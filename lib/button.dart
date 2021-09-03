@@ -25,9 +25,7 @@ class Button extends StatelessWidget {
         child: SizedBox(
           height: 100,
           width: 100,
-          // child: Button(
-          //     animation: this.animation
-          // ),
+          child: Text(this.title),
         ),
       ),
     );
