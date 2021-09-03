@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
-import 'package:dash_cam_app/app_settings.dart' as appSettings;
+import 'package:dash_cam_app/app_settings.dart' show appBarHeightScaleFactor;
+import 'package:dash_cam_app/button_array.dart';
 
 /// [BasePage] implements a basic page layout design.
 class BasePage extends StatefulWidget {
@@ -27,9 +28,11 @@ class _BasePageState extends State<BasePage> {
         title: Text(widget.title),
       ),
 
-      //  Use Builder(...) widget because it is not possible to get the appBar
+      //  Use Builder widget because it is not possible to get the appBar
       //  height from the current BuildContext when it doesn't yet include the
-      //  Scaffold(...) class being returned by this widget.
+      //  Scaffold class being returned by the parent widget.
+      //
+      //  The Builder class delegates its build to a callback.
       bottomNavigationBar: Builder(
         builder: (BuildContext context) {
           //  [height] variable for storing appBar height.
@@ -40,18 +43,20 @@ class _BasePageState extends State<BasePage> {
             child: Row(
               children: <Widget>[
                 SizedBox(
-                  //  Set height of the BottomAppBar(...) class variable using
-                  //  SizedBox(...). Get height from [context] by first
-                  //  extracting the immediate Scaffold(...), and then getting
-                  //  the value for appBarMaxHeight. Need to take into account
-                  //  appBarMaxHeight possibly being null.
-                  height: height * appSettings.appBarHeightScaleFactor,
+                  //  Set height of the BottomAppBar class variable using
+                  //  SizedBox. Get height from [context] by first
+                  //  extracting the Scaffold that immediately wraps this
+                  //  widget, and then getting the value for appBarMaxHeight.
+                  height: height * appBarHeightScaleFactor,
                 ),
               ],
             ),
           );
         },
       ),
+
+      //  A linear array of buttons.
+      body: ButtonArray()
     );
   }
 }
