@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
-import 'package:dash_cam_app/app_settings.dart' show appBarHeightScaleFactor;
+import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button_array.dart';
 
 /// [BasePage] implements a basic page layout design.
@@ -47,7 +47,7 @@ class _BasePageState extends State<BasePage> {
                   //  SizedBox. Get height from [context] by first
                   //  extracting the Scaffold that immediately wraps this
                   //  widget, and then getting the value for appBarMaxHeight.
-                  height: height * appBarHeightScaleFactor,
+                  height: height * AppSettings.appBarHeightScaleFactor,
                 ),
               ],
             ),
@@ -56,7 +56,7 @@ class _BasePageState extends State<BasePage> {
       ),
 
       //  A linear array of buttons.
-      body: ButtonArray()
+      body: ButtonArray(),
     );
   }
 }
