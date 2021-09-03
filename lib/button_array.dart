@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Import project-specific files.
 import 'package:dash_cam_app/app_settings.dart';
+import 'package:dash_cam_app/button.dart';
 
 class ButtonArray extends StatelessWidget {
   const ButtonArray({Key? key}) : super(key: key);
@@ -22,10 +23,9 @@ class ButtonArray extends StatelessWidget {
               ? VerticalDirection.down
               : VerticalDirection.up,
           children: <Widget>[
-            Text('Button'),
-            // Button(
-            //   title: 'Settings',
-            // )
+            Button(
+              title: 'Settings',
+            )
           ],
         ),
       ),
