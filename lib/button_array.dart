@@ -25,7 +25,13 @@ class ButtonArray extends StatelessWidget {
           children: <Widget>[
             Button(
               title: 'Settings',
-            )
+            ),
+            Button(
+              title: 'Files',
+            ),
+            Button(
+              title: 'Home',
+            ),
           ],
         ),
       ),

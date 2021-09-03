@@ -10,36 +10,35 @@ class AppSettings {
   /// [buttonAlignment] defines the anchor point for FAB placement in BasePage.
   static Alignment buttonAlignment = Alignment.bottomRight;
 
-  // /// [buttonPaddingDown] defines the padding for downward direction
-  // /// button positioning associated with BasePage.
-  // const EdgeInsetsDirectional buttonPaddingDown = EdgeInsetsDirectional.fromSTEB(
-  //   buttonPaddingCrossAxis,
-  //   buttonPaddingMainAxis,
-  //   buttonPaddingCrossAxis,
-  //   buttonPaddingMainAxisExtra,
-  // );
-  //
-  // /// [buttonPaddingCrossAxis] defines the cross axis padding between buttons
-  // /// associated with BasePage.
-  // const double buttonPaddingCrossAxis = 15;
-  //
-  // /// [buttonPaddingMainAxis] defines the main axis padding between buttons
-  // /// associated with BasePage.
-  // const double buttonPaddingMainAxis = 15.0;
-  //
-  // /// [buttonPaddingMainAxisExtra] defines extra padding in the main axis
-  // /// direction between buttons associated with BasePage.
-  // const double buttonPaddingMainAxisExtra = 10.0;
-  //
-  // /// [buttonPaddingUp] defines the padding for downward direction
-  // /// button positioning associated with BasePage.
-  // const EdgeInsetsDirectional buttonPaddingUp = EdgeInsetsDirectional.fromSTEB(
-  //   buttonPaddingCrossAxis,
-  //   buttonPaddingMainAxisExtra,
-  //   buttonPaddingCrossAxis,
-  //   buttonPaddingMainAxis,
-  // );
+  /// [buttonPaddingDown] defines the padding for downward direction
+  /// button positioning associated with BasePage.
+  static EdgeInsetsDirectional buttonPaddingDown = EdgeInsetsDirectional.fromSTEB(
+    buttonPaddingCrossAxis,
+    buttonPaddingMainAxis,
+    buttonPaddingCrossAxis,
+    buttonPaddingMainAxisExtra,
+  );
 
+  /// [buttonPaddingCrossAxis] defines the cross axis padding between buttons
+  /// associated with BasePage.
+  static double buttonPaddingCrossAxis = 15;
+
+  /// [buttonPaddingMainAxis] defines the main axis padding between buttons
+  /// associated with BasePage.
+  static double buttonPaddingMainAxis = 15.0;
+
+  /// [buttonPaddingMainAxisExtra] defines extra padding in the main axis
+  /// direction between buttons associated with BasePage.
+  static double buttonPaddingMainAxisExtra = 10.0;
+
+  /// [buttonPaddingUp] defines the padding for downward direction
+  /// button positioning associated with BasePage.
+  static EdgeInsetsDirectional buttonPaddingUp = EdgeInsetsDirectional.fromSTEB(
+    buttonPaddingCrossAxis,
+    buttonPaddingMainAxisExtra,
+    buttonPaddingCrossAxis,
+    buttonPaddingMainAxis,
+  );
 }
 
 // /// [appBarHeightScaleFactor] defines a simple scale factor to apply to

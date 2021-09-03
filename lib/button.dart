@@ -16,8 +16,20 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(this.title),
+    return Padding(
+      padding: (AppSettings.buttonAlignment.y < 0)
+          ? AppSettings.buttonPaddingDown
+          : AppSettings.buttonPaddingUp,
+      child: Container(
+        color: Colors.red,
+        child: SizedBox(
+          height: 100,
+          width: 100,
+          // child: Button(
+          //     animation: this.animation
+          // ),
+        ),
+      ),
     );
   }
 }
