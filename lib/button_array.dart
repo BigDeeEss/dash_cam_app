@@ -5,9 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button.dart';
 
-class ButtonArray extends StatelessWidget {
+class ButtonArray extends StatefulWidget {
   const ButtonArray({Key? key}) : super(key: key);
 
+  @override
+  _ButtonArrayState createState() => _ButtonArrayState();
+}
+
+class _ButtonArrayState extends State<ButtonArray> {
   @override
   Widget build(BuildContext context) {
     return Container(
