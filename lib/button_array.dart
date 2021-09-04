@@ -16,11 +16,17 @@ class ButtonArray extends StatefulWidget {
 class _ButtonArrayState extends State<ButtonArray> {
   @override
   Widget build(BuildContext context) {
+    //  Use a Container-Align-Column construct to position FABs, which are
+    //  built by the Button widget, in BasePage.
     return Container(
+      //  Request that this container expands to fit the entire screen.
       constraints: BoxConstraints.expand(
         width: double.infinity,
         height: double.infinity,
       ),
+
+      //  Position the button array according to Align specs.
+      //  Specs provided by AppSettings.
       child: Align(
         alignment: AppSettings.buttonAlignment,
         child: Column(
@@ -30,13 +36,13 @@ class _ButtonArrayState extends State<ButtonArray> {
               : VerticalDirection.up,
           children: <Widget>[
             Button(
-              ButtonSpec: settings,
+              buttonSpec: settings,
             ),
             Button(
-              ButtonSpec: files,
+              buttonSpec: files,
             ),
             Button(
-              ButtonSpec: home,
+              buttonSpec: home,
             ),
           ],
         ),

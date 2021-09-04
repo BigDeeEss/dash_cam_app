@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button_specs.dart';
 
-//  Geometrical button specs for [ButtonArray].
+//  Geometrical and functional button specs for [ButtonArray].
 class Button extends StatelessWidget {
   const Button({
     required this.buttonSpec,
     Key? key,
   }) : super(key: key);
 
-  /// [title] is the page title displayed on the appBar of the
-  /// BasePage widget.
+  /// [title] is the page title displayed in BasePage.
   final ButtonSpec buttonSpec;
 
   @override

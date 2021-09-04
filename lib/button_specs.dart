@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Import project-specific files.
 import 'package:dash_cam_app/base_page.dart';
+import 'package:dash_cam_app/lib/custom_icons.dart';
 
 //  Class for ease of reference to specific button settings.
 class ButtonSpec {
@@ -13,58 +14,58 @@ class ButtonSpec {
     required this.title,
   });
 
-  //  [icon] is displayed on the FAB associated with [RouteSpec].
+  //  [icon] corresponding to the page transition type.
   final Icon icon;
 
-  //  [onPressed] defines the action to be taken on activation
-  //  of the associated FAB.
+  //  [onPressed] defines the action to be taken when the associated FAB
+  //  is activated.
   final void Function(BuildContext context) onPressed;
 
+  //  [size] is the FAB characteristic dimension.
   final double size;
 
-  //  [title] of screen appearing on appBar.
+  //  [title] is the appBar title associated with the destination in
+  //  the corresponding page transition type.
   final String title;
-
-// double screenDimension(BuildContext context);
 }
 
-// //  Eject button specs.
-// ButtonSpec eject = ButtonSpec(
-//   icon: Icon(CustomIcons.eject),
-//   onPressed: (context) {
-//     Navigator.of(context).pushReplacement(_createRoute(eject));
-//   },
-//   size: 50,
-//   title: 'Eject',
-// );
-
-//  Home button specs.
+//  Home page button specs.
 ButtonSpec home = ButtonSpec(
   icon: Icon(CustomIcons.home),
   onPressed: (context) {
-    Navigator.of(context).pushReplacement(_createRoute(this.title)));
+    Navigator.of(context).pushReplacement(_createRoute(home));
   },
   size: 50,
   title: 'Home',
 );
 
-//  Settings button specs.
+//  Files page button specs.
+ButtonSpec files = ButtonSpec(
+  icon: Icon(CustomIcons.videocam),
+  onPressed: (context) {
+    Navigator.of(context).pushReplacement(_createRoute(home));
+  },
+  size: 50,
+  title: 'Files',
+);
+
+//  Settings page button specs.
 ButtonSpec settings = ButtonSpec(
   icon: Icon(CustomIcons.cog_1),
   onPressed: (context) {
-    Navigator.of(context).pushReplacement(_createRoute(this.title));
+    Navigator.of(context).pushReplacement(_createRoute(settings));
   },
   size: 50,
   title: 'Settings',
 );
 
-//  Implement PageRouteBuilder method for managing page/route transitions
-//  that result from FAB activation associated with Button class.
-Route _createRoute(String title) {
+//  An animated page transition for managing the page transition that occurs
+//  following FAB activation in Button class.
+Route _createRoute(ButtonSpec buttonSpec) {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) =>
         BasePage(
-          title: title,
+          title: buttonSpec.title,
         ),
     transitionDuration: const Duration(seconds: 2),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {

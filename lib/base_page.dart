@@ -12,8 +12,7 @@ class BasePage extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  /// [title] is the page title displayed on the appBar of the
-  /// BasePage widget.
+  /// [title] is the page title displayed on the appBar in BasePage.
   final String title;
 
   @override
