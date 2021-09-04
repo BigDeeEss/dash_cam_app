@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // Import project-specific files.
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button.dart';
+import 'package:dash_cam_app/button_specs.dart';
 
 class ButtonArray extends StatefulWidget {
   const ButtonArray({Key? key}) : super(key: key);
@@ -29,13 +30,13 @@ class _ButtonArrayState extends State<ButtonArray> {
               : VerticalDirection.up,
           children: <Widget>[
             Button(
-              title: 'Settings',
+              ButtonSpec: settings,
             ),
             Button(
-              title: 'Files',
+              ButtonSpec: files,
             ),
             Button(
-              title: 'Home',
+              ButtonSpec: home,
             ),
           ],
         ),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button_array.dart';
 
-/// [BasePage] implements a basic page layout design.
+/// Implements a basic page layout design.
 class BasePage extends StatefulWidget {
   const BasePage({
     required this.title,
@@ -13,7 +13,7 @@ class BasePage extends StatefulWidget {
   }) : super(key: key);
 
   /// [title] is the page title displayed on the appBar of the
-  /// [BasePage] widget.
+  /// BasePage widget.
   final String title;
 
   @override
