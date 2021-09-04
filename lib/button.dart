@@ -24,9 +24,12 @@ class Button extends StatelessWidget {
       child: Container(
         color: Colors.red,
         child: SizedBox(
-          height: this.buttonSpec.size,
-          width: this.buttonSpec.size,
-          child: Text(this.buttonSpec.title),
+          child: FloatingActionButton(
+            // Use buttonSpec.title for heroTag.
+            heroTag: this.buttonSpec.title,
+            child: this.buttonSpec.icon,
+            onPressed: () => this.buttonSpec.onPressed(context),
+          ),
         ),
       ),
     );

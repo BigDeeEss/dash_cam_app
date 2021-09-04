@@ -41,9 +41,9 @@ ButtonSpec home = ButtonSpec(
 
 //  Files page button specs.
 ButtonSpec files = ButtonSpec(
-  icon: Icon(CustomIcons.videocam),
+  icon: Icon(CustomIcons.archive),
   onPressed: (context) {
-    Navigator.of(context).pushReplacement(basePageTranstion(home));
+    Navigator.of(context).pushReplacement(basePageTranstion(files));
   },
   size: 50,
   title: 'Files',
