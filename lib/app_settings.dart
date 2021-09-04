@@ -40,4 +40,6 @@ class AppSettings {
 
   /// [buttonSize] defines the button size in Button class..
   static double buttonSize = 56.0;
+
+  static int pageTransitionTime = 1500;
 }
