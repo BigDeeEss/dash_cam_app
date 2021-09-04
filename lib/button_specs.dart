@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
-import 'package:dash_cam_app/base_page.dart';
+import 'package:dash_cam_app/base_page_transition.dart';
 import 'package:dash_cam_app/lib/custom_icons.dart';
 
 //  Class for ease of reference to specific button settings.
@@ -33,7 +33,7 @@ class ButtonSpec {
 ButtonSpec home = ButtonSpec(
   icon: Icon(CustomIcons.home),
   onPressed: (context) {
-    Navigator.of(context).pushReplacement(_createRoute(home));
+    Navigator.of(context).pushReplacement(basePageTranstion(home));
   },
   size: 50,
   title: 'Home',
@@ -43,7 +43,7 @@ ButtonSpec home = ButtonSpec(
 ButtonSpec files = ButtonSpec(
   icon: Icon(CustomIcons.videocam),
   onPressed: (context) {
-    Navigator.of(context).pushReplacement(_createRoute(home));
+    Navigator.of(context).pushReplacement(basePageTranstion(home));
   },
   size: 50,
   title: 'Files',
@@ -53,37 +53,9 @@ ButtonSpec files = ButtonSpec(
 ButtonSpec settings = ButtonSpec(
   icon: Icon(CustomIcons.cog_1),
   onPressed: (context) {
-    Navigator.of(context).pushReplacement(_createRoute(settings));
+    Navigator.of(context).pushReplacement(basePageTranstion(settings));
   },
   size: 50,
   title: 'Settings',
 );
 
-//  An animated page transition for managing the page transition that occurs
-//  following FAB activation in Button class.
-Route _createRoute(ButtonSpec buttonSpec) {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        BasePage(
-          title: buttonSpec.title,
-        ),
-    transitionDuration: const Duration(seconds: 2),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
-
-      var tween = Tween(
-        begin: begin,
-        end: end,
-      ).chain(CurveTween(
-        curve: curve,
-      ));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
-}

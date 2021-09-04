@@ -24,8 +24,8 @@ class Button extends StatelessWidget {
       child: Container(
         color: Colors.red,
         child: SizedBox(
-          height: 100,
-          width: 100,
+          height: this.buttonSpec.size,
+          width: this.buttonSpec.size,
           child: Text(this.buttonSpec.title),
         ),
       ),
