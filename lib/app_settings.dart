@@ -4,15 +4,15 @@ import 'package:flutter/painting.dart';
 /// Class for ease of import of app settings.
 class AppSettings {
   /// [appBarHeightScaleFactor] defines a simple scale factor to apply to
-  /// appBar when calculating bottomNavigationBar height in BasePage.
+  /// appBar when calculating bottomNavigationBar height in BasePage class.
   static double appBarHeightScaleFactor = 1.0;
 
-  /// [buttonAlignment] defines the anchor point for FAB placement
-  /// ButtonArray.
+  /// [buttonAlignment] defines the anchor point for button placement
+  /// in ButtonArray class.
   static Alignment buttonAlignment = Alignment.bottomRight;
 
   /// [buttonPaddingDown] defines the padding for downward direction
-  /// button positioning in Button.
+  /// button positioning in Button class.
   static EdgeInsetsDirectional buttonPaddingDown = EdgeInsetsDirectional.fromSTEB(
     buttonPaddingCrossAxis,
     buttonPaddingMainAxis,
@@ -30,11 +30,14 @@ class AppSettings {
   static double buttonPaddingMainAxisExtra = 10.0;
 
   /// [buttonPaddingUp] defines the padding for downward direction
-  /// button positioning in Button.
+  /// button positioning in Button class.
   static EdgeInsetsDirectional buttonPaddingUp = EdgeInsetsDirectional.fromSTEB(
     buttonPaddingCrossAxis,
     buttonPaddingMainAxisExtra,
     buttonPaddingCrossAxis,
     buttonPaddingMainAxis,
   );
+
+  /// [buttonSize] defines the button size in Button class..
+  static double buttonSize = 56.0;
 }

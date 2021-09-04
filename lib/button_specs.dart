@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Import project-specific files.
 import 'package:dash_cam_app/lib/custom_icons.dart';
+import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/base_page_transition.dart';
 import 'package:dash_cam_app/zoom_page_transition.dart';
 
@@ -34,9 +35,11 @@ class ButtonSpec {
 ButtonSpec home = ButtonSpec(
   icon: Icon(CustomIcons.home),
   onPressed: (context) {
-    Navigator.of(context).pushReplacement(basePageTranstion(home));
+    Navigator.of(context).pushReplacement(ZoomPageTransition(
+      buttonSpec: home,
+    ));
   },
-  size: 50,
+  size: AppSettings.buttonSize,
   title: 'Home',
 );
 
@@ -44,9 +47,11 @@ ButtonSpec home = ButtonSpec(
 ButtonSpec files = ButtonSpec(
   icon: Icon(CustomIcons.file_video),
   onPressed: (context) {
-    Navigator.of(context).pushReplacement(basePageTranstion(files));
+    Navigator.of(context).pushReplacement(ZoomPageTransition(
+      buttonSpec: files,
+    ));
   },
-  size: 50,
+  size: AppSettings.buttonSize,
   title: 'Files',
 );
 
@@ -54,12 +59,11 @@ ButtonSpec files = ButtonSpec(
 ButtonSpec settings = ButtonSpec(
   icon: Icon(CustomIcons.cog_1),
   onPressed: (context) {
-    // Navigator.of(context).pushReplacement(basePageTranstion(settings));
-    Navigator.push(context, ZoomPageTransition(
+    Navigator.of(context).pushReplacement(ZoomPageTransition(
       buttonSpec: settings,
     ));
   },
-  size: 50,
+  size: AppSettings.buttonSize,
   title: 'Settings',
 );
 

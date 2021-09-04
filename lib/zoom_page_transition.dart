@@ -16,6 +16,9 @@ class ZoomPageTransition extends PageRouteBuilder {
       Animation<double> animation,
       Animation<double> secondaryAnimation,
     ) => BasePage(title: buttonSpec.title),
+
+    transitionDuration: const Duration(milliseconds: 250),
+
     transitionsBuilder: (
       BuildContext context,
       Animation<double> animation,

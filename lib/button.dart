@@ -22,14 +22,26 @@ class Button extends StatelessWidget {
           ? AppSettings.buttonPaddingDown
           : AppSettings.buttonPaddingUp,
       child: Container(
-        color: Colors.red,
         child: SizedBox(
-          child: FloatingActionButton(
-            // Use buttonSpec.title for heroTag.
-            heroTag: this.buttonSpec.title,
-            child: this.buttonSpec.icon,
-            onPressed: () => this.buttonSpec.onPressed(context),
+          height: this.buttonSpec.size,
+          width: this.buttonSpec.size,
+          child: Ink(
+            decoration: const ShapeDecoration(
+              color: Colors.lightBlue,
+              shape: CircleBorder(),
+            ),
+            child: IconButton(
+              icon: this.buttonSpec.icon,
+              color: Colors.white,
+              onPressed: () => this.buttonSpec.onPressed(context),
+            ),
           ),
+          // child: FloatingActionButton(
+          //   // Use buttonSpec.title for heroTag.
+          //   heroTag: this.buttonSpec.title,
+          //   child: this.buttonSpec.icon,
+          //   onPressed: () => this.buttonSpec.onPressed(context),
+          // ),
         ),
       ),
     );
