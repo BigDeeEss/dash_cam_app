@@ -41,7 +41,7 @@ ButtonSpec home = ButtonSpec(
 
 //  Files page button specs.
 ButtonSpec files = ButtonSpec(
-  icon: Icon(CustomIcons.archive),
+  icon: Icon(CustomIcons.file_video),
   onPressed: (context) {
     Navigator.of(context).pushReplacement(basePageTranstion(files));
   },
