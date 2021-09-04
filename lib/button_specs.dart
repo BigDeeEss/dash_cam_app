@@ -2,8 +2,9 @@
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
-import 'package:dash_cam_app/base_page_transition.dart';
 import 'package:dash_cam_app/lib/custom_icons.dart';
+import 'package:dash_cam_app/base_page_transition.dart';
+import 'package:dash_cam_app/zoom_page_transition.dart';
 
 //  Class for ease of reference to specific button settings.
 class ButtonSpec {
@@ -53,7 +54,10 @@ ButtonSpec files = ButtonSpec(
 ButtonSpec settings = ButtonSpec(
   icon: Icon(CustomIcons.cog_1),
   onPressed: (context) {
-    Navigator.of(context).pushReplacement(basePageTranstion(settings));
+    // Navigator.of(context).pushReplacement(basePageTranstion(settings));
+    Navigator.push(context, ZoomPageTransition(
+      buttonSpec: settings,
+    ));
   },
   size: 50,
   title: 'Settings',
