@@ -57,7 +57,9 @@ class _ButtonArrayState extends State<ButtonArray>
       print('1');
       print(homeButton);
       print('1');
-      addButtons();
+      setState(() {
+        addButtons();
+      });
       print('2');
       print(homeButton);
       print('2');
