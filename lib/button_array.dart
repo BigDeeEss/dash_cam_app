@@ -30,14 +30,45 @@ class _ButtonArrayState extends State<ButtonArray>
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
 
-  Button? homeButton;
-  Button? settingsButton;
-  Button? filesButton;
+  // Button? homeButton;
+  // Button? settingsButton;
+  // Button? filesButton;
+  Button homeButton = Button(buttonSpec: home);
+  Button settingsButton = Button(buttonSpec: settings);
+  Button filesButton = Button(buttonSpec: files);
+
+  static const double initialOffsetX = -100;
+  static const double intervalStart = 0.5;
+  static const double intervalEnd = 1.0;
 
   void addButtons() {
     homeButton = Button(buttonSpec: home);
     settingsButton = Button(buttonSpec: settings);
     filesButton = Button(buttonSpec: files);
+  }
+
+  Widget slidingButton(Animation<double>? animation, Button button) {
+    addButtons();
+    if (animation == null) {
+      return button;
+    } else {
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: Offset(initialOffsetX, 0),
+          end: Offset(0, 0),
+        ).animate(
+          CurvedAnimation(
+            curve: Interval(
+              intervalStart,
+              intervalEnd,
+              curve: Curves.easeOutCubic,
+            ),
+            parent: animation,
+          ),
+        ),
+        child: button,
+      );
+    }
   }
 
   @override
@@ -95,16 +126,9 @@ class _ButtonArrayState extends State<ButtonArray>
               ? VerticalDirection.down
               : VerticalDirection.up,
           children: <Widget>[
-            Button(
-              buttonSpec: settings,
-            ),
-            Button(
-              buttonSpec: files,
-            ),
-            SlideTransition(
-              child: homeButton,
-              position: _offsetAnimation,
-            ),
+            slidingButton(widget.animation, settingsButton),
+            slidingButton(widget.animation, filesButton),
+            slidingButton(widget.animation, homeButton),
           ],
         ),
       ),
