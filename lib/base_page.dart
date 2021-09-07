@@ -8,9 +8,18 @@ import 'package:dash_cam_app/button_array.dart';
 /// Implements a basic page layout design.
 class BasePage extends StatefulWidget {
   const BasePage({
+    this.animation,
     required this.title,
     Key? key,
   }) : super(key: key);
+
+  /// [animation] is used to animate the launch of buttons onto the screen.
+  //  Whilst this animation ranges from 0.0 to 1.0, in this instance the
+  //  values 0.0--0.5 animate the page transition leaving the range 0.5--1.0
+  //  for animating the buttons.
+  // [animationb] is nullable because DashCamApp calls
+  // BasePage(title: 'Home',).
+  final Animation<double>? animation;
 
   /// [title] is the page title displayed on the appBar in BasePage.
   final String title;
@@ -55,7 +64,9 @@ class _BasePageState extends State<BasePage> {
       ),
 
       //  A linear array of buttons.
-      body: ButtonArray(),
+      body: ButtonArray(
+        animation: widget.animation
+      ),
     );
   }
 }

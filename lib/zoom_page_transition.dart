@@ -16,7 +16,10 @@ class ZoomPageTransition extends PageRouteBuilder {
       BuildContext context,
       Animation<double> animation,
       Animation<double> secondaryAnimation,
-    ) => BasePage(title: buttonSpec.title),
+    ) => BasePage(
+      title: buttonSpec.title,
+      animation: animation,
+    ),
 
     transitionDuration: Duration(milliseconds: AppSettings.pageTransitionTime),
 

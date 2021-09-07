@@ -7,7 +7,18 @@ import 'package:dash_cam_app/button.dart';
 import 'package:dash_cam_app/button_specs.dart';
 
 class ButtonArray extends StatefulWidget {
-  ButtonArray({Key? key}) : super(key: key);
+  ButtonArray({
+    this.animation,
+    Key? key,
+  }) : super(key: key);
+
+  /// [animation] is used to animate the launch of buttons onto the screen.
+  //  Whilst this animation ranges from 0.0 to 1.0, in this instance the
+  //  values 0.0--0.5 animate the page transition leaving the range 0.5--1.0
+  //  for animating the buttons.
+  // [animationb] is nullable because DashCamApp calls
+  // BasePage(title: 'Home',).
+  final Animation<double>? animation;
 
   @override
   _ButtonArrayState createState() => _ButtonArrayState();
@@ -45,29 +56,16 @@ class _ButtonArrayState extends State<ButtonArray>
       end: Offset.zero,
     ).animate(_controller);
 
-    _controller.addListener(() {
-      print(_offsetAnimation.value);
-    });
+    // _controller.addListener(() {
+    //   print(_offsetAnimation.value);
+    // });
 
-
-    print('4');
-    print(homeButton);
-    print('4');
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      print('1');
-      print(homeButton);
-      print('1');
       setState(() {
         addButtons();
       });
-      print('2');
-      print(homeButton);
-      print('2');
       _controller.forward();
     });
-    print('5');
-    print(homeButton);
-    print('5');
   }
 
   @override
@@ -78,9 +76,6 @@ class _ButtonArrayState extends State<ButtonArray>
 
   @override
   Widget build(BuildContext context) {
-    print('3');
-    print(homeButton);
-    print('3');
     //  Use a Container-Align-Column construct to position FABs, which are
     //  built by the Button widget, in BasePage.
     return Container(

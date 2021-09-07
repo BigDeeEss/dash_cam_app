@@ -35,7 +35,6 @@ class ButtonSpec {
 ButtonSpec home = ButtonSpec(
   icon: Icon(CustomIcons.home),
   onPressed: (context) {
-    print('Navigating to home page');
     Navigator.of(context).pushReplacement(ZoomPageTransition(
       buttonSpec: home,
     ));
@@ -48,7 +47,6 @@ ButtonSpec home = ButtonSpec(
 ButtonSpec files = ButtonSpec(
   icon: Icon(CustomIcons.file_video),
   onPressed: (context) {
-    print('Navigating to files page');
     Navigator.of(context).pushReplacement(ZoomPageTransition(
       buttonSpec: files,
     ));
@@ -61,7 +59,6 @@ ButtonSpec files = ButtonSpec(
 ButtonSpec settings = ButtonSpec(
   icon: Icon(CustomIcons.cog_1),
   onPressed: (context) {
-    print('Navigating to settings page');
     Navigator.of(context).pushReplacement(ZoomPageTransition(
       buttonSpec: settings,
     ));

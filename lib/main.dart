@@ -6,21 +6,23 @@ import 'package:dash_cam_app/base_page.dart';
 
 //  App start point.
 void main() {
-  runApp(const DashCam());
+  runApp(const DashCamApp());
 }
 
-class DashCam extends StatelessWidget {
+class DashCamApp extends StatelessWidget {
   //  Default constructor required because there is a const keyword
-  //  in 'runApp(const DashCam(...));' above.
-  const DashCam({Key? key}) : super(key: key);
+  //  in 'runApp(const DashCamApp(...));' above.
+  const DashCamApp({Key? key}) : super(key: key);
 
-  //  Root widget of DashCam project defining the first widget built
+  //  Root widget of DashCamApp project defining the first widget built
   //  by runApp(...).
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'DashCam',
-      home: BasePage(title: 'Home',),
+      title: 'DashCamApp',
+      home: BasePage(
+        title: 'Home',
+      ),
     );
   }
 }
