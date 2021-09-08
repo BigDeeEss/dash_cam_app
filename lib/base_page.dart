@@ -5,14 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button_array.dart';
 
-/// Implements a basic page layout design.
+/// [BasePage] implements a basic generic page layout design.
 class BasePage extends StatefulWidget {
   const BasePage({
+    this.animation,
     required this.title,
     Key? key,
   }) : super(key: key);
 
-  /// [title] is the page title displayed on the appBar in BasePage.
+  /// [animation] is used to animate the launch of buttons onto the screen.
+  //  Whilst this animation ranges from 0.0 to 1.0, in this instance the
+  //  range of values 0.0--0.5 is reserved got animating the page transition
+  //  whilst the range 0.5--1.0 is used for animating the buttons.
+  //  [animation] is nullable because DashCamApp calls BasePage(title: 'Home',).
+  final Animation<double>? animation;
+
+  /// [title] is the page title that is displayed on the appBar in BasePage.
   final String title;
 
   @override
@@ -39,23 +47,30 @@ class _BasePageState extends State<BasePage> {
 
           return BottomAppBar(
             color: Colors.blue,
-            child: Row(
-              children: <Widget>[
-                SizedBox(
-                  //  Set height of the BottomAppBar class variable using
-                  //  SizedBox. Get height from [context] by first
-                  //  extracting the Scaffold that immediately wraps this
-                  //  widget, and then getting the value for appBarMaxHeight.
-                  height: height * AppSettings.appBarHeightScaleFactor,
-                ),
-              ],
+            // child: Row(
+            //   children: <Widget>[
+            //     SizedBox(
+            //       //  Set height of the BottomAppBar class variable using
+            //       //  SizedBox. Get height from [context] by first
+            //       //  extracting the Scaffold that immediately wraps this
+            //       //  widget, and then getting the value for appBarMaxHeight.
+            //       height: height * AppSettings.appBarHeightScaleFactor,
+            //     ),
+            //   ],
+            // ),
+            child: SizedBox(
+              //  Set height of the BottomAppBar class variable using
+              //  SizedBox. Get height from [context] by first
+              //  extracting the Scaffold that immediately wraps this
+              //  widget, and then getting the value for appBarMaxHeight.
+              height: height * AppSettings.appBarHeightScaleFactor,
             ),
           );
         },
       ),
 
-      //  A linear array of buttons.
-      body: ButtonArray(),
+      //  An animated linear array of buttons.
+      body: ButtonArray(animation: widget.animation),
     );
   }
 }

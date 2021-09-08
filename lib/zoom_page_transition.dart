@@ -16,8 +16,13 @@ class ZoomPageTransition extends PageRouteBuilder {
       BuildContext context,
       Animation<double> animation,
       Animation<double> secondaryAnimation,
-    ) => BasePage(title: buttonSpec.title),
+    ) => BasePage(
+      title: buttonSpec.title,
+      animation: animation,
+    ),
 
+    // [transitionDuration] includes the page transition time AND the button
+    //  animation time.
     transitionDuration: Duration(milliseconds: AppSettings.pageTransitionTime),
 
     transitionsBuilder: (
@@ -32,7 +37,10 @@ class ZoomPageTransition extends PageRouteBuilder {
       ).animate(
         CurvedAnimation(
           parent: animation,
-          curve: Curves.fastOutSlowIn,
+          curve: Interval(
+            0.0, 0.5,
+            curve: Curves.fastOutSlowIn,
+          ),
         ),
       ),
       child: child,

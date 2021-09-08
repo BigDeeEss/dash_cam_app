@@ -36,12 +36,6 @@ class Button extends StatelessWidget {
               onPressed: () => this.buttonSpec.onPressed(context),
             ),
           ),
-          // child: FloatingActionButton(
-          //   // Use buttonSpec.title for heroTag.
-          //   heroTag: this.buttonSpec.title,
-          //   child: this.buttonSpec.icon,
-          //   onPressed: () => this.buttonSpec.onPressed(context),
-          // ),
         ),
       ),
     );
