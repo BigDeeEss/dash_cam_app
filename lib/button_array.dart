@@ -12,43 +12,34 @@ class ButtonArray extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  /// [animation] is used to animate the launch of buttons onto the screen.
+  // [animation] is used to animate the launch of buttons onto the screen.
   //  Whilst this animation ranges from 0.0 to 1.0, in this instance the
-  //  values 0.0--0.5 animate the page transition leaving the range 0.5--1.0
-  //  for animating the buttons.
-  // [animationb] is nullable because DashCamApp calls
-  // BasePage(title: 'Home',).
+  //  range of values 0.0--0.5 is reserved got animating the page transition
+  //  whilst the range 0.5--1.0 is used for animating the buttons.
+  //  [animation] is nullable because DashCamApp calls BasePage(title: 'Home',).
   final Animation<double>? animation;
 
   @override
   _ButtonArrayState createState() => _ButtonArrayState();
 }
 
-class _ButtonArrayState extends State<ButtonArray>
-    with SingleTickerProviderStateMixin {
-  // needs late because animationcontroller cannot be null.
-  late AnimationController _controller;
-  late Animation<Offset> _offsetAnimation;
-
-  // Button? homeButton;
-  // Button? settingsButton;
-  // Button? filesButton;
+class _ButtonArrayState extends State<ButtonArray> {
+  //  [filesButton], [homeButton] and [settingsButton] are instances of the
+  //  Button StatelessWidget class. These will get animated across the page.
+  Button filesButton = Button(buttonSpec: files);
   Button homeButton = Button(buttonSpec: home);
   Button settingsButton = Button(buttonSpec: settings);
-  Button filesButton = Button(buttonSpec: files);
 
+  //  TODO: move the following to app_settings.dart.
   static const double initialOffsetX = -100;
   static const double intervalStart = 0.5;
   static const double intervalEnd = 1.0;
 
-  void addButtons() {
-    homeButton = Button(buttonSpec: home);
-    settingsButton = Button(buttonSpec: settings);
-    filesButton = Button(buttonSpec: files);
-  }
-
+  //  [slidingButton] is a class method which outputs either a static
+  //  button or a sliding button.
   Widget slidingButton(Animation<double>? animation, Button button) {
-    addButtons();
+    //  If animation is null the return a static button; if not null then
+    //  return a SlideTransition. Both use the base button class.
     if (animation == null) {
       return button;
     } else {
@@ -72,43 +63,9 @@ class _ButtonArrayState extends State<ButtonArray>
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    _controller = AnimationController(
-      duration: Duration(milliseconds: 2000),
-      vsync: this,
-    );
-
-    // _controller.forward();
-
-    _offsetAnimation = Tween<Offset>(
-      begin: Offset(-0.5, 0.0),
-      end: Offset.zero,
-    ).animate(_controller);
-
-    // _controller.addListener(() {
-    //   print(_offsetAnimation.value);
-    // });
-
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      setState(() {
-        addButtons();
-      });
-      _controller.forward();
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    //  Use a Container-Align-Column construct to position FABs, which are
-    //  built by the Button widget, in BasePage.
+    //  Use a Container-Align-Column construct to position [filesButton],
+    //  [homeButton] and [settingsButton].
     return Container(
       //  Request that this container expands to fit the entire screen.
       constraints: BoxConstraints.expand(

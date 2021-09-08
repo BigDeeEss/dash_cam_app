@@ -19,11 +19,11 @@ class ButtonSpec {
   //  [icon] corresponding to the page transition type.
   final Icon icon;
 
-  //  [onPressed] defines the action to be taken when the associated FAB
+  //  [onPressed] defines the action to be taken when the associated button
   //  is activated.
   final void Function(BuildContext context) onPressed;
 
-  //  [size] is the FAB characteristic dimension.
+  //  [size] is the button characteristic dimension.
   final double size;
 
   //  [title] is the appBar title associated with the destination in

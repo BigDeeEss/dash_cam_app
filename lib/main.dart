@@ -14,12 +14,13 @@ class DashCamApp extends StatelessWidget {
   //  in 'runApp(const DashCamApp(...));' above.
   const DashCamApp({Key? key}) : super(key: key);
 
-  //  Root widget of DashCamApp project defining the first widget built
-  //  by runApp(...).
+  //  Root widget of DashCamApp project called by runApp(...).
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DashCamApp',
+
+      //  [BasePage] defines a generic page layout for use with all pages.
       home: BasePage(
         title: 'Home',
       ),
