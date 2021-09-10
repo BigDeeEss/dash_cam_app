@@ -24,24 +24,18 @@ class ButtonArray extends StatefulWidget {
 }
 
 class _ButtonArrayState extends State<ButtonArray> {
-  //  [filesButton], [homeButton] and [settingsButton] are instances of the
-  //  Button StatelessWidget class. These will get animated across the page.
-  Button filesButton = Button(buttonSpec: files);
-  Button homeButton = Button(buttonSpec: home);
-  Button settingsButton = Button(buttonSpec: settings);
-
   //  TODO: move the following to app_settings.dart.
-  static const double initialOffsetX = -100;
+  static const double initialOffsetX = -1;
   static const double intervalStart = 0.5;
   static const double intervalEnd = 1.0;
 
   //  [slidingButton] is a class method which outputs either a static
   //  button or a sliding button.
-  Widget slidingButton(Animation<double>? animation, Button button) {
+  Widget slidingButton(Animation<double>? animation, ButtonSpec buttonSpec) {
     //  If animation is null the return a static button; if not null then
     //  return a SlideTransition. Both use the base button class.
     if (animation == null) {
-      return button;
+      return Button(buttonSpec: buttonSpec);
     } else {
       return SlideTransition(
         position: Tween<Offset>(
@@ -57,7 +51,7 @@ class _ButtonArrayState extends State<ButtonArray> {
             parent: animation,
           ),
         ),
-        child: button,
+        child: Button(buttonSpec: buttonSpec),
       );
     }
   }
@@ -83,9 +77,9 @@ class _ButtonArrayState extends State<ButtonArray> {
               ? VerticalDirection.down
               : VerticalDirection.up,
           children: <Widget>[
-            slidingButton(widget.animation, settingsButton),
-            slidingButton(widget.animation, filesButton),
-            slidingButton(widget.animation, homeButton),
+            slidingButton(widget.animation, settings),
+            slidingButton(widget.animation, files),
+            slidingButton(widget.animation, home),
           ],
         ),
       ),
