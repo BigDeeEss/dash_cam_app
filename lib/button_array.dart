@@ -24,36 +24,60 @@ class ButtonArray extends StatefulWidget {
 }
 
 class _ButtonArrayState extends State<ButtonArray> {
+  static List<ButtonSpec> buttonSpecList= [
+    settings,
+    files,
+    home,
+  ];
+
   //  TODO: move the following to app_settings.dart.
   static const double initialOffsetX = -1;
   static const double intervalStart = 0.5;
   static const double intervalEnd = 1.0;
 
+  List<Button> makeButtonList(List<ButtonSpec> buttonSpecList) {
+    List<Button> buttonList = [];
+
+    buttonSpecList.forEach((item) => buttonList.add(Button(buttonSpec: item)));
+
+    return buttonList;
+  }
+
   //  [slidingButton] is a class method which outputs either a static
   //  button or a sliding button.
-  Widget slidingButton(Animation<double>? animation, ButtonSpec buttonSpec) {
-    //  If animation is null the return a static button; if not null then
-    //  return a SlideTransition. Both use the base button class.
-    if (animation == null) {
-      return Button(buttonSpec: buttonSpec);
-    } else {
-      return SlideTransition(
-        position: Tween<Offset>(
-          begin: Offset(initialOffsetX, 0),
-          end: Offset(0, 0),
-        ).animate(
-          CurvedAnimation(
-            curve: Interval(
-              intervalStart,
-              intervalEnd,
-              curve: Curves.easeOutCubic,
+  List<Widget> slidingButtonList(Animation<double>? animation, List<ButtonSpec> buttonSpecList) {
+    final List<Button> buttonList = makeButtonList(buttonSpecList);
+
+    List<Widget> widgetList = [];;
+
+    buttonList.forEach((item) {
+      //  If animation is null the return a static button; if not null then
+      //  return a SlideTransition. Both use the base button class.
+      if (animation == null) {
+        widgetList.add(item);
+      } else {
+        widgetList.add(
+          SlideTransition(
+            position: Tween<Offset>(
+              begin: Offset(initialOffsetX, 0),
+              end: Offset(0, 0),
+            ).animate(
+              CurvedAnimation(
+                curve: Interval(
+                  intervalStart,intervalEnd,
+                  // buttonSpec.start,
+                  // buttonSpec.stop,
+                  curve: Curves.easeOutCubic,
+                ),
+                parent: animation,
+              ),
             ),
-            parent: animation,
+            child: item,
           ),
-        ),
-        child: Button(buttonSpec: buttonSpec),
-      );
-    }
+        );
+      }
+    });
+    return widgetList;
   }
 
   @override
@@ -76,11 +100,7 @@ class _ButtonArrayState extends State<ButtonArray> {
           verticalDirection: (AppSettings.buttonAlignment.y < 0)
               ? VerticalDirection.down
               : VerticalDirection.up,
-          children: <Widget>[
-            slidingButton(widget.animation, settings),
-            slidingButton(widget.animation, files),
-            slidingButton(widget.animation, home),
-          ],
+          children: slidingButtonList(widget.animation, buttonSpecList,),
         ),
       ),
     );
