@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button.dart';
 import 'package:dash_cam_app/button_specs.dart';
+import 'package:dash_cam_app/utils.dart';
 
 class ButtonArray extends StatefulWidget {
   ButtonArray({
@@ -30,16 +31,25 @@ class _ButtonArrayState extends State<ButtonArray> {
     settings,
     files,
     home,
-    home,
   ];
 
   //  TODO: move the following to app_settings.dart.
-  static const double initialOffsetX = -1;
+  static const double initialOffsetX = -(1);
+
+  Offset getOffset(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
+    double buttonSizeInPixels = AppSettings.buttonSize
+        + 2.0 * AppSettings.buttonPaddingCrossAxis;
+    return Offset(-size.width / buttonSizeInPixels /2, 0);
+  }
 
   //  [slidingButtonList] is a class method which outputs a list of
   //  widgets. The list contains either a static or sliding button.
   List<Widget> slidingButtonList(
-      Animation<double>? animation, List<ButtonSpec> buttonSpecList) {
+      BuildContext context,
+      Animation<double>? animation,
+      List<ButtonSpec> buttonSpecList,) {
     //  Initialise [widgetList] ready for population.
     List<Widget> widgetList = [];
 
@@ -55,15 +65,14 @@ class _ButtonArrayState extends State<ButtonArray> {
         widgetList.add(
           SlideTransition(
             position: Tween<Offset>(
-              begin: Offset(initialOffsetX, 0),
-              end: Offset(0, 0),
+              begin: getOffset(context),
+              end: Offset.zero,
             ).animate(
               CurvedAnimation(
+                //  Staggered button movement.
                 curve: Interval(
                   0.5 + (i / (buttonSpecList.length + 1)) * 0.5,
                   0.5 + ((i + 2) / (buttonSpecList.length + 1)) * 0.5,
-                  // buttonSpec.start,
-                  // buttonSpec.stop,
                   curve: Curves.easeOutCubic,
                 ),
                 parent: animation,
@@ -98,6 +107,7 @@ class _ButtonArrayState extends State<ButtonArray> {
               ? VerticalDirection.down
               : VerticalDirection.up,
           children: slidingButtonList(
+            context,
             widget.animation,
             buttonSpecList,
           ),
