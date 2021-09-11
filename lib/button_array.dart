@@ -30,26 +30,26 @@ class _ButtonArrayState extends State<ButtonArray> {
     settings,
     files,
     home,
+    home,
   ];
 
   //  TODO: move the following to app_settings.dart.
   static const double initialOffsetX = -1;
-  static const double intervalStart = 0.5;
-  static const double intervalEnd = 1.0;
 
   //  [slidingButtonList] is a class method which outputs a list of
   //  widgets. The list contains either a static or sliding button.
   List<Widget> slidingButtonList(
       Animation<double>? animation, List<ButtonSpec> buttonSpecList) {
+    //  Initialise [widgetList] ready for population.
     List<Widget> widgetList = [];
 
     //  Loop over [buttonSpecList] and convert each item in list to either a
     //  static button (if animation is null) or a SlideTransition with
     //  button for its child (if not).
-    buttonSpecList.forEach((item) {
+    for (int i = 0; i < buttonSpecList.length; i++) {
       if (animation == null) {
         //  If animation is null then add static button to widgetList.
-        widgetList.add(Button(buttonSpec: item));
+        widgetList.add(Button(buttonSpec: buttonSpecList[i]));
       } else {
         //  If animation is not null then add SlidingTransition to widgetList.
         widgetList.add(
@@ -60,7 +60,8 @@ class _ButtonArrayState extends State<ButtonArray> {
             ).animate(
               CurvedAnimation(
                 curve: Interval(
-                  intervalStart, intervalEnd,
+                  0.5 + (i / (buttonSpecList.length + 1)) * 0.5,
+                  0.5 + ((i + 2) / (buttonSpecList.length + 1)) * 0.5,
                   // buttonSpec.start,
                   // buttonSpec.stop,
                   curve: Curves.easeOutCubic,
@@ -68,11 +69,11 @@ class _ButtonArrayState extends State<ButtonArray> {
                 parent: animation,
               ),
             ),
-            child: Button(buttonSpec: item),
+            child: Button(buttonSpec: buttonSpecList[i]),
           ),
         );
       }
-    });
+    };
     return widgetList;
   }
 
