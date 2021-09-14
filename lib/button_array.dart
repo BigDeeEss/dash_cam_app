@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button.dart';
 import 'package:dash_cam_app/button_specs.dart';
-import 'package:dash_cam_app/utils.dart';
 
 class ButtonArray extends StatefulWidget {
   ButtonArray({
@@ -39,12 +38,13 @@ class _ButtonArrayState extends State<ButtonArray> {
     //  Get size of screen in pixels.
     final Size size = MediaQuery.of(context).size;
 
-    // Get button size including padding in pixels.
-    double buttonSizeInPixels = AppSettings.buttonSize
-        + 2.0 * AppSettings.buttonPaddingCrossAxis;
+    // Get characteristic button dimension including padding in pixels.
+    double buttonDim =
+        AppSettings.buttonSize + 2.0 * AppSettings.buttonPaddingCrossAxis;
 
-    //  Convert [buttonSizeInPixels] to an Offset.
-    return Offset(-size.width / buttonSizeInPixels, 0);
+    //  Convert [buttonDim] to an Offset.
+    //  [AppSettings.buttonAlignment] switches between left and right entrance.
+    return Offset(-AppSettings.buttonAlignment.x * size.width / buttonDim, 0);
   }
 
   /// [getButtonStartTime] calculates the point in the animation at which
@@ -63,9 +63,10 @@ class _ButtonArrayState extends State<ButtonArray> {
   //  [slidingButtonList] is a class method which outputs a list of
   //  widgets. The list contains either a static or sliding button.
   List<Widget> slidingButtonList(
-      BuildContext context,
-      Animation<double>? animation,
-      List<ButtonSpec> buttonSpecList,) {
+    BuildContext context,
+    Animation<double>? animation,
+    List<ButtonSpec> buttonSpecList,
+  ) {
     //  Initialise [widgetList] ready for population.
     List<Widget> widgetList = [];
 
@@ -98,7 +99,8 @@ class _ButtonArrayState extends State<ButtonArray> {
           ),
         );
       }
-    };
+    }
+    ;
     return widgetList;
   }
 
