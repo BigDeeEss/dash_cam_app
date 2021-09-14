@@ -1,4 +1,5 @@
-//  Import flutter packages.
+//  Import dart and flutter packages.
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
@@ -33,15 +34,30 @@ class _ButtonArrayState extends State<ButtonArray> {
     home,
   ];
 
-  //  TODO: move the following to app_settings.dart.
-  static const double initialOffsetX = -(1);
-
+  /// [getOffset]
   Offset getOffset(BuildContext context) {
+    //  Get size of screen in pixels.
     final Size size = MediaQuery.of(context).size;
 
+    // Get button size including padding in pixels.
     double buttonSizeInPixels = AppSettings.buttonSize
         + 2.0 * AppSettings.buttonPaddingCrossAxis;
-    return Offset(-size.width / buttonSizeInPixels /2, 0);
+
+    //  Convert [buttonSizeInPixels] to an Offset.
+    return Offset(-size.width / buttonSizeInPixels, 0);
+  }
+
+  /// [getButtonStartTime] calculates the point in the animation at which
+  /// th ith button starts its animation.
+  double getButtonStartTime(int i) {
+    return 0.5 + (i / (buttonSpecList.length + 1)) * 0.5;
+  }
+
+  /// [getButtonStopTime] calculates the point in the animation at which
+  /// th ith button starts its animation.
+  double getButtonStopTime(int i) {
+    return 0.5 + ((i + 2) / (buttonSpecList.length + 1)) * 0.5;
+    // return 0.5 + pow((i + 2) / (buttonSpecList.length + 1), 1.0 / 3.0) * 0.5;
   }
 
   //  [slidingButtonList] is a class method which outputs a list of
@@ -71,8 +87,8 @@ class _ButtonArrayState extends State<ButtonArray> {
               CurvedAnimation(
                 //  Staggered button movement.
                 curve: Interval(
-                  0.5 + (i / (buttonSpecList.length + 1)) * 0.5,
-                  0.5 + ((i + 2) / (buttonSpecList.length + 1)) * 0.5,
+                  getButtonStartTime(i),
+                  getButtonStopTime(i),
                   curve: Curves.easeOutCubic,
                 ),
                 parent: animation,
