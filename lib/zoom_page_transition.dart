@@ -10,8 +10,10 @@ class ZoomPageTransition extends PageRouteBuilder {
   final ButtonSpec buttonSpec;
 
   ZoomPageTransition({
+    //  Add constructor details specific to ZoomPageTransition.
     required this.buttonSpec,
   }) : super(
+    //  Add constructor details specific to PageRouteBuilder.
     pageBuilder: (
       BuildContext context,
       Animation<double> animation,
@@ -19,9 +21,10 @@ class ZoomPageTransition extends PageRouteBuilder {
     ) => BasePage(
       title: buttonSpec.title,
       animation: animation,
+      controller: animation
     ),
 
-    // [transitionDuration] includes the page transition time AND the button
+    //  [transitionDuration] includes the page transition time AND the button
     //  animation time.
     transitionDuration: Duration(milliseconds: AppSettings.pageTransitionTime),
 

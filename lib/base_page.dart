@@ -10,6 +10,7 @@ class BasePage extends StatefulWidget {
   const BasePage({
     this.animation,
     required this.title,
+    this.controller,
     Key? key,
   }) : super(key: key);
 
@@ -22,6 +23,8 @@ class BasePage extends StatefulWidget {
 
   /// [title] is the page title that is displayed on the appBar in BasePage.
   final String title;
+
+  final controller;
 
   @override
   _BasePageState createState() => _BasePageState();

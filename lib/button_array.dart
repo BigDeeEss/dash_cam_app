@@ -1,8 +1,8 @@
 //  Import dart and flutter packages.
-import 'dart:math';
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
+import 'package:dash_cam_app/animated_button.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button.dart';
 import 'package:dash_cam_app/button_specs.dart';
@@ -95,12 +95,30 @@ class _ButtonArrayState extends State<ButtonArray> {
                 parent: animation,
               ),
             ),
-            child: Button(buttonSpec: buttonSpecList[i]),
+            // child: Button(
+            //   buttonSpec: buttonSpecList[i],
+            // ),
+            child: AnimatedButton(
+              skewFactor: Tween<double>(
+                begin: -0.3,
+                end: 0.0,
+              ).animate(
+                CurvedAnimation(
+                  //  Staggered button movement.
+                  curve: Interval(
+                    getButtonStartTime(i),
+                    getButtonStopTime(i),
+                    curve: Curves.easeOutCubic,
+                  ),
+                  parent: animation,
+                ),
+              ),
+              buttonSpec: buttonSpecList[i],
+            ),
           ),
         );
       }
-    }
-    ;
+    };
     return widgetList;
   }
 

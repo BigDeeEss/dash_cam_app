@@ -43,5 +43,5 @@ class AppSettings {
 
   /// [pageTransitionTime] defines the page transition time including
   /// button animation.
-  static int pageTransitionTime = 1500;
+  static int pageTransitionTime = 15000;
 }
