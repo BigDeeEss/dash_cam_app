@@ -42,6 +42,7 @@ class AppSettings {
   static double buttonSize = 56.0;
 
   /// [pageTransitionTime] defines the page transition time including
-  /// button animation.
-  static int pageTransitionTime = 15000;
+  /// button animation. Any page transition is allocated time for transitioning
+  /// and animating page content (e.g. buttons) in the ration 1:4.
+  static int pageTransitionTime = 1200;
 }

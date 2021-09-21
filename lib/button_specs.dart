@@ -18,8 +18,7 @@ class ButtonSpec {
   //  [icon] corresponding to the page transition type.
   final Icon icon;
 
-  //  [onPressed] defines the action to be taken when the associated button
-  //  is activated.
+  //  [onPressed] defines the action to be taken when the button is activated.
   final void Function(BuildContext context) onPressed;
 
   //  [size] is the button characteristic dimension.

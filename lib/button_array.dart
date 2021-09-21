@@ -50,13 +50,13 @@ class _ButtonArrayState extends State<ButtonArray> {
   /// [getButtonStartTime] calculates the point in the animation at which
   /// th ith button starts its animation.
   double getButtonStartTime(int i) {
-    return 0.5 + (i / (buttonSpecList.length + 1)) * 0.5;
+    return 0.25 + (i / (buttonSpecList.length + 1)) * 0.75;
   }
 
   /// [getButtonStopTime] calculates the point in the animation at which
   /// th ith button starts its animation.
   double getButtonStopTime(int i) {
-    return 0.5 + ((i + 2) / (buttonSpecList.length + 1)) * 0.5;
+    return 0.25 + ((i + 2) / (buttonSpecList.length + 1)) * 0.75;
     // return 0.5 + pow((i + 2) / (buttonSpecList.length + 1), 1.0 / 3.0) * 0.5;
   }
 

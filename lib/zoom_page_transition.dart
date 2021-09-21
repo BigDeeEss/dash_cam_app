@@ -21,7 +21,6 @@ class ZoomPageTransition extends PageRouteBuilder {
     ) => BasePage(
       title: buttonSpec.title,
       animation: animation,
-      controller: animation
     ),
 
     //  [transitionDuration] includes the page transition time AND the button
@@ -41,7 +40,7 @@ class ZoomPageTransition extends PageRouteBuilder {
         CurvedAnimation(
           parent: animation,
           curve: Interval(
-            0.0, 0.5,
+            0.0, 0.25,
             curve: Curves.fastOutSlowIn,
           ),
         ),
