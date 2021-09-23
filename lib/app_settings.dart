@@ -14,7 +14,8 @@ class AppSettings {
 
   /// [buttonPaddingDown] defines the padding for downward direction
   /// button positioning in Button class.
-  static EdgeInsetsDirectional buttonPaddingDown = EdgeInsetsDirectional.fromSTEB(
+  static EdgeInsetsDirectional buttonPaddingDown =
+      EdgeInsetsDirectional.fromSTEB(
     buttonPaddingCrossAxis,
     buttonPaddingMainAxis,
     buttonPaddingCrossAxis,
@@ -44,6 +45,6 @@ class AppSettings {
 
   /// [pageTransitionTime] defines the page transition time including
   /// button animation. Any page transition is allocated time for transitioning
-  /// and animating page content (e.g. buttons) in the ration 1:4.
+  /// and animating page content (e.g. buttons) in the ratio 1:4.
   static int pageTransitionTime = 3200;
 }
