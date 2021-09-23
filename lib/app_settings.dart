@@ -9,8 +9,14 @@ class AppSettings {
 
   /// [buttonAlignment] defines the anchor point for button placement
   /// in ButtonArray class.
-  // static Alignment buttonAlignment = Alignment.bottomRight;
-  static Alignment buttonAlignment = Alignment.topLeft;
+  // static Alignment buttonAlignment = Alignment.bottomLeft;
+  static Alignment buttonAlignment = Alignment.bottomRight;
+  // static Alignment buttonAlignment = Alignment.topLeft;
+  // static Alignment buttonAlignment = Alignment.topRight;
+
+  /// [buttonAxis] sets the button axis in ButtonArray.
+  // static Axis buttonAxis = Axis.horizontal;
+  static Axis buttonAxis = Axis.vertical;
 
   /// [buttonPaddingDown] defines the padding for downward direction
   /// button positioning in Button class.
@@ -23,7 +29,7 @@ class AppSettings {
   );
 
   /// [buttonPaddingCrossAxis] defines the cross axis padding between buttons.
-  static double buttonPaddingCrossAxis = 15;
+  static double buttonPaddingCrossAxis = 15.0;
 
   /// [buttonPaddingMainAxis] defines the main axis padding between buttons.
   static double buttonPaddingMainAxis = 15.0;
