@@ -9,7 +9,8 @@ class AppSettings {
 
   /// [buttonAlignment] defines the anchor point for button placement
   /// in ButtonArray class.
-  static Alignment buttonAlignment = Alignment.bottomRight;
+  // static Alignment buttonAlignment = Alignment.bottomRight;
+  static Alignment buttonAlignment = Alignment.topLeft;
 
   /// [buttonPaddingDown] defines the padding for downward direction
   /// button positioning in Button class.
@@ -44,5 +45,5 @@ class AppSettings {
   /// [pageTransitionTime] defines the page transition time including
   /// button animation. Any page transition is allocated time for transitioning
   /// and animating page content (e.g. buttons) in the ration 1:4.
-  static int pageTransitionTime = 1200;
+  static int pageTransitionTime = 3200;
 }

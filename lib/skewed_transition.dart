@@ -1,23 +1,16 @@
 //  Import flutter packages.
 import 'package:flutter/material.dart';
 
-// Import project-specific files.
-import 'package:dash_cam_app/button.dart';
-import 'package:dash_cam_app/button_specs.dart';
-
-class AnimatedButton extends AnimatedWidget {
-  /// Creates a fractional translation transition.
-  ///
-  /// The [buttonSpec] argument must not be null.
+class SkewedTransition extends AnimatedWidget {
+  /// Creates a skewed transition.
   //
   //  The skewFactor animation is required by the super constructor,
-  //  and so needs to be defined as an input for AnimatedButton.
-  const AnimatedButton({
+  //  and so needs to be defined as an input for skewedTransition.
+  const SkewedTransition({
     Key? key,
-    required this.buttonSpec,
+    this.child,
     required Animation<double> skewFactor,
-  })  : assert(buttonSpec != null),
-        assert(skewFactor != null),
+  })  : assert(skewFactor != null),
         super(key: key, listenable: skewFactor);
 
   //  Redirects the getter for skewFactor onto the listenable variable,
@@ -25,8 +18,8 @@ class AnimatedButton extends AnimatedWidget {
   //  Animation<double>.
   Animation<double> get skewFactor => listenable as Animation<double>;
 
-  /// [buttonSpec] defines the button characteristics such as icon, route etc.
-  final ButtonSpec buttonSpec;
+  /// The widget below this widget in the widget tree.
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +27,7 @@ class AnimatedButton extends AnimatedWidget {
     //  Animation<double> variable as the input to Matrix4.skewX.
     return Transform(
       transform: Matrix4.skewX(skewFactor.value),
-      child: Button(buttonSpec: buttonSpec),
+      child: child,
     );
   }
 }

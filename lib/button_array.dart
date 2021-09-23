@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
-import 'package:dash_cam_app/animated_button.dart';
+import 'package:dash_cam_app/skewed_transition.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button.dart';
 import 'package:dash_cam_app/button_specs.dart';
@@ -47,17 +47,16 @@ class _ButtonArrayState extends State<ButtonArray> {
     return Offset(-AppSettings.buttonAlignment.x * size.width / buttonDim, 0);
   }
 
-  /// [getButtonStartTime] calculates the point in the animation at which
-  /// th ith button starts its animation.
+  /// [getButtonStartTime] calculates the point in [animation] at which
+  /// the ith button starts to animate.
   double getButtonStartTime(int i) {
     return 0.25 + (i / (buttonSpecList.length + 1)) * 0.75;
   }
 
-  /// [getButtonStopTime] calculates the point in the animation at which
-  /// th ith button starts its animation.
+  /// [getButtonStopTime] calculates the point in [animation] at which
+  /// the ith button stops animating.
   double getButtonStopTime(int i) {
     return 0.25 + ((i + 2) / (buttonSpecList.length + 1)) * 0.75;
-    // return 0.5 + pow((i + 2) / (buttonSpecList.length + 1), 1.0 / 3.0) * 0.5;
   }
 
   //  [slidingButtonList] is a class method which outputs a list of
@@ -76,9 +75,11 @@ class _ButtonArrayState extends State<ButtonArray> {
     for (int i = 0; i < buttonSpecList.length; i++) {
       if (animation == null) {
         //  If animation is null then add static button to widgetList.
-        widgetList.add(Button(buttonSpec: buttonSpecList[i]));
+        widgetList.add(Button(
+          buttonSpec: buttonSpecList[i],
+        ));
       } else {
-        //  If animation is not null then add SlidingTransition to widgetList.
+        //  If animation is not null then add animated button to widgetList.
         widgetList.add(
           SlideTransition(
             position: Tween<Offset>(
@@ -95,12 +96,9 @@ class _ButtonArrayState extends State<ButtonArray> {
                 parent: animation,
               ),
             ),
-            // child: Button(
-            //   buttonSpec: buttonSpecList[i],
-            // ),
-            child: AnimatedButton(
+            child: SkewedTransition(
               skewFactor: Tween<double>(
-                begin: -0.3,
+                begin: -AppSettings.buttonAlignment.x * 0.3,
                 end: 0.0,
               ).animate(
                 CurvedAnimation(
@@ -113,7 +111,9 @@ class _ButtonArrayState extends State<ButtonArray> {
                   parent: animation,
                 ),
               ),
-              buttonSpec: buttonSpecList[i],
+              child: Button(
+                buttonSpec: buttonSpecList[i],
+              ),
             ),
           ),
         );
