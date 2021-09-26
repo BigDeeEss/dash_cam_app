@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // Import project-specific files.
 import 'package:dash_cam_app/lib/custom_icons.dart';
 import 'package:dash_cam_app/app_settings.dart';
-import 'package:dash_cam_app/base_page_transition.dart';
 import 'package:dash_cam_app/zoom_page_transition.dart';
 
 //  Class for ease of reference to specific button settings.
@@ -19,8 +18,7 @@ class ButtonSpec {
   //  [icon] corresponding to the page transition type.
   final Icon icon;
 
-  //  [onPressed] defines the action to be taken when the associated button
-  //  is activated.
+  //  [onPressed] defines the action to be taken when the button is activated.
   final void Function(BuildContext context) onPressed;
 
   //  [size] is the button characteristic dimension.

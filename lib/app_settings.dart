@@ -9,11 +9,19 @@ class AppSettings {
 
   /// [buttonAlignment] defines the anchor point for button placement
   /// in ButtonArray class.
+  // static Alignment buttonAlignment = Alignment.bottomLeft;
   static Alignment buttonAlignment = Alignment.bottomRight;
+  // static Alignment buttonAlignment = Alignment.topLeft;
+  // static Alignment buttonAlignment = Alignment.topRight;
+
+  /// [buttonAxis] sets the button axis in ButtonArray.
+  // static Axis buttonAxis = Axis.horizontal;
+  static Axis buttonAxis = Axis.vertical;
 
   /// [buttonPaddingDown] defines the padding for downward direction
   /// button positioning in Button class.
-  static EdgeInsetsDirectional buttonPaddingDown = EdgeInsetsDirectional.fromSTEB(
+  static EdgeInsetsDirectional buttonPaddingDown =
+      EdgeInsetsDirectional.fromSTEB(
     buttonPaddingCrossAxis,
     buttonPaddingMainAxis,
     buttonPaddingCrossAxis,
@@ -21,7 +29,7 @@ class AppSettings {
   );
 
   /// [buttonPaddingCrossAxis] defines the cross axis padding between buttons.
-  static double buttonPaddingCrossAxis = 15;
+  static double buttonPaddingCrossAxis = 15.0;
 
   /// [buttonPaddingMainAxis] defines the main axis padding between buttons.
   static double buttonPaddingMainAxis = 15.0;
@@ -41,5 +49,8 @@ class AppSettings {
   /// [buttonSize] defines the button size in Button class..
   static double buttonSize = 56.0;
 
-  static int pageTransitionTime = 1500;
+  /// [pageTransitionTime] defines the page transition time including
+  /// button animation. Any page transition is allocated time for transitioning
+  /// and animating page content (e.g. buttons) in the ratio 1:4.
+  static int pageTransitionTime = 3200;
 }

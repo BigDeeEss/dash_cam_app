@@ -10,17 +10,14 @@ void main() {
 }
 
 class DashCamApp extends StatelessWidget {
-  //  Default constructor required because there is a const keyword
-  //  in 'runApp(const DashCamApp(...));' above.
+  /// The root widget of this dash cam project called by runApp(...).
+  ///
   const DashCamApp({Key? key}) : super(key: key);
 
-  //  Root widget of DashCamApp project called by runApp(...).
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DashCamApp',
-
-      //  [BasePage] defines a generic page layout for use with all pages.
       home: BasePage(
         title: 'Home',
       ),

@@ -1,7 +1,8 @@
-//  Import flutter packages.
+//  Import dart and flutter packages.
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
+import 'package:dash_cam_app/skewed_transition.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button.dart';
 import 'package:dash_cam_app/button_specs.dart';
@@ -12,9 +13,9 @@ class ButtonArray extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  // [animation] is used to animate the launch of buttons onto the screen.
+  //  [animation] is used to animate the launch of buttons onto the screen.
   //  Whilst this animation ranges from 0.0 to 1.0, in this instance the
-  //  range of values 0.0--0.5 is reserved got animating the page transition
+  //  range of values 0.0--0.5 is reserved for animating the page transition
   //  whilst the range 0.5--1.0 is used for animating the buttons.
   //  [animation] is nullable because DashCamApp calls BasePage(title: 'Home',).
   final Animation<double>? animation;
@@ -24,48 +25,112 @@ class ButtonArray extends StatefulWidget {
 }
 
 class _ButtonArrayState extends State<ButtonArray> {
-  //  [filesButton], [homeButton] and [settingsButton] are instances of the
-  //  Button StatelessWidget class. These will get animated across the page.
-  Button filesButton = Button(buttonSpec: files);
-  Button homeButton = Button(buttonSpec: home);
-  Button settingsButton = Button(buttonSpec: settings);
+  //  [buttonSpecList] defines a list of buttonSpec items which
+  //  ultimately define the buttons on each screen.
+  static List<ButtonSpec> buttonSpecList = [
+    settings,
+    files,
+    home,
+  ];
 
-  //  TODO: move the following to app_settings.dart.
-  static const double initialOffsetX = -100;
-  static const double intervalStart = 0.5;
-  static const double intervalEnd = 1.0;
+  /// [child]
+  Widget child(Widget widget) {
+    return widget;
+  }
 
-  //  [slidingButton] is a class method which outputs either a static
-  //  button or a sliding button.
-  Widget slidingButton(Animation<double>? animation, Button button) {
-    //  If animation is null the return a static button; if not null then
-    //  return a SlideTransition. Both use the base button class.
-    if (animation == null) {
-      return button;
-    } else {
-      return SlideTransition(
-        position: Tween<Offset>(
-          begin: Offset(initialOffsetX, 0),
-          end: Offset(0, 0),
-        ).animate(
-          CurvedAnimation(
-            curve: Interval(
-              intervalStart,
-              intervalEnd,
-              curve: Curves.easeOutCubic,
+  /// [getButtonStartTime] calculates the point in [animation] at which
+  /// the ith button starts to animate.
+  double getButtonStartTime(int i) {
+    return 0.25 + (i / (buttonSpecList.length + 1)) * 0.75;
+  }
+
+  /// [getButtonStopTime] calculates the point in [animation] at which
+  /// the ith button stops animating.
+  double getButtonStopTime(int i) {
+    return 0.25 + ((i + 2) / (buttonSpecList.length + 1)) * 0.75;
+  }
+
+  /// [getOffset]
+  Offset getOffset(BuildContext context) {
+    //  Get size of screen in pixels.
+    final Size size = MediaQuery.of(context).size;
+
+    // Get characteristic button dimension including padding in pixels.
+    double buttonDim =
+        AppSettings.buttonSize + 2.0 * AppSettings.buttonPaddingCrossAxis;
+
+    //  Convert [buttonDim] to an Offset.
+    //  [AppSettings.buttonAlignment] switches between left and right entrance.
+    return Offset(-AppSettings.buttonAlignment.x * size.width / buttonDim, 0);
+  }
+
+  //  [slidingButtonList] is a class method which outputs a list of
+  //  widgets. The list contains either a static or sliding button.
+  List<Widget> slidingButtonList(
+    BuildContext context,
+    Animation<double>? animation,
+    List<ButtonSpec> buttonSpecList,
+  ) {
+    //  Initialise [widgetList] ready for population.
+    List<Widget> widgetList = [];
+
+    //  Loop over [buttonSpecList] and convert each item in list to either a
+    //  static button (if animation is null) or a SlideTransition with
+    //  button for its child (if not).
+    for (int i = 0; i < buttonSpecList.length; i++) {
+      if (animation == null) {
+        //  If animation is null then add static button to widgetList.
+        widgetList.add(Button(
+          buttonSpec: buttonSpecList[i],
+        ));
+      } else {
+        //  If animation is not null then add animated button to widgetList.
+        widgetList.add(
+          SlideTransition(
+            position: Tween<Offset>(
+              begin: getOffset(context),
+              end: Offset.zero,
+            ).animate(
+              CurvedAnimation(
+                //  Staggered button movement.
+                curve: Interval(
+                  getButtonStartTime(i),
+                  getButtonStopTime(i),
+                  curve: Curves.easeOutCubic,
+                ),
+                parent: animation,
+              ),
             ),
-            parent: animation,
+            child: SkewedTransition(
+              skewFactor: Tween<double>(
+                begin: -AppSettings.buttonAlignment.x * 0.3,
+                end: 0.0,
+              ).animate(
+                CurvedAnimation(
+                  //  Staggered button movement.
+                  curve: Interval(
+                    getButtonStartTime(i),
+                    getButtonStopTime(i),
+                    curve: Curves.easeOutCubic,
+                  ),
+                  parent: animation,
+                ),
+              ),
+              child: Button(
+                buttonSpec: buttonSpecList[i],
+              ),
+            ),
           ),
-        ),
-        child: button,
-      );
-    }
+        );
+      }
+    };
+    return widgetList;
   }
 
   @override
   Widget build(BuildContext context) {
-    //  Use a Container-Align-Column construct to position [filesButton],
-    //  [homeButton] and [settingsButton].
+    //  Use a Container-Align-Column construct to position items in the list
+    //  generated by [slidingButtonList].
     return Container(
       //  Request that this container expands to fit the entire screen.
       constraints: BoxConstraints.expand(
@@ -77,16 +142,21 @@ class _ButtonArrayState extends State<ButtonArray> {
       //  Specs provided by AppSettings.
       child: Align(
         alignment: AppSettings.buttonAlignment,
-        child: Column(
+        // child: Column(
+        child: Flex(
+          direction: AppSettings.buttonAxis,
+          textDirection: (AppSettings.buttonAlignment.x < 0)
+              ? TextDirection.ltr
+              : TextDirection.rtl,
           crossAxisAlignment: CrossAxisAlignment.center,
           verticalDirection: (AppSettings.buttonAlignment.y < 0)
               ? VerticalDirection.down
               : VerticalDirection.up,
-          children: <Widget>[
-            slidingButton(widget.animation, settingsButton),
-            slidingButton(widget.animation, filesButton),
-            slidingButton(widget.animation, homeButton),
-          ],
+          children: slidingButtonList(
+            context,
+            widget.animation,
+            buttonSpecList,
+          ),
         ),
       ),
     );
