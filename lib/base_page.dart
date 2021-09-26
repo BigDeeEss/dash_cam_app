@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 // Import project-specific files.
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button_array.dart';
+import 'package:dash_cam_app/page_specs.dart';
 
 class BasePage extends StatefulWidget {
   /// Implements a basic generic page layout design.
   const BasePage({
-    this.animation,
-    required this.title,
     Key? key,
+    this.animation,
+    required this.pageSpec,
   }) : super(key: key);
 
   /// [animation] is used to animate the launch of buttons onto the screen.
@@ -20,8 +21,8 @@ class BasePage extends StatefulWidget {
   //  [animation] is nullable because DashCamApp calls BasePage(title: 'Home',).
   final Animation<double>? animation;
 
-  /// [title] is the page title that is displayed on the appBar in BasePage.
-  final String title;
+  /// [pageSpec] defines the page content.
+  final PageSpec pageSpec;
 
   @override
   _BasePageState createState() => _BasePageState();
@@ -32,7 +33,7 @@ class _BasePageState extends State<BasePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.pageSpec.title),
       ),
 
       //  Use Builder widget because it is not possible to get the appBar

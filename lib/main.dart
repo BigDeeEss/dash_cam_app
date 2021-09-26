@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //  Import project-specific files.
 import 'package:dash_cam_app/base_page.dart';
+import 'package:dash_cam_app/page_specs.dart';
 
 //  App start point.
 void main() {
@@ -19,7 +20,7 @@ class DashCamApp extends StatelessWidget {
     return MaterialApp(
       title: 'DashCamApp',
       home: BasePage(
-        title: 'Home',
+        pageSpec: homePage,
       ),
     );
   }

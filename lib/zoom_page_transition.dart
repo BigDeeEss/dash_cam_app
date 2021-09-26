@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 
 // Import project-specific files.
 import 'package:dash_cam_app/app_settings.dart';
-import 'package:dash_cam_app/button_specs.dart';
+import 'package:dash_cam_app/page_specs.dart';
 import 'package:dash_cam_app/base_page.dart';
 
 class ZoomPageTransition extends PageRouteBuilder {
-  final ButtonSpec buttonSpec;
+  final PageSpec pageSpec;
 
   ZoomPageTransition({
     //  Add constructor details specific to ZoomPageTransition.
-    required this.buttonSpec,
+    required this.pageSpec,
   }) : super(
     //  Add constructor details specific to PageRouteBuilder.
     pageBuilder: (
@@ -19,8 +19,8 @@ class ZoomPageTransition extends PageRouteBuilder {
       Animation<double> animation,
       Animation<double> secondaryAnimation,
     ) => BasePage(
-      title: buttonSpec.title,
       animation: animation,
+      pageSpec: pageSpec,
     ),
 
     //  [transitionDuration] includes the page transition time AND the button

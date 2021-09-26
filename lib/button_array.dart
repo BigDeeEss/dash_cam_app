@@ -9,8 +9,8 @@ import 'package:dash_cam_app/button_specs.dart';
 
 class ButtonArray extends StatefulWidget {
   ButtonArray({
-    this.animation,
     Key? key,
+    this.animation,
   }) : super(key: key);
 
   //  [animation] is used to animate the launch of buttons onto the screen.
@@ -28,9 +28,9 @@ class _ButtonArrayState extends State<ButtonArray> {
   //  [buttonSpecList] defines a list of buttonSpec items which
   //  ultimately define the buttons on each screen.
   static List<ButtonSpec> buttonSpecList = [
-    settings,
-    files,
-    home,
+    settingsButton,
+    filesButton,
+    homeButton,
   ];
 
   /// [child]

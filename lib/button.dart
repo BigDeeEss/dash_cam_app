@@ -8,8 +8,8 @@ import 'package:dash_cam_app/button_specs.dart';
 //  Geometrical and functional button specs for [ButtonArray].
 class Button extends StatelessWidget {
   const Button({
-    required this.buttonSpec,
     Key? key,
+    required this.buttonSpec,
   }) : super(key: key);
 
   /// [title] is the page title displayed in BasePage.
