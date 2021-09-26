@@ -9,13 +9,17 @@ import 'package:dash_cam_app/zoom_page_transition.dart';
 //  Class for ease of reference to specific button settings.
 class ButtonSpec {
   const ButtonSpec({
+    required this.child,
     required this.icon,
     required this.onPressed,
     required this.size,
     required this.title,
   });
 
-  //  [icon] corresponding to the page transition type.
+  //  [child] is the root widget containing the destination page content.
+  final Widget child;
+
+  //  The [icon] associated with the destination page.
   final Icon icon;
 
   //  [onPressed] defines the action to be taken when the button is activated.
@@ -24,13 +28,13 @@ class ButtonSpec {
   //  [size] is the button characteristic dimension.
   final double size;
 
-  //  [title] is the appBar title associated with the destination in
-  //  the corresponding page transition type.
+  //  The destination page [title].
   final String title;
 }
 
 //  Home page button specs.
 ButtonSpec home = ButtonSpec(
+  child: Container(),
   icon: Icon(CustomIcons.home),
   onPressed: (context) {
     Navigator.of(context).pushReplacement(ZoomPageTransition(
@@ -43,6 +47,7 @@ ButtonSpec home = ButtonSpec(
 
 //  Files page button specs.
 ButtonSpec files = ButtonSpec(
+  child: Container(),
   icon: Icon(CustomIcons.file_video),
   onPressed: (context) {
     Navigator.of(context).pushReplacement(ZoomPageTransition(
@@ -55,6 +60,7 @@ ButtonSpec files = ButtonSpec(
 
 //  Settings page button specs.
 ButtonSpec settings = ButtonSpec(
+  child: Container(),
   icon: Icon(CustomIcons.cog_1),
   onPressed: (context) {
     Navigator.of(context).pushReplacement(ZoomPageTransition(
