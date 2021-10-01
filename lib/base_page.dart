@@ -15,10 +15,11 @@ class BasePage extends StatefulWidget {
   }) : super(key: key);
 
   /// [animation] is used to animate the launch of buttons onto the screen.
-  //  Whilst this animation ranges from 0.0 to 1.0, in this instance the
-  //  range of values 0.0--0.25 is reserved got animating the page transition
-  //  whilst the range 0.25--1.0 is used for animating the buttons.
-  //  [animation] is nullable because DashCamApp calls BasePage(title: 'Home',).
+  /// Whilst this animation ranges from 0.0 to 1.0, in this instance the
+  /// range of values 0.0--0.5 is reserved for animating the page transition
+  /// whilst the range 0.5--1.0 is used for animating the buttons.
+  /// [animation] is nullable because DashCamApp includes the call,
+  /// BasePage(title: 'Home',).
   final Animation<double>? animation;
 
   /// [pageSpec] defines the page content.

@@ -23,8 +23,7 @@ class ZoomPageTransition extends PageRouteBuilder {
       pageSpec: pageSpec,
     ),
 
-    //  [transitionDuration] includes the page transition time AND the button
-    //  animation time.
+    //  Define page transition PLUS button animation time.
     transitionDuration: Duration(milliseconds: AppSettings.pageTransitionTime),
 
     transitionsBuilder: (

@@ -12,7 +12,7 @@ class Button extends StatelessWidget {
     required this.buttonSpec,
   }) : super(key: key);
 
-  /// [title] is the page title displayed in BasePage.
+  /// [buttonSpec] defines the button characteristics.
   final ButtonSpec buttonSpec;
 
   @override

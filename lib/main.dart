@@ -12,7 +12,6 @@ void main() {
 
 class DashCamApp extends StatelessWidget {
   /// The root widget of this dash cam project called by runApp(...).
-  ///
   const DashCamApp({Key? key}) : super(key: key);
 
   @override

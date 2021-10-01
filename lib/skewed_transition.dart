@@ -13,8 +13,8 @@ class SkewedTransition extends AnimatedWidget {
   })  : assert(skewFactor != null),
         super(key: key, listenable: skewFactor);
 
-  //  Redirects the getter for skewFactor onto the listenable variable,
-  //  which a member of AnimatedWidget, and recasts it to be of type
+  //  Redirect the getter for skewFactor onto the listenable variable,
+  //  which a member of AnimatedWidget, and recast it to be of type
   //  Animation<double>.
   Animation<double> get skewFactor => listenable as Animation<double>;
 
