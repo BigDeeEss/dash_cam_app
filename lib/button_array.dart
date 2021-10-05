@@ -119,6 +119,7 @@ class _ButtonArrayState extends State<ButtonArray> {
               ),
               child: Button(
                 buttonSpec: buttonSpecList[i],
+                key: UniqueKey()
               ),
             ),
           ),
@@ -143,7 +144,6 @@ class _ButtonArrayState extends State<ButtonArray> {
       //  Specs provided by AppSettings.
       child: Align(
         alignment: AppSettings.buttonAlignment,
-        // child: Column(
         child: Flex(
           direction: AppSettings.buttonAxis,
           textDirection: (AppSettings.buttonAlignment.x < 0)

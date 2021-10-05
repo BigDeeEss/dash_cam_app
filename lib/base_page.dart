@@ -63,7 +63,16 @@ class _BasePageState extends State<BasePage> {
       //  An animated linear array of buttons.
       body: Stack(
         children: <Widget>[
-          ButtonArray(animation: widget.animation),
+          widget.pageSpec.contents,
+          ButtonArray(animation: widget.animation, key: UniqueKey()),
+          // Center(
+          //   child: Container(
+          //     margin: const EdgeInsets.all(10.0),
+          //     color: Colors.red,
+          //     height: 10,
+          //     width: 10,
+          //   ),
+          // ),
         ],
       ),
     );
