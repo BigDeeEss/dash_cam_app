@@ -15,11 +15,12 @@ class BasePage extends StatefulWidget {
   }) : super(key: key);
 
   /// [animation] is used to animate the launch of buttons onto the screen.
-  /// Whilst this animation ranges from 0.0 to 1.0, in this instance the
-  /// range of values 0.0--0.5 is reserved for animating the page transition
-  /// whilst the range 0.5--1.0 is used for animating the buttons.
-  /// [animation] is nullable because DashCamApp includes the call,
-  /// BasePage(title: 'Home',).
+  //
+  //  Whilst this animation ranges from 0.0 to 1.0, in this instance the
+  //  range of values 0.0--0.5 is reserved for animating the page transition
+  //  whilst the range 0.5--1.0 is used for animating the buttons.
+  //  [animation] is nullable because DashCamApp includes the call,
+  //  BasePage(title: 'Home',).
   final Animation<double>? animation;
 
   /// [pageSpec] defines the page content.
@@ -60,19 +61,12 @@ class _BasePageState extends State<BasePage> {
         },
       ),
 
-      //  An animated linear array of buttons.
+      //  Ensure that [ButtonArray] sits above the page content using
+      //  a Stack widget.
       body: Stack(
         children: <Widget>[
           widget.pageSpec.contents,
           ButtonArray(animation: widget.animation, key: UniqueKey()),
-          // Center(
-          //   child: Container(
-          //     margin: const EdgeInsets.all(10.0),
-          //     color: Colors.red,
-          //     height: 10,
-          //     width: 10,
-          //   ),
-          // ),
         ],
       ),
     );

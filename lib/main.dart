@@ -19,8 +19,7 @@ class DashCamApp extends StatelessWidget {
     return MaterialApp(
       title: 'DashCamApp',
       home: BasePage(
-        // pageSpec: homePage,
-        pageSpec: settingsPage,
+        pageSpec: homePage,
       ),
     );
   }

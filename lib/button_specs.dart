@@ -7,8 +7,8 @@ import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/page_specs.dart';
 import 'package:dash_cam_app/zoom_page_transition.dart';
 
-//  Class for ease of reference to specific button settings.
 class ButtonSpec {
+  /// Class for ease of reference to specific button settings.
   const ButtonSpec({
     required this.icon,
     required this.onPressed,

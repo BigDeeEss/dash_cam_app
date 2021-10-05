@@ -7,6 +7,7 @@ import 'package:dash_cam_app/page_specs.dart';
 import 'package:dash_cam_app/base_page.dart';
 
 class ZoomPageTransition extends PageRouteBuilder {
+  /// Implements a zooming page transition from the centre out.
   final PageSpec pageSpec;
 
   ZoomPageTransition({

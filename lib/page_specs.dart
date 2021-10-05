@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/settings_page_contents.dart';
 
 class PageSpec {
+  /// Class for ease of reference to specific page settings.
   const PageSpec({
     required this.title,
     required this.contents,

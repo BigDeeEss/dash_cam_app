@@ -7,6 +7,7 @@ import 'package:dash_cam_app/button_specs.dart';
 
 //  Geometrical and functional button specs for [ButtonArray].
 class Button extends StatelessWidget {
+  /// Implements a single button item in ButtonArray.
   const Button({
     Key? key,
     required this.buttonSpec,
@@ -31,27 +32,6 @@ class Button extends StatelessWidget {
             onPressed: () => this.buttonSpec.onPressed(context),
           ),
         ),
-        // child: Container(
-        //   key: UniqueKey(),
-        //   child: SizedBox(
-        //     key: UniqueKey(),
-        //     height: this.buttonSpec.size,
-        //     width: this.buttonSpec.size,
-        //     child: Ink(
-        //       key: UniqueKey(),
-        //       decoration: const ShapeDecoration(
-        //         color: Colors.lightBlue,
-        //         shape: CircleBorder(),
-        //       ),
-        //       child: IconButton(
-        //         key: UniqueKey(),
-        //         icon: this.buttonSpec.icon,
-        //         color: Colors.white,
-        //         onPressed: () => this.buttonSpec.onPressed(context),
-        //       ),
-        //     ),
-        //   ),
-        // ),
       );
   }
 }
