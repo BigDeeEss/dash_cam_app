@@ -125,7 +125,6 @@ class _ButtonArrayState extends State<ButtonArray> {
               ),
               child: Button(
                 buttonSpec: buttonSpecList[i],
-                key: UniqueKey()
               ),
             ),
           ),

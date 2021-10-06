@@ -23,10 +23,9 @@ class Button extends StatelessWidget {
             ? AppSettings.buttonPaddingDown
             : AppSettings.buttonPaddingUp,
         child: CircleAvatar(
-          radius: this.buttonSpec.size,
+          radius: this.buttonSpec.size / 2.0,
           backgroundColor: Colors.lightBlue,
           child: IconButton(
-            key: UniqueKey(),
             icon: this.buttonSpec.icon,
             color: Colors.white,
             onPressed: () => this.buttonSpec.onPressed(context),

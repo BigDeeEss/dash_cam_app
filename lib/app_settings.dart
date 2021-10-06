@@ -47,7 +47,7 @@ class AppSettings {
   );
 
   /// [buttonSize] defines the button size in Button class..
-  static double buttonSize = 30.0;
+  static double buttonSize = 56.0;
 
   /// [pageTransitionTime] defines the page transition time including
   /// button animation. Any page transition is allocated time for transitioning

@@ -33,5 +33,5 @@ PageSpec filesPage = PageSpec(
 //  Home page button specs.
 PageSpec settingsPage = PageSpec(
   title: 'Settings',
-  contents: SettingsPageContents(key: UniqueKey())
+  contents: SettingsPageContents()
 );

@@ -66,7 +66,7 @@ class _BasePageState extends State<BasePage> {
       body: Stack(
         children: <Widget>[
           widget.pageSpec.contents,
-          ButtonArray(animation: widget.animation, key: UniqueKey()),
+          ButtonArray(animation: widget.animation),
         ],
       ),
     );
