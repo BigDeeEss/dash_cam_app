@@ -77,6 +77,90 @@ class _SettingsPageContentsState extends State<SettingsPageContents> {
                   });
                 },
               ),
+              SettingsTile(
+                title: 'Security',
+                subtitle: 'Fingerprint',
+                leading: Icon(Icons.lock),
+                onPressed: (BuildContext context) {},
+              ),
+              SettingsTile.switchTile(
+                title: 'Use fingerprint',
+                leading: Icon(Icons.fingerprint),
+                switchValue: true,
+                onToggle: (value) {},
+              ),
+              SettingsTile(
+                title: 'Language',
+                subtitle: 'English',
+                leading: Icon(Icons.language),
+                onPressed: (BuildContext context) {},
+              ),
+              SettingsTile.switchTile(
+                title: 'Use System Theme',
+                leading: Icon(Icons.phone_android),
+                switchValue: isSwitched,
+                onToggle: (value) {
+                  setState(() {
+                    isSwitched = value;
+                  });
+                },
+              ),
+              SettingsTile(
+                title: 'Security',
+                subtitle: 'Fingerprint',
+                leading: Icon(Icons.lock),
+                onPressed: (BuildContext context) {},
+              ),
+              SettingsTile.switchTile(
+                title: 'Use fingerprint',
+                leading: Icon(Icons.fingerprint),
+                switchValue: true,
+                onToggle: (value) {},
+              ),
+              SettingsTile(
+                title: 'Language',
+                subtitle: 'English',
+                leading: Icon(Icons.language),
+                onPressed: (BuildContext context) {},
+              ),
+              SettingsTile.switchTile(
+                title: 'Use System Theme',
+                leading: Icon(Icons.phone_android),
+                switchValue: isSwitched,
+                onToggle: (value) {
+                  setState(() {
+                    isSwitched = value;
+                  });
+                },
+              ),
+              SettingsTile(
+                title: 'Security',
+                subtitle: 'Fingerprint',
+                leading: Icon(Icons.lock),
+                onPressed: (BuildContext context) {},
+              ),
+              SettingsTile.switchTile(
+                title: 'Use fingerprint',
+                leading: Icon(Icons.fingerprint),
+                switchValue: true,
+                onToggle: (value) {},
+              ),
+              SettingsTile(
+                title: 'Language',
+                subtitle: 'English',
+                leading: Icon(Icons.language),
+                onPressed: (BuildContext context) {},
+              ),
+              SettingsTile.switchTile(
+                title: 'Use System Theme',
+                leading: Icon(Icons.phone_android),
+                switchValue: isSwitched,
+                onToggle: (value) {
+                  setState(() {
+                    isSwitched = value;
+                  });
+                },
+              ),
             ],
           ),
         ],
