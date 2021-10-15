@@ -27,7 +27,8 @@ class ButtonArray extends StatefulWidget {
   _ButtonArrayState createState() => _ButtonArrayState();
 }
 
-class _ButtonArrayState extends State<ButtonArray> {
+class _ButtonArrayState extends State<ButtonArray>
+    with SingleTickerProviderStateMixin {
   bool animationTrigger = false;
 
   /// [buttonSpecList] defines the specs for buttons on each screen.
@@ -134,7 +135,8 @@ class _ButtonArrayState extends State<ButtonArray> {
           );
         }
       }
-    };
+    }
+    ;
     return widgetList;
   }
 
@@ -143,14 +145,15 @@ class _ButtonArrayState extends State<ButtonArray> {
     Animation<double> animation;
 
     if (widget.animation != null) {
-      animation = widget.animation!..addStatusListener((status) {
-        print(status);
-        if (status == AnimationStatus.completed) {
-          setState(() {
-            animationTrigger = true;
-          });
-        }
-      });
+      animation = widget.animation!
+        ..addStatusListener((status) {
+          print(status);
+          if (status == AnimationStatus.completed) {
+            setState(() {
+              animationTrigger = true;
+            });
+          }
+        });
     }
 
     //  Use a Container-Align-Column construct to position items in the list
