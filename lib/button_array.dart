@@ -143,8 +143,13 @@ class _ButtonArrayState extends State<ButtonArray> {
     Animation<double> animation;
 
     if (widget.animation != null) {
-      animation = widget.animation!..addStatusListener((state) {
-        print(state);
+      animation = widget.animation!..addStatusListener((status) {
+        print(status);
+        if (status == AnimationStatus.completed) {
+          setState(() {
+            animationTrigger = true;
+          });
+        }
       });
     }
 
