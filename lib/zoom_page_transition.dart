@@ -39,10 +39,7 @@ class ZoomPageTransition extends PageRouteBuilder {
       ).animate(
         CurvedAnimation(
           parent: animation,
-          curve: Interval(
-            0.0, 0.25,
-            curve: Curves.fastOutSlowIn,
-          ),
+          curve: Curves.fastOutSlowIn,
         ),
       ),
       child: child,
