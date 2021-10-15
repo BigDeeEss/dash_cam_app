@@ -29,6 +29,9 @@ class ButtonArray extends StatefulWidget {
 
 class _ButtonArrayState extends State<ButtonArray>
     with SingleTickerProviderStateMixin {
+  late Animation<double> buttonAnimation;
+  late AnimationController controller;
+
   bool animationTrigger = false;
 
   /// [buttonSpecList] defines the specs for buttons on each screen.
@@ -71,6 +74,18 @@ class _ButtonArrayState extends State<ButtonArray>
     return Offset(-AppSettings.buttonAlignment.x * size.width / buttonDim, 0);
   }
 
+  @override
+  void initState() {
+    super.initState();
+    controller =  AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: AppSettings.pageTransitionTime),
+    );
+    // buttonAnimation = Animation<double>(
+    //   parent: controller,
+    // );
+  }
+
   /// [slidingButtonList] outputs a list of widgets.
   //
   //  All elements in the list produced by [slidingButtonList] are either
@@ -109,7 +124,7 @@ class _ButtonArrayState extends State<ButtonArray>
                     getButtonStopTime(i),
                     curve: Curves.easeOutCubic,
                   ),
-                  parent: animation,
+                  parent: controller,
                 ),
               ),
               child: SkewedTransition(
@@ -142,18 +157,18 @@ class _ButtonArrayState extends State<ButtonArray>
 
   @override
   Widget build(BuildContext context) {
-    Animation<double> animation;
+    // Animation<double> animation;
 
     if (widget.animation != null) {
-      animation = widget.animation!
-        ..addStatusListener((status) {
+      widget.animation!..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
           print(status);
-          if (status == AnimationStatus.completed) {
-            setState(() {
-              animationTrigger = true;
-            });
-          }
-        });
+          setState(() {
+            animationTrigger = true;
+            controller.forward();
+          });
+        }
+      });
     }
 
     //  Use a Container-Align-Column construct to position items in the list
