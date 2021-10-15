@@ -28,6 +28,8 @@ class ButtonArray extends StatefulWidget {
 }
 
 class _ButtonArrayState extends State<ButtonArray> {
+  bool animationTrigger = false;
+
   /// [buttonSpecList] defines the specs for buttons on each screen.
   static List<ButtonSpec> buttonSpecList = [
     settingsButton,
