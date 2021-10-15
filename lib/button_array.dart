@@ -93,27 +93,13 @@ class _ButtonArrayState extends State<ButtonArray> {
           buttonSpec: buttonSpecList[i],
         ));
       } else {
-        //  If animation is not null then add animated button to widgetList.
-        widgetList.add(
-          SlideTransition(
-            position: Tween<Offset>(
-              begin: getOffset(context),
-              end: Offset.zero,
-            ).animate(
-              CurvedAnimation(
-                //  Staggered button movement.
-                curve: Interval(
-                  getButtonStartTime(i),
-                  getButtonStopTime(i),
-                  curve: Curves.easeOutCubic,
-                ),
-                parent: animation,
-              ),
-            ),
-            child: SkewedTransition(
-              skewFactor: Tween<double>(
-                begin: -AppSettings.buttonAlignment.x * 0.3,
-                end: 0.0,
+        if (animationTrigger) {
+          //  If animation is not null then add animated button to widgetList.
+          widgetList.add(
+            SlideTransition(
+              position: Tween<Offset>(
+                begin: getOffset(context),
+                end: Offset.zero,
               ).animate(
                 CurvedAnimation(
                   //  Staggered button movement.
@@ -125,12 +111,28 @@ class _ButtonArrayState extends State<ButtonArray> {
                   parent: animation,
                 ),
               ),
-              child: Button(
-                buttonSpec: buttonSpecList[i],
+              child: SkewedTransition(
+                skewFactor: Tween<double>(
+                  begin: -AppSettings.buttonAlignment.x * 0.3,
+                  end: 0.0,
+                ).animate(
+                  CurvedAnimation(
+                    //  Staggered button movement.
+                    curve: Interval(
+                      getButtonStartTime(i),
+                      getButtonStopTime(i),
+                      curve: Curves.easeOutCubic,
+                    ),
+                    parent: animation,
+                  ),
+                ),
+                child: Button(
+                  buttonSpec: buttonSpecList[i],
+                ),
               ),
             ),
-          ),
-        );
+          );
+        }
       }
     };
     return widgetList;
