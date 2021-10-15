@@ -14,11 +14,14 @@ class ButtonArray extends StatefulWidget {
     this.animation,
   }) : super(key: key);
 
-  /// [animation] is used to animate the launch of buttons onto the screen.
+  /// [animation] is derived from the page transition and is only listened
+  /// to in this class.
   //
-  //  Whilst this animation ranges from 0.0 to 1.0, in this instance the
-  //  range of values 0.0--0.5 is reserved for animating the page transition
-  //  whilst the range 0.5--1.0 is used for animating the buttons.
+  //  When the page transition is complete a listener triggers two things:
+  //  (i) the removal of the build blocker, animationTrigger, which prevents
+  //  button movement during the page transition, and (ii) initiation of a
+  //  secondary animation that moves the buttons across the screen.
+  //
   //  [animation] is nullable because DashCamApp includes the call,
   //  BasePage(title: 'Home',).
   final Animation<double>? animation;
@@ -27,7 +30,14 @@ class ButtonArray extends StatefulWidget {
   _ButtonArrayState createState() => _ButtonArrayState();
 }
 
-class _ButtonArrayState extends State<ButtonArray> {
+class _ButtonArrayState extends State<ButtonArray>
+    with SingleTickerProviderStateMixin {
+  late AnimationController buttonAnimationController;
+
+  /// [animationBlocker] set to true stops the builder from animating
+  /// the buttons.
+  bool animationBlocker = true;
+
   /// [buttonSpecList] defines the specs for buttons on each screen.
   static List<ButtonSpec> buttonSpecList = [
     settingsButton,
@@ -35,26 +45,41 @@ class _ButtonArrayState extends State<ButtonArray> {
     homeButton,
   ];
 
+  @override
+  void dispose () {
+    buttonAnimationController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    buttonAnimationController =  AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: AppSettings.pageTransitionTime),
+    );
+  }
+
   /// [getButtonStartTime] calculates the start time for button animation.
   double getButtonStartTime(int i) {
-    //  The total time for all button animation is a further fraction of
-    //  three quarters of the total page transition time.
-    //  The function below defines the start point in time for each button.
-    return 0.25 + (i / (buttonSpecList.length + 1)) * 0.75;
+    //  The total time for all buttons to finish animating is defined
+    //  by buttonAnimationTime in appSettings. The function below defines
+    //  a staggered start point in time for each button.
+    return (i / (buttonSpecList.length + 1));
   }
 
   /// [getButtonStopTime] calculates the stop time for button animation.
   double getButtonStopTime(int i) {
-    //  The total time for all button animation is a further fraction of
-    //  three quarters of the total page transition time.
-    //  The function below defines the stop point in time for each button.
-    return 0.25 + ((i + 2) / (buttonSpecList.length + 1)) * 0.75;
+    //  The total time for all buttons to finish animating is defined
+    //  by buttonAnimationTime in appSettings. The function below defines
+    //  a staggered stop point in time for each button.
+    return ((i + 2) / (buttonSpecList.length + 1));
   }
 
   /// [getOffset] defines the starting position for each button.
   //
   //  [getOffset] calculates the position to be one screen width to the
-  //  left/right of the button's final locatioin.
+  //  left/right of the button's final location.
   Offset getOffset(BuildContext context) {
     //  Get size of screen in pixels.
     final Size size = MediaQuery.of(context).size;
@@ -77,8 +102,7 @@ class _ButtonArrayState extends State<ButtonArray> {
     Animation<double>? animation,
     List<ButtonSpec> buttonSpecList,
   ) {
-    //  Initialise widgetList so that it is ready for population in
-    //  the for loop below.
+    //  Initialise widgetList so that it is ready for population.
     List<Widget> widgetList = [];
 
     //  Loop over items in buttonSpecList and convert each to either a static
@@ -92,26 +116,13 @@ class _ButtonArrayState extends State<ButtonArray> {
         ));
       } else {
         //  If animation is not null then add animated button to widgetList.
-        widgetList.add(
-          SlideTransition(
-            position: Tween<Offset>(
-              begin: getOffset(context),
-              end: Offset.zero,
-            ).animate(
-              CurvedAnimation(
-                //  Staggered button movement.
-                curve: Interval(
-                  getButtonStartTime(i),
-                  getButtonStopTime(i),
-                  curve: Curves.easeOutCubic,
-                ),
-                parent: animation,
-              ),
-            ),
-            child: SkewedTransition(
-              skewFactor: Tween<double>(
-                begin: -AppSettings.buttonAlignment.x * 0.3,
-                end: 0.0,
+        if (!animationBlocker) {
+          //  Only add an animated button if animationBlocker is set to false.
+          widgetList.add(
+            SlideTransition(
+              position: Tween<Offset>(
+                begin: getOffset(context),
+                end: Offset.zero,
               ).animate(
                 CurvedAnimation(
                   //  Staggered button movement.
@@ -120,22 +131,53 @@ class _ButtonArrayState extends State<ButtonArray> {
                     getButtonStopTime(i),
                     curve: Curves.easeOutCubic,
                   ),
-                  parent: animation,
+                  parent: buttonAnimationController,
                 ),
               ),
-              child: Button(
-                buttonSpec: buttonSpecList[i],
+              child: SkewedTransition(
+                skewFactor: Tween<double>(
+                  begin: -AppSettings.buttonAlignment.x * 0.3,
+                  end: 0.0,
+                ).animate(
+                  CurvedAnimation(
+                    //  Staggered button movement.
+                    curve: Interval(
+                      getButtonStartTime(i),
+                      getButtonStopTime(i),
+                      curve: Curves.easeOutCubic,
+                    ),
+                    parent: animation,
+                  ),
+                ),
+                child: Button(
+                  buttonSpec: buttonSpecList[i],
+                ),
               ),
             ),
-          ),
-        );
+          );
+        }
       }
-    };
+    }
+    ;
     return widgetList;
   }
 
   @override
   Widget build(BuildContext context) {
+    //  Add a status listener to widget.animation in order to trigger a
+    //  setState that removes the animationBlocker and starts
+    //  buttonAnimationController.
+    if (widget.animation != null) {
+      widget.animation!..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          setState(() {
+            animationBlocker = false;
+            buttonAnimationController.forward();
+          });
+        }
+      });
+    }
+
     //  Use a Container-Align-Column construct to position items in the list
     //  generated by slidingButtonList(...).
     return Container(
