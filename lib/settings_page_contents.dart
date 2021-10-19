@@ -1,177 +1,200 @@
 //  Import flutter packages.
 import 'package:flutter/material.dart';
-import 'package:settings_ui/settings_ui.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
 class SettingsPageContents extends StatefulWidget {
   const SettingsPageContents({Key? key}) : super(key: key);
 
   @override
-  State<SettingsPageContents> createState() => _SettingsPageContentsState();
+  _SettingsPageContentsState createState() => _SettingsPageContentsState();
 }
 
 class _SettingsPageContentsState extends State<SettingsPageContents> {
   @override
   Widget build(BuildContext context) {
-    bool isSwitched = false;
-
-    return Padding(
-      padding: EdgeInsetsDirectional.only(
-        start: 5,
-        top: 5,
-        end: 100,
-        bottom: 5,
-      ),
-      child: SettingsList(
-        sections: [
-          SettingsSection(
-            titlePadding: EdgeInsets.all(20),
-            title: 'Section 1',
-            tiles: [
-              SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
-                leading: Icon(Icons.language),
-                onPressed: (BuildContext context) {},
-              ),
-              SettingsTile.switchTile(
-                title: 'Use System Theme',
-                leading: Icon(Icons.phone_android),
-                switchValue: isSwitched,
-                onToggle: (value) {
-                  setState(() {
-                    isSwitched = value;
-                  });
-                },
-              ),
-            ],
-          ),
-          SettingsSection(
-            titlePadding: EdgeInsets.all(20),
-            title: 'Section 2',
-            tiles: [
-              SettingsTile(
-                title: 'Security',
-                subtitle: 'Fingerprint',
-                leading: Icon(Icons.lock),
-                onPressed: (BuildContext context) {},
-              ),
-              SettingsTile.switchTile(
-                title: 'Use fingerprint',
-                leading: Icon(Icons.fingerprint),
-                switchValue: true,
-                onToggle: (value) {},
-              ),
-              SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
-                leading: Icon(Icons.language),
-                onPressed: (BuildContext context) {},
-              ),
-              SettingsTile.switchTile(
-                title: 'Use System Theme',
-                leading: Icon(Icons.phone_android),
-                switchValue: isSwitched,
-                onToggle: (value) {
-                  setState(() {
-                    isSwitched = value;
-                  });
-                },
-              ),
-              SettingsTile(
-                title: 'Security',
-                subtitle: 'Fingerprint',
-                leading: Icon(Icons.lock),
-                onPressed: (BuildContext context) {},
-              ),
-              SettingsTile.switchTile(
-                title: 'Use fingerprint',
-                leading: Icon(Icons.fingerprint),
-                switchValue: true,
-                onToggle: (value) {},
-              ),
-              SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
-                leading: Icon(Icons.language),
-                onPressed: (BuildContext context) {},
-              ),
-              SettingsTile.switchTile(
-                title: 'Use System Theme',
-                leading: Icon(Icons.phone_android),
-                switchValue: isSwitched,
-                onToggle: (value) {
-                  setState(() {
-                    isSwitched = value;
-                  });
-                },
-              ),
-              SettingsTile(
-                title: 'Security',
-                subtitle: 'Fingerprint',
-                leading: Icon(Icons.lock),
-                onPressed: (BuildContext context) {},
-              ),
-              SettingsTile.switchTile(
-                title: 'Use fingerprint',
-                leading: Icon(Icons.fingerprint),
-                switchValue: true,
-                onToggle: (value) {},
-              ),
-              SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
-                leading: Icon(Icons.language),
-                onPressed: (BuildContext context) {},
-              ),
-              SettingsTile.switchTile(
-                title: 'Use System Theme',
-                leading: Icon(Icons.phone_android),
-                switchValue: isSwitched,
-                onToggle: (value) {
-                  setState(() {
-                    isSwitched = value;
-                  });
-                },
-              ),
-              SettingsTile(
-                title: 'Security',
-                subtitle: 'Fingerprint',
-                leading: Icon(Icons.lock),
-                onPressed: (BuildContext context) {},
-              ),
-              SettingsTile.switchTile(
-                title: 'Use fingerprint',
-                leading: Icon(Icons.fingerprint),
-                switchValue: true,
-                onToggle: (value) {},
-              ),
-              SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
-                leading: Icon(Icons.language),
-                onPressed: (BuildContext context) {},
-              ),
-              SettingsTile.switchTile(
-                title: 'Use System Theme',
-                leading: Icon(Icons.phone_android),
-                switchValue: isSwitched,
-                onToggle: (value) {
-                  setState(() {
-                    isSwitched = value;
-                  });
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-    return Center(
-      child: Container(
-        width: 600,
-        height: 300,
+    return
+      // ClipOval(
+      // child:
+      Container(
+        // height: 200,
+        // width: 200,
         color: Colors.red,
-      ),
+        child: ListView(
+          padding: EdgeInsets.all(24),
+          children: [
+            SettingsGroup(
+              title: 'General fIF;ODIF vj  ',
+              children: <Widget>[
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+                SimpleSettingsTile(
+                  title: 'test',
+                  subtitle: '',
+                  leading: Icon(Icons.delete),
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ],
+        ),
+      // ),
     );
   }
 }
+// child: ListView.builder(
+//   scrollDirection: Axis.horizontal,
+//   itemCount: 100,
+//   itemBuilder: (ctx, i) {
+//     return Align(
+//       child: Container(
+//         width: 200,
+//         height: 100,
+//         decoration: BoxDecoration(
+//           border: Border.all(
+//             color: Colors.black,
+//             width: 2
+//           ),
+//           borderRadius: BorderRadius.circular(32),
+//           color: Colors.green.withOpacity(0.75)
+//         ),
+//       ),
+//       widthFactor: 0.8,
+//     );
+//   },
+// ),
