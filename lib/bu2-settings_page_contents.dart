@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 //  Import project-specific files.
-import 'package:dash_cam_app/notification_broadcaster.dart';
+// import 'package:dash_cam_app/notification_broadcaster.dart';
+
 
 
 class ScrollNotificationBroadcaster extends InheritedWidget {

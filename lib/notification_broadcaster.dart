@@ -1,59 +1,43 @@
 //  Import flutter packages.
 import 'package:flutter/material.dart';
 
-class NotificationBroadcasterEngine extends InheritedWidget {
-  /// Implements a method for descendant widgets to access notifications.
-  const NotificationBroadcasterEngine({
+mixin NotificationBroadcasterServiceListener<T extends Notification> on NotificationBroadcasterService {}
+
+abstract class NotificationBroadcasterService<T extends Notification> extends InheritedWidget {
+  const NotificationBroadcasterService({
     Key? key,
-    required this.notifier,
-    required this.child,
+    required Widget child,
   }) : super(key: key, child: child);
 
-  /// [notifier], the service provided by this widget, is the method by
-  /// which descendant widgets are able to access notifications that
-  /// bubble up the widget tree.
-  final ValueNotifier<dynamic> notifier;
-
-  /// [child] is this widget's immediate descendant.
-  final Widget child;
-
-  static NotificationBroadcasterEngine of(BuildContext context) {
-    final NotificationBroadcasterEngine? result =
-        context.dependOnInheritedWidgetOfExactType<NotificationBroadcasterEngine>();
-    assert(result != null, 'No NotificationBroadcasterEngine found in context');
+  static NotificationBroadcasterService of(BuildContext context) {
+    final NotificationBroadcasterService? result = context.dependOnInheritedWidgetOfExactType<NotificationBroadcasterService>();
+    assert(result != null, 'No NotificationBroadcasterService found in context');
     return result!;
   }
 
   @override
-  bool updateShouldNotify(NotificationBroadcasterEngine old) =>
-      notifier != old.notifier;
+  bool updateShouldNotify(NotificationBroadcasterService old) =>
+      notifyOnChange();
+
+  /// notifyOnChange is an abstract method which must be overridden by the
+  /// mixin that specialises [NotificationBroadcasterService].
+  bool notifyOnChange();
 }
 
-
-class NotificationBroadcaster extends StatelessWidget {
-  NotificationBroadcaster({
+/// [NotificationBroadcaster] can be placed anywhere in the widget tree
+/// provided it is above the relevant notifier.
+abstract class NotificationBroadcaster<T extends Notification> extends StatelessWidget {
+  const NotificationBroadcaster({
     Key? key,
     required this.child,
-    required this.setValueNotifier,
-    required this.valueNotifierInitialValue
   }) : super(key: key);
 
-  /// [child] is this widget's immediate descendant.
+  /// [child] is the immediate descendant, not necessarily the widget that
+  /// dispatches the notifications.
   final Widget child;
-
-  /// [engine] initiates valueNotifier.
-  late NotificationBroadcasterEngine engine;
-
-  /// [valueNotifierInitialValue] initiates valueNotifier.
-  var valueNotifierInitialValue;
-
-  final Function setValueNotifier;
 
   @override
   Widget build(BuildContext context) {
-    return NotificationListener(
-      onNotification: (notification) => setValueNotifier(notification),
-      child: child
-    );
+    return this.child;
   }
 }
