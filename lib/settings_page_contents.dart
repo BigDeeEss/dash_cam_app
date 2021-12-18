@@ -49,7 +49,9 @@ class SettingsPageContents extends StatelessWidget {
           }
           return true;
         },
-        child: MyHomePage(),
+        child: NotificationBroadcaster(
+          child: MyHomePage(),
+        ),
       ),
     );
   }
