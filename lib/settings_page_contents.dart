@@ -51,7 +51,7 @@ class SettingsPageContents extends StatelessWidget {
           return false;
         },
         // child: MyHomePage(),
-        child: NotificationBroadcaster(
+        child: SNotificationBroadcaster(
           child: MyHomePage(),
         ),
       ),
