@@ -2,30 +2,27 @@
 import 'package:flutter/material.dart';
 
 
-// typedef NotificationBroadcasterCallback<T extends Notification> = bool Function(T notification);
+class notifvar<T extends Notification>{}
 
 class NotificationBroadcaster<T extends Notification> extends InheritedWidget {
 
   NotificationBroadcaster({
     Key? key,
     required this.child,
-    required this.notificationType,
   })  : listener = NotificationListener<T>(
           child: child,
           onNotification: (notification) {
-            // if (notification is notificationType) {
+            if (notification is ScrollNotification) {
             //   this.notifier.value = notification;
             //   print('NotificationBroadcaster: notification, '
             //       '${notification}');
-            // }
+            }
             return false;
           },
         ),
         super(key: key, child: child,);
 
   final Widget child;
-
-  final T notificationType;
 
   final NotificationListener<T> listener;
 
