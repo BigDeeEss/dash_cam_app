@@ -50,10 +50,15 @@ class SettingsPageContents extends StatelessWidget {
           }
           return false;
         },
-        // child: MyHomePage(),
-        child: SNotificationBroadcaster(
-          child: MyHomePage(),
-        ),
+        child: MyHomePage(),
+        // child: NotificationBroadcaster(
+        //   child: MyHomePage(),
+        //   notificationType: ScrollUpdateNotification,
+          // notifier: ValueNotifier(0.0),
+          // onNotification: (notification, notifier) {
+          //   if (notification is ScrollUpdateNotification)
+          // },
+        // ),
       ),
     );
   }
