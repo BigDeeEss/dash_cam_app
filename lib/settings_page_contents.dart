@@ -51,9 +51,8 @@ class SettingsPageContents extends StatelessWidget {
           return false;
         },
         // child: MyHomePage(),
-        child: NotificationBroadcaster(
+        child: NotificationBroadcaster<ScrollNotification, ScrollUpdateNotification>(
           child: MyHomePage(),
-          notifier: ValueNotifier(0.0),
         ),
       ),
     );
@@ -228,17 +227,17 @@ class _MyHomePageState extends State<MyHomePage> {
           alignment: Alignment.center,
           color: colors[1],
         ),
-        // ValueListenableBuilder<dynamic>(
-        //   valueListenable: ScrollNotificationBroadcasterWorksA.of(context).notifier,
-        //   builder: (BuildContext context, dynamic value, __,){
-        //     return Container(
-        //       height: value.toDouble() % 290 + 10,
-        //       width: 50,
-        //       alignment: Alignment.center,
-        //       color: colors[3],
-        //     );
-        //   },
-        // ),
+        ValueListenableBuilder<double>(
+          valueListenable: NotificationBroadcasterService.of(context).notifier,
+          builder: (BuildContext context, double value, __,){
+            return Container(
+              height: value.toDouble() % 290 + 10,
+              width: 50,
+              alignment: Alignment.center,
+              color: colors[3],
+            );
+          },
+        ),
         Container(
           height: 50,
           width: 50,
