@@ -24,20 +24,29 @@ class NotificationBroadcasterService extends InheritedWidget {
 }
 
 class NotificationBroadcaster extends StatelessWidget {
-  const NotificationBroadcaster({
+  NotificationBroadcaster({
     Key? key,
     required this.child,
-    required this.notifier,
   }) : super(key: key);
 
   final Widget child;
 
-  final ValueNotifier<dynamic> notifier;
+  final ValueNotifier<double> notifier = ValueNotifier(0.0);
 
   @override
   Widget build(BuildContext context) {
     return NotificationBroadcasterService(
-      child: child,
+      child: NotificationListener<ScrollNotification>(
+        onNotification: (notification) {
+          if (notification is ScrollUpdateNotification) {
+            notifier.value = notification.metrics.pixels;
+            print('NotificationBroadcaster: notifier.value = , '
+                '${notifier.value}');
+          }
+          return false;
+        },
+        child: child,
+      ),
       notifier: notifier,
     );
   }
