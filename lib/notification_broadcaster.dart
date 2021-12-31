@@ -10,7 +10,7 @@ class NotificationBroadcasterService extends InheritedWidget {
 
   final Widget child;
 
-  final ValueNotifier<dynamic> notifier;
+  final ValueNotifier<double> notifier;
 
   static NotificationBroadcasterService of(BuildContext context) {
     final NotificationBroadcasterService? result = context.dependOnInheritedWidgetOfExactType<NotificationBroadcasterService>();
@@ -23,7 +23,7 @@ class NotificationBroadcasterService extends InheritedWidget {
       notifier != old.notifier;
 }
 
-class NotificationBroadcaster extends StatelessWidget {
+class NotificationBroadcaster<T extends Notification> extends StatelessWidget {
   NotificationBroadcaster({
     Key? key,
     required this.child,
@@ -36,7 +36,7 @@ class NotificationBroadcaster extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NotificationBroadcasterService(
-      child: NotificationListener<ScrollNotification>(
+      child: NotificationListener<T>(
         onNotification: (notification) {
           if (notification is ScrollUpdateNotification) {
             notifier.value = notification.metrics.pixels;
