@@ -9,7 +9,7 @@ class SettingsPageContents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NotificationBroadcaster<ScrollNotification>(
+    return NotificationBroadcaster<ScrollNotification, ScrollUpdateNotification>(
       child: MyHomePage(),
     );
   }

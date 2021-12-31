@@ -23,7 +23,7 @@ class NotificationBroadcasterService extends InheritedWidget {
       notifier != old.notifier;
 }
 
-class NotificationBroadcaster<T extends Notification> extends StatelessWidget {
+class NotificationBroadcaster<T extends Notification, U extends ScrollNotification> extends StatelessWidget {
   NotificationBroadcaster({
     Key? key,
     required this.child,
@@ -38,9 +38,9 @@ class NotificationBroadcaster<T extends Notification> extends StatelessWidget {
     return NotificationBroadcasterService(
       child: NotificationListener<T>(
         onNotification: (notification) {
-          if (notification is ScrollUpdateNotification) {
+          if (notification is U) {
             notifier.value = notification.metrics.pixels;
-            print('NotificationBroadcaster: notifier.value = , '
+            print('NotificationBroadcaster: notifier.value, '
                 '${notifier.value}');
           }
           return false;
