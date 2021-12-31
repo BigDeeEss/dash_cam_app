@@ -5,28 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/notification_broadcaster.dart';
 
 
-class ScrollNotificationBroadcasterWorks extends InheritedWidget {
-  ScrollNotificationBroadcasterWorks({
-    Key? key,
-    required this.randNumValueNotifier,
-    required this.child,
-  }) : super(key: key, child: child);
-
-  final ValueNotifier<dynamic> randNumValueNotifier;
-
-  final Widget child;
-
-  static ScrollNotificationBroadcasterWorks of(BuildContext context) {
-    final ScrollNotificationBroadcasterWorks? result = context.dependOnInheritedWidgetOfExactType<ScrollNotificationBroadcasterWorks>();
-    assert(result != null, 'No ScrollNotificationBroadcasterWorks found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(ScrollNotificationBroadcasterWorks old) =>
-      randNumValueNotifier != old.randNumValueNotifier;
-}
-
 
 class SettingsPageContents extends StatelessWidget {
   SettingsPageContents({Key? key}) : super(key: key);
@@ -35,16 +13,16 @@ class SettingsPageContents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScrollNotificationBroadcasterWorks(
-      randNumValueNotifier: scrollPositionNotifier,
+    return NotificationBroadcaster(
+      notifier: scrollPositionNotifier,
       child: NotificationListener<ScrollNotification>(
         // onNotification : (notification) => setValueNotifier(notification),
         onNotification: (notification) {
           if (notification is ScrollUpdateNotification) {
             // print('Top level listener...');
-            // randNumValueNotifier.value = (randNum.nextInt(50) + 50);
+            // notifier.value = (randNum.nextInt(50) + 50);
             scrollPositionNotifier.value = notification.metrics.pixels;
-            // print(randNumValueNotifier.value);
+            // print(notifier.value);
             print('SettingsPageContents: scroll position, '
                 '${notification.metrics.pixels}');
           }
@@ -211,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
           color: colors[0],
         ),
         ValueListenableBuilder<dynamic>(
-          valueListenable: ScrollNotificationBroadcasterWorks.of(context).randNumValueNotifier,
+          valueListenable: NotificationBroadcasterService.of(context).notifier,
           builder: (BuildContext context, dynamic value, __,){
             return Container(
               height: value.toDouble() % 290 + 10,
