@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 
 //  Import project-specific files.
-import 'package:dash_cam_app/notification_broadcaster.dart';
+import 'package:dash_cam_app/notification_notifier.dart';
 
 class SettingsPageContents extends StatelessWidget {
   SettingsPageContents({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return NotificationBroadcaster<ScrollNotification, ScrollUpdateNotification>(
+    return NotificationNotifier<ScrollNotification, ScrollUpdateNotification>(
       child: MyHomePage(),
     );
   }
@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
           color: colors[0],
         ),
         ValueListenableBuilder<dynamic>(
-          valueListenable: NotificationBroadcaster.of(context).notifier,
+          valueListenable: NotificationNotifier.of(context).notificationData,
           builder: (BuildContext context, dynamic value, __,){
             return Container(
               height: value.toDouble() % 290 + 10,
@@ -178,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
           color: colors[0],
         ),
         ValueListenableBuilder<dynamic>(
-          valueListenable: NotificationBroadcaster.of(context).notifier,
+          valueListenable: NotificationNotifier.of(context).notificationData,
           builder: (BuildContext context, dynamic value, __,){
             return Container(
               height: value.toDouble() % 290 + 10,
