@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
           color: colors[0],
         ),
         ValueListenableBuilder<dynamic>(
-          valueListenable: NotificationBroadcasterService.of(context).notifier,
+          valueListenable: NotificationBroadcaster.of(context).notifier,
           builder: (BuildContext context, dynamic value, __,){
             return Container(
               height: value.toDouble() % 290 + 10,
@@ -178,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
           color: colors[0],
         ),
         ValueListenableBuilder<dynamic>(
-          valueListenable: NotificationBroadcasterService.of(context).notifier,
+          valueListenable: NotificationBroadcaster.of(context).notifier,
           builder: (BuildContext context, dynamic value, __,){
             return Container(
               height: value.toDouble() % 290 + 10,

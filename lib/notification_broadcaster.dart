@@ -1,17 +1,19 @@
 //  Import flutter packages.
 import 'package:flutter/material.dart';
 
-/// [NotificationBroadcasterService] catches notifications proceeding up
-/// the widget tree and then allows widgets anywhere below it to
-/// access the associated notification data by interrogating notifier.
-class NotificationBroadcasterService extends InheritedWidget {
-  NotificationBroadcasterService({
+/// [_NotificationBroadcasterService] catches and rebroadcasts notifications
+/// proceeding up the widget tree.
+///
+/// Widgets anywhere below [_NotificationBroadcasterService] access the
+/// associated notification data by interrogating notifier.
+class _NotificationBroadcasterService extends InheritedWidget {
+  _NotificationBroadcasterService({
     Key? key,
     required this.child,
     required this.notifier,
   }) : super(key: key, child: child);
 
-  /// [child] is the immediate descendant of [NotificationBroadcasterService].
+  /// [child] is the immediate descendant of [_NotificationBroadcasterService].
   final Widget child;
 
   /// [notifier] stores the required notification data value, defined in
@@ -19,25 +21,15 @@ class NotificationBroadcasterService extends InheritedWidget {
   /// which is accessible to all widgets below it in the widget tree.
   final ValueNotifier<double> notifier;
 
-  //  Allow widgets below [NotificationBroadcasterService] in the widget tree
-  //  to access the data stored in notifier.
-  static NotificationBroadcasterService of(BuildContext context) {
-    final NotificationBroadcasterService? result = context
-        .dependOnInheritedWidgetOfExactType<NotificationBroadcasterService>();
-    assert(
-        result != null, 'No NotificationBroadcasterService found in context');
-    return result!;
-  }
-
-  //  Allow [NotificationBroadcasterService] to broadcast updates whenever
-  //  notifier changes.
+  /// Allow [_NotificationBroadcasterService] to broadcast updates whenever
+  /// notifier changes.
   @override
-  bool updateShouldNotify(NotificationBroadcasterService old) =>
+  bool updateShouldNotify(_NotificationBroadcasterService old) =>
       notifier != old.notifier;
 }
 
-/// [NotificationBroadcaster] combines the services associated with
-/// NotificationListener and [NotificationBroadcasterService] classes into
+/// [NotificationBroadcaster] combines the services associated with the
+/// NotificationListener and [_NotificationBroadcasterService] classes into
 /// a single class that provides both services.
 class NotificationBroadcaster<T extends Notification,
     U extends ScrollNotification> extends StatelessWidget {
@@ -49,25 +41,28 @@ class NotificationBroadcaster<T extends Notification,
   /// [child] is the immediate descendant of [NotificationBroadcaster].
   final Widget child;
 
-  /// [notifier] is passed to [NotificationBroadcasterService] and made
-  /// available to all widgets below [NotificationBroadcaster] in the
+  /// [notifier] is passed to [_NotificationBroadcasterService] which then
+  /// makes it available to all widgets below [NotificationBroadcaster] in the
   /// widget tree.
   final ValueNotifier<double> notifier = ValueNotifier(0.0);
 
-  /// [listener] is the widget that listens out for notifications
-  /// of type T. On condition of onNotification callback defined below, it
-  /// updates [notifier].
+  /// [listener] listens out for notifications of type T. On condition
+  /// of onNotification callback defined below, it updates [notifier].
   late NotificationListener<T> listener;
 
-  late NotificationBroadcasterService broadcaster;
+  /// [broadcaster] provides the rebroadcasting service for widgets
+  /// below it in the widget tree,
+  late _NotificationBroadcasterService broadcaster;
 
-  // static NotificationBroadcaster of(BuildContext context) {
-  //   final NotificationBroadcasterService? result = context
-  //     .dependOnInheritedWidgetOfExactType<NotificationBroadcasterService>();
-  // assert(
-  // result != null, 'No NotificationBroadcasterService found in context');
-  // return result!;
-  // }
+  /// Allow widgets below [NotificationBroadcaster] in the widget tree to
+  /// access the data stored in notifier via [_NotificationBroadcasterService].
+  static _NotificationBroadcasterService of(BuildContext context) {
+    final _NotificationBroadcasterService? result = context
+        .dependOnInheritedWidgetOfExactType<_NotificationBroadcasterService>();
+    assert(
+    result != null, 'No _NotificationBroadcasterService found in context');
+    return result!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +78,7 @@ class NotificationBroadcaster<T extends Notification,
       child: child,
     );
 
-    broadcaster = NotificationBroadcasterService(
+    broadcaster = _NotificationBroadcasterService(
       child: listener,
       notifier: notifier,
     );
