@@ -22,8 +22,10 @@ class NotificationBroadcasterService extends InheritedWidget {
   //  Allow widgets below [NotificationBroadcasterService] in the widget tree
   //  to access the data stored in notifier.
   static NotificationBroadcasterService of(BuildContext context) {
-    final NotificationBroadcasterService? result = context.dependOnInheritedWidgetOfExactType<NotificationBroadcasterService>();
-    assert(result != null, 'No NotificationBroadcasterService found in context');
+    final NotificationBroadcasterService? result = context
+        .dependOnInheritedWidgetOfExactType<NotificationBroadcasterService>();
+    assert(
+        result != null, 'No NotificationBroadcasterService found in context');
     return result!;
   }
 
@@ -34,11 +36,11 @@ class NotificationBroadcasterService extends InheritedWidget {
       notifier != old.notifier;
 }
 
-
 /// [NotificationBroadcaster] combines the services associated with
 /// NotificationListener and [NotificationBroadcasterService] classes into
 /// a single class that provides both services.
-class NotificationBroadcaster<T extends Notification, U extends ScrollNotification> extends StatelessWidget {
+class NotificationBroadcaster<T extends Notification,
+    U extends ScrollNotification> extends StatelessWidget {
   NotificationBroadcaster({
     Key? key,
     required this.child,
@@ -52,22 +54,40 @@ class NotificationBroadcaster<T extends Notification, U extends ScrollNotificati
   /// widget tree.
   final ValueNotifier<double> notifier = ValueNotifier(0.0);
 
+  /// [listener] is the widget that listens out for notifications
+  /// of type T. On condition of onNotification callback defined below, it
+  /// updates [notifier].
+  late NotificationListener<T> listener;
+
+  late NotificationBroadcasterService broadcaster;
+
+  // static NotificationBroadcaster of(BuildContext context) {
+  //   final NotificationBroadcasterService? result = context
+  //     .dependOnInheritedWidgetOfExactType<NotificationBroadcasterService>();
+  // assert(
+  // result != null, 'No NotificationBroadcasterService found in context');
+  // return result!;
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return NotificationBroadcasterService(
-      child: NotificationListener<T>(
-        onNotification: (notification) {
-          if (notification is U) {
-            notifier.value = notification.metrics.pixels;
-            print('NotificationBroadcaster: notifier.value, '
-                '${notifier.value}');
-          }
-          return false;
-        },
-        child: child,
-      ),
+    listener = NotificationListener<T>(
+      onNotification: (notification) {
+        if (notification is U) {
+          notifier.value = notification.metrics.pixels;
+          print('NotificationBroadcaster: notifier.value, '
+              '${notifier.value}');
+        }
+        return false;
+      },
+      child: child,
+    );
+
+    broadcaster = NotificationBroadcasterService(
+      child: listener,
       notifier: notifier,
     );
+
+    return broadcaster;
   }
 }
-
