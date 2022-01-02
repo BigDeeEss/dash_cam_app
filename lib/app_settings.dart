@@ -11,12 +11,18 @@ class AppSettings {
   /// in ButtonArray class.
   // static Alignment buttonAlignment = Alignment.bottomLeft;
   static Alignment buttonAlignment = Alignment.bottomRight;
+
   // static Alignment buttonAlignment = Alignment.topLeft;
   // static Alignment buttonAlignment = Alignment.topRight;
 
   /// [buttonAxis] sets the button axis in ButtonArray.
   // static Axis buttonAxis = Axis.horizontal;
   static Axis buttonAxis = Axis.vertical;
+
+  /// [buttonAnimationTime] defines the time in milliseconds allowed
+  /// for the button animation in BasePage.
+  /// TODO: fix buttonAnimationTime. Currently it has no effect.
+  static int buttonAnimationTime = 1500;
 
   /// [buttonPaddingDown] defines the padding for downward direction
   /// button positioning in Button class.
@@ -39,7 +45,8 @@ class AppSettings {
 
   /// [buttonPaddingUp] defines the padding for downward direction
   /// button positioning in Button class.
-  static EdgeInsetsDirectional buttonPaddingUp = EdgeInsetsDirectional.fromSTEB(
+  static EdgeInsetsDirectional buttonPaddingUp =
+      EdgeInsetsDirectional.fromSTEB(
     buttonPaddingCrossAxis,
     buttonPaddingMainAxisExtra,
     buttonPaddingCrossAxis,
@@ -49,8 +56,7 @@ class AppSettings {
   /// [buttonSize] defines the button size in Button class..
   static double buttonSize = 56.0;
 
-  /// [pageTransitionTime] defines the page transition time including
-  /// button animation. Any page transition is allocated time for transitioning
-  /// and animating page content (e.g. buttons) in the ratio 1:4.
-  static int pageTransitionTime = 3200;
+  /// [pageTransitionTime] defines the time in milliseconds allowed
+  /// for the transitioning the page.
+  static int pageTransitionTime = 1500;
 }

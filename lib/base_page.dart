@@ -4,24 +4,27 @@ import 'package:flutter/material.dart';
 // Import project-specific files.
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button_array.dart';
+import 'package:dash_cam_app/page_specs.dart';
 
 class BasePage extends StatefulWidget {
   /// Implements a basic generic page layout design.
   const BasePage({
-    this.animation,
-    required this.title,
     Key? key,
+    this.animation,
+    required this.pageSpec,
   }) : super(key: key);
 
   /// [animation] is used to animate the launch of buttons onto the screen.
-  //  Whilst this animation ranges from 0.0 to 1.0, in this instance the
-  //  range of values 0.0--0.25 is reserved got animating the page transition
-  //  whilst the range 0.25--1.0 is used for animating the buttons.
-  //  [animation] is nullable because DashCamApp calls BasePage(title: 'Home',).
+  ///
+  /// Whilst this animation ranges from 0.0 to 1.0, in this instance the
+  /// range of values 0.0--0.5 is reserved for animating the page transition
+  /// whilst the range 0.5--1.0 is used for animating the buttons.
+  /// [animation] is nullable because _DashCamApp includes the call,
+  /// BasePage(title: 'Home',).
   final Animation<double>? animation;
 
-  /// [title] is the page title that is displayed on the appBar in BasePage.
-  final String title;
+  /// [pageSpec] defines the page content.
+  final PageSpec pageSpec;
 
   @override
   _BasePageState createState() => _BasePageState();
@@ -32,7 +35,7 @@ class _BasePageState extends State<BasePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.pageSpec.title),
       ),
 
       //  Use Builder widget because it is not possible to get the appBar
@@ -58,8 +61,16 @@ class _BasePageState extends State<BasePage> {
         },
       ),
 
-      //  An animated linear array of buttons.
-      body: ButtonArray(animation: widget.animation),
+      //  Ensure that [ButtonArray] sits above the page content using
+      //  a Stack widget.
+      body: Stack(
+        children: <Widget>[
+          widget.pageSpec.contents,
+          ButtonArray(
+            animation: widget.animation,
+          ),
+        ],
+      ),
     );
   }
 }
