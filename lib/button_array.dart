@@ -22,7 +22,7 @@ class ButtonArray extends StatefulWidget {
   /// button movement during the page transition, and (ii) initiation of a
   /// secondary animation that moves the buttons across the screen.
   ///
-  /// [animation] is nullable because DashCamApp includes the call,
+  /// [animation] is nullable because _DashCamApp includes the call,
   /// BasePage(title: 'Home',).
   final Animation<double>? animation;
 

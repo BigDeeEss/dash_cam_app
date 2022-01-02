@@ -10,19 +10,19 @@ class SettingsPageContents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NotificationNotifier<ScrollNotification, ScrollUpdateNotification>(
-      child: MyHomePage(),
+      child: _SettingsPageContentsList(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
+class _SettingsPageContentsList extends StatefulWidget {
+  _SettingsPageContentsList({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<_SettingsPageContentsList> createState() => __SettingsPageContentsListState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class __SettingsPageContentsListState extends State<_SettingsPageContentsList> {
   List<Color> colors = [
     Colors.blueGrey,
     Colors.green,

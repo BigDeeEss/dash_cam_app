@@ -7,17 +7,17 @@ import 'package:dash_cam_app/page_specs.dart';
 
 //  App start point.
 void main() {
-  runApp(const DashCamApp());
+  runApp(const _DashCamApp());
 }
 
-class DashCamApp extends StatelessWidget {
+class _DashCamApp extends StatelessWidget {
   /// The root widget of this dash cam project called by runApp(...).
-  const DashCamApp({Key? key}) : super(key: key);
+  const _DashCamApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'DashCamApp',
+      title: '_DashCamApp',
       home: BasePage(
         pageSpec: settingsPage,
       ),
