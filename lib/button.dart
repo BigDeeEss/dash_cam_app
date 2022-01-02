@@ -18,6 +18,7 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //  An IconButton with a circular background and geometry-dependent padding.
     return Padding(
         padding: (AppSettings.buttonAlignment.y < 0)
             ? AppSettings.buttonPaddingDown

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class SkewedTransition extends AnimatedWidget {
   /// Creates a skewed transition.
-  //
-  //  The skewFactor animation is required by the super constructor,
-  //  and so needs to be defined as an input for skewedTransition.
+  ///
+  /// The skewFactor animation is required by the super constructor,
+  /// and so needs to be defined as an input for skewedTransition.
   const SkewedTransition({
     Key? key,
     this.child,

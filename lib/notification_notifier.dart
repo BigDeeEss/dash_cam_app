@@ -36,6 +36,11 @@ class _NotificationNotifierService extends InheritedWidget {
 ///
 /// [NotificationNotifier] makes [notificationData] available to listenable
 /// objects below it in the widget tree via the [of] method defined below.
+///
+/// [NotificationNotifier] has two type arguments, T and U, which define,
+/// respectively, the type of notification to listen out for (T) and the type
+/// of notification to notify listenable objects of updates to
+/// [notificationNotifier].
 class NotificationNotifier<T extends Notification,
     U extends ScrollNotification> extends StatelessWidget {
   NotificationNotifier({
@@ -55,8 +60,8 @@ class NotificationNotifier<T extends Notification,
   final ValueNotifier<double> notificationData = ValueNotifier(0.0);
 
   /// [listener] listens out for notifications of type T. On condition of
-  /// onNotification callback defined below, defined in terms of type U,
-  /// it updates [notificationData].
+  /// onNotification callback defined below, defined in terms of notifications
+  /// of type U, it updates [notificationData].
   late NotificationListener<T> listener;
 
   /// [notificationNotifier] notifies listenable objects below it in the

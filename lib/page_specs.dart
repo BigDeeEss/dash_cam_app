@@ -18,19 +18,19 @@ class PageSpec {
   final Widget contents;
 }
 
-//  Home page button specs.
+//  Home page specs.
 PageSpec homePage = PageSpec(
   title: 'Home',
   contents: Container(),
 );
 
-//  Home page button specs.
+//  Home page specs.
 PageSpec filesPage = PageSpec(
   title: 'Files',
   contents: Container(),
 );
 
-//  Home page button specs.
+//  Home page specs.
 PageSpec settingsPage = PageSpec(
   title: 'Settings',
   contents: SettingsPageContents()

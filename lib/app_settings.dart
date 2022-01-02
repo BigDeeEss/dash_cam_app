@@ -11,6 +11,7 @@ class AppSettings {
   /// in ButtonArray class.
   // static Alignment buttonAlignment = Alignment.bottomLeft;
   static Alignment buttonAlignment = Alignment.bottomRight;
+
   // static Alignment buttonAlignment = Alignment.topLeft;
   // static Alignment buttonAlignment = Alignment.topRight;
 
@@ -20,6 +21,7 @@ class AppSettings {
 
   /// [buttonAnimationTime] defines the time in milliseconds allowed
   /// for the button animation in BasePage.
+  /// TODO: fix buttonAnimationTime. Currently it has no effect.
   static int buttonAnimationTime = 1500;
 
   /// [buttonPaddingDown] defines the padding for downward direction
@@ -43,7 +45,8 @@ class AppSettings {
 
   /// [buttonPaddingUp] defines the padding for downward direction
   /// button positioning in Button class.
-  static EdgeInsetsDirectional buttonPaddingUp = EdgeInsetsDirectional.fromSTEB(
+  static EdgeInsetsDirectional buttonPaddingUp =
+      EdgeInsetsDirectional.fromSTEB(
     buttonPaddingCrossAxis,
     buttonPaddingMainAxisExtra,
     buttonPaddingCrossAxis,

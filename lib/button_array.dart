@@ -16,14 +16,14 @@ class ButtonArray extends StatefulWidget {
 
   /// [animation] is derived from the page transition and is only listened
   /// to in this class.
-  //
-  //  When the page transition is complete a listener triggers two things:
-  //  (i) the removal of the build blocker, animationTrigger, which prevents
-  //  button movement during the page transition, and (ii) initiation of a
-  //  secondary animation that moves the buttons across the screen.
-  //
-  //  [animation] is nullable because DashCamApp includes the call,
-  //  BasePage(title: 'Home',).
+  ///
+  /// When the page transition is complete a listener triggers two things:
+  /// (i) the removal of the build blocker, animationTrigger, which prevents
+  /// button movement during the page transition, and (ii) initiation of a
+  /// secondary animation that moves the buttons across the screen.
+  ///
+  /// [animation] is nullable because DashCamApp includes the call,
+  /// BasePage(title: 'Home',).
   final Animation<double>? animation;
 
   @override
@@ -34,8 +34,7 @@ class _ButtonArrayState extends State<ButtonArray>
     with SingleTickerProviderStateMixin {
   late AnimationController buttonAnimationController;
 
-  /// [animationBlocker] set to true stops the builder from animating
-  /// the buttons.
+  /// [animationBlocker] set to true stops builder from animating buttons.
   bool animationBlocker = true;
 
   /// [buttonSpecList] defines the specs for buttons on each screen.
@@ -77,9 +76,9 @@ class _ButtonArrayState extends State<ButtonArray>
   }
 
   /// [getOffset] defines the starting position for each button.
-  //
-  //  [getOffset] calculates the position to be one screen width to the
-  //  left/right of the button's final location.
+  ///
+  /// [getOffset] calculates the position to be one screen width to the
+  /// left/right of the button's final location.
   Offset getOffset(BuildContext context) {
     //  Get size of screen in pixels.
     final Size size = MediaQuery.of(context).size;
@@ -94,9 +93,9 @@ class _ButtonArrayState extends State<ButtonArray>
   }
 
   /// [slidingButtonList] outputs a list of widgets.
-  //
-  //  All elements in the list produced by [slidingButtonList] are either
-  //  a static or sliding button.
+  ///
+  /// All elements in the list produced by [slidingButtonList] are either
+  /// a static or sliding button.
   List<Widget> slidingButtonList(
     BuildContext context,
     Animation<double>? animation,
