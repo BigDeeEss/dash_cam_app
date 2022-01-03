@@ -57,6 +57,24 @@ class _SettingsPageContentsList extends StatelessWidget {
           alignment: Alignment.center,
           color: colors[0],
         ),
+        Container(
+          height: 50,
+          width: 50,
+          alignment: Alignment.center,
+          color: colors[1],
+        ),
+        Container(
+          height: 50,
+          width: 50,
+          alignment: Alignment.center,
+          color: colors[2],
+        ),
+        Container(
+          height: 50,
+          width: 50,
+          alignment: Alignment.center,
+          color: colors[0],
+        ),
         ValueListenableBuilder<double>(
           valueListenable: NotificationNotifier.of(context).notificationData,
           builder: (BuildContext context, double value, __,){
@@ -79,6 +97,9 @@ class _SettingsPageContentsList extends StatelessWidget {
           width: 50,
           alignment: Alignment.center,
           color: colors[2],
+        ),
+        SettingsPageListTile<double>(
+          valueListenable: NotificationNotifier.of(context).notificationData,
         ),
         Container(
           height: 50,

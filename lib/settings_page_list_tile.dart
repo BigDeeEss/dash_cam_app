@@ -5,23 +5,36 @@ import 'package:flutter/material.dart';
 /// [SettingsPageListTile] implements a bespoke listTile class that,
 /// when used in conjunction with NotificationNotifier, will produce
 /// a list tile which changes shape to accommodate ButtonArray.
-class SettingsPageListTile<T> extends ValueListenableBuilder<T> {
+class SettingsPageListTile<T> extends StatelessWidget {
   const SettingsPageListTile({
     Key? key,
-    required ValueListenable<T> valueListenable,
-    required ValueWidgetBuilder<T> builder,
-    Widget? child,
-  }) : super(
-    key: key,
-    valueListenable: valueListenable,
-    builder: builder,
-    child: child,
-  );
-  // final ValueListenable<T> valueListenable;
-  // final ValueWidgetBuilder<T> builder;
-  // final Widget? child;
-//   @override
-//   Widget build(BuildContext context) {
-//     return widget.builder(context, value, widget.child);
-//   }
+    required this.valueListenable,
+    Widget? this.child,
+  }) : super(key: key);
+
+  final ValueListenable<T> valueListenable;
+  final Widget? child;
+  final List<Color> colors = const [
+    Colors.blueGrey,
+    Colors.green,
+    Colors.deepOrange,
+    Colors.purple,
+    Colors.pink
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<T>(
+      valueListenable: valueListenable,
+      builder: (BuildContext context, T value, __,){
+        return Container(
+          height: 50,
+          width: 50,
+          alignment: Alignment.center,
+          color: colors[4],
+        );
+      },
+    );
+  }
 }
+
