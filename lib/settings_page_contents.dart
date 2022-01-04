@@ -79,7 +79,7 @@ class _SettingsPageContentsList extends StatelessWidget {
           valueListenable: NotificationNotifier.of(context).notificationData,
           builder: (BuildContext context, double value, __,){
             return Container(
-              height: value % 290 + 10,
+              height: value % 190 + 10,
               width: 50,
               alignment: Alignment.center,
               color: colors[3],
@@ -91,6 +91,14 @@ class _SettingsPageContentsList extends StatelessWidget {
           width: 50,
           alignment: Alignment.center,
           color: colors[1],
+        ),
+        Card(
+          child: Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
         ),
         Container(
           height: 50,
@@ -185,11 +193,13 @@ class _SettingsPageContentsList extends StatelessWidget {
           alignment: Alignment.center,
           color: colors[1],
         ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
+        Card(
+          child: Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
         ),
         Container(
           height: 50,
@@ -201,7 +211,7 @@ class _SettingsPageContentsList extends StatelessWidget {
           valueListenable: NotificationNotifier.of(context).notificationData,
           builder: (BuildContext context, double value, __,){
             return Container(
-              height: value % 290 + 10,
+              height: value % 190 + 10,
               width: 50,
               alignment: Alignment.center,
               color: colors[3],
