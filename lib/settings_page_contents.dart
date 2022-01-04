@@ -98,7 +98,7 @@ class _SettingsPageContentsList extends StatelessWidget {
           alignment: Alignment.center,
           color: colors[2],
         ),
-        SettingsPageListTile<double>(
+        SettingsPageListTile(
           valueListenable: NotificationNotifier.of(context).notificationData,
         ),
         Container(
