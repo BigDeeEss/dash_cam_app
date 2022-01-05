@@ -52,35 +52,35 @@ class SettingsPageListTile extends StatelessWidget {
           //     color: colors[4],
           //   )
           // );
-          // Padding(
-          //   padding: EdgeInsets.all(4.0),
-          //   child: ClipRRect(
-          //     borderRadius: BorderRadius.circular(15.0),
-          //     child: Container(
-          //       height: 50.0,
-          //       width: 50,
-          //       alignment: Alignment.center,
-          //       color: colors[4],
+          Padding(
+            padding: EdgeInsets.all(4.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15.0),
+              child: Container(
+                height: 50.0,
+                width: 50,
+                alignment: Alignment.center,
+                color: colors[4],
+              )
+            )
+          );
+          // ClipPath(
+          //   clipper: SettingsPageListTileClipper(
+          //     context: context,
+          //   ),
+          //   child: Padding(
+          //     padding: EdgeInsets.all(4.0),
+          //     child: ClipRRect(
+          //       borderRadius: BorderRadius.circular(15.0),
+          //       child: Container(
+          //         height: 150,
+          //         // width: 50,
+          //         alignment: Alignment.center,
+          //         color: colors[4],
+          //       )
           //     )
           //   )
           // );
-          ClipPath(
-            clipper: SettingsPageListTileClipper(
-              context: context,
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(4.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15.0),
-                child: Container(
-                  height: value % 190 + 10,
-                  width: 50,
-                  alignment: Alignment.center,
-                  color: colors[4],
-                )
-              )
-          )
-          );
           // Card(
           //   elevation: 8,
           //   shape: BeveledRectangleBorder(

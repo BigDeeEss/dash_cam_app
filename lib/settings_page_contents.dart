@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //  Import project-specific files.
 import 'package:dash_cam_app/notification_notifier.dart';
 import 'package:dash_cam_app/settings_page_list_tile.dart';
+import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
 
 /// Implement a settings page based on a bespoke list view.
 class SettingsPageContents extends StatelessWidget {
@@ -31,327 +32,332 @@ class _SettingsPageContentsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        SettingsPageListTile(
-          valueListenable: NotificationNotifier.of(context).notificationData,
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Card(
-          child: ListTile(
-            title: Text("Codesinsider.com"),
+    return ClipPath(
+      clipper: SettingsPageListTileClipper(
+        context: context,
+      ),
+      child: ListView(
+        children: [
+          SettingsPageListTile(
+            valueListenable: NotificationNotifier.of(context).notificationData,
           ),
-          elevation: 8,
-          shadowColor: Colors.green,
-          shape: BeveledRectangleBorder(
-              borderRadius: BorderRadius.circular(15)
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
           ),
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        ValueListenableBuilder<double>(
-          valueListenable: NotificationNotifier.of(context).notificationData,
-          builder: (BuildContext context, double value, __,){
-            return Container(
-              height: value % 190 + 10,
-              width: 50,
-              alignment: Alignment.center,
-              color: colors[3],
-            );
-          },
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Card(
-          child: Container(
+          Card(
+            child: ListTile(
+              title: Text("Codesinsider.com"),
+            ),
+            elevation: 8,
+            shadowColor: Colors.green,
+            shape: BeveledRectangleBorder(
+                borderRadius: BorderRadius.circular(15)
+            ),
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
             height: 50,
             width: 50,
             alignment: Alignment.center,
             color: colors[2],
           ),
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        SettingsPageListTile(
-          valueListenable: NotificationNotifier.of(context).notificationData,
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Card(
-          child: Container(
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          ValueListenableBuilder<double>(
+            valueListenable: NotificationNotifier.of(context).notificationData,
+            builder: (BuildContext context, double value, __,){
+              return Container(
+                height: value % 190 + 10,
+                width: 50,
+                alignment: Alignment.center,
+                color: colors[3],
+              );
+            },
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Card(
+            child: Container(
+              height: 50,
+              width: 50,
+              alignment: Alignment.center,
+              color: colors[2],
+            ),
+          ),
+          Container(
             height: 50,
             width: 50,
             alignment: Alignment.center,
             color: colors[2],
           ),
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        ValueListenableBuilder<double>(
-          valueListenable: NotificationNotifier.of(context).notificationData,
-          builder: (BuildContext context, double value, __,){
-            return Container(
-              height: value % 190 + 10,
+          SettingsPageListTile(
+            valueListenable: NotificationNotifier.of(context).notificationData,
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Card(
+            child: Container(
+              height: 50,
               width: 50,
               alignment: Alignment.center,
-              color: colors[3],
-            );
-          },
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-      ],
+              color: colors[2],
+            ),
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          ValueListenableBuilder<double>(
+            valueListenable: NotificationNotifier.of(context).notificationData,
+            builder: (BuildContext context, double value, __,){
+              return Container(
+                height: value % 190 + 10,
+                width: 50,
+                alignment: Alignment.center,
+                color: colors[3],
+              );
+            },
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[1],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[2],
+          ),
+          Container(
+            height: 50,
+            width: 50,
+            alignment: Alignment.center,
+            color: colors[0],
+          ),
+        ],
+      ),
     );
   }
 }
