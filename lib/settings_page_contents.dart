@@ -33,29 +33,24 @@ class _SettingsPageContentsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[0],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[1],
-        ),
-        Container(
-          height: 50,
-          width: 50,
-          alignment: Alignment.center,
-          color: colors[2],
+        SettingsPageListTile(
+          valueListenable: NotificationNotifier.of(context).notificationData,
         ),
         Container(
           height: 50,
           width: 50,
           alignment: Alignment.center,
           color: colors[0],
+        ),
+        Card(
+          child: ListTile(
+            title: Text("Codesinsider.com"),
+          ),
+          elevation: 8,
+          shadowColor: Colors.green,
+          shape: BeveledRectangleBorder(
+              borderRadius: BorderRadius.circular(15)
+          ),
         ),
         Container(
           height: 50,
