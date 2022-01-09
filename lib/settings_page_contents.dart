@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/notification_notifier.dart';
 import 'package:dash_cam_app/settings_page_list_tile.dart';
 import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
+import 'package:dash_cam_app/settings_page_listtile.dart';
 
 /// Implement a settings page based on a bespoke list view.
 class SettingsPageContents extends StatelessWidget {
@@ -32,11 +33,13 @@ class _SettingsPageContentsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: SettingsPageListTileClipper(
-        context: context,
-      ),
-      child: ListView(
+    return
+      // ClipPath(
+      //   clipper: SettingsPageListTileClipper(
+      //   context: context,
+      // ),
+      // child:
+        ListView(
         children: [
           SettingsPageListTile(
             valueListenable: NotificationNotifier.of(context).notificationData,
@@ -75,16 +78,25 @@ class _SettingsPageContentsList extends StatelessWidget {
             alignment: Alignment.center,
             color: colors[0],
           ),
-          ValueListenableBuilder<double>(
+          ListTile(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+            selected: true,
+            selectedTileColor: Colors.grey[300],
+            leading: FlutterLogo(),
+            title: Text('ListTile'),
+          ),
+          Card(
+            child: ListTile(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              selected: true,
+              selectedTileColor: Colors.grey[300],
+              leading: FlutterLogo(),
+              title: Text('ListTile'),
+              subtitle: SizedBox(height: 77,),
+            ),
+          ),
+          SettingsPageListTileTwo(
             valueListenable: NotificationNotifier.of(context).notificationData,
-            builder: (BuildContext context, double value, __,){
-              return Container(
-                height: value % 190 + 10,
-                width: 50,
-                alignment: Alignment.center,
-                color: colors[3],
-              );
-            },
           ),
           Container(
             height: 50,
@@ -98,7 +110,18 @@ class _SettingsPageContentsList extends StatelessWidget {
               width: 50,
               alignment: Alignment.center,
               color: colors[2],
+              child: Text('2'),
             ),
+          ),
+          Card(
+            child: Container(
+              height: 50,
+              width: 50,
+              alignment: Alignment.center,
+              color: colors[2],
+              child: Text('1'),
+            ),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
           ),
           Container(
             height: 50,
@@ -357,7 +380,7 @@ class _SettingsPageContentsList extends StatelessWidget {
             color: colors[0],
           ),
         ],
-      ),
+      // ),
     );
   }
 }
