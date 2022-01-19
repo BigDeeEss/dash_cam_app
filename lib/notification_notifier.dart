@@ -74,8 +74,8 @@ class NotificationNotifier<T extends Notification,
   static _NotificationNotifierService of(BuildContext context) {
     final _NotificationNotifierService? result = context
         .dependOnInheritedWidgetOfExactType<_NotificationNotifierService>();
-    assert(
-    result != null, 'No _NotificationNotifierService found in context');
+    assert(result != null,
+        'No _NotificationNotifierService found in context');
     return result!;
   }
 

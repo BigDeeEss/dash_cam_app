@@ -21,7 +21,6 @@ class AppSettings {
 
   /// [buttonAnimationTime] defines the time in milliseconds allowed
   /// for the button animation in BasePage.
-  /// TODO: fix buttonAnimationTime. Currently it has no effect.
   static int buttonAnimationTime = 1500;
 
   /// [buttonPaddingDown] defines the padding for downward direction
@@ -58,5 +57,5 @@ class AppSettings {
 
   /// [pageTransitionTime] defines the time in milliseconds allowed
   /// for the transitioning the page.
-  static int pageTransitionTime = 1500;
+  static int pageTransitionTime = 750;
 }
