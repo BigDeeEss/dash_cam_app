@@ -55,7 +55,8 @@ class _ButtonArrayState extends State<ButtonArray>
     super.initState();
     buttonAnimationController =  AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: AppSettings.pageTransitionTime),
+      // duration: Duration(milliseconds: AppSettings.pageTransitionTime),
+      duration: Duration(milliseconds: AppSettings.buttonAnimationTime),
     );
   }
 

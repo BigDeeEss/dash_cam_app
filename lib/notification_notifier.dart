@@ -74,13 +74,15 @@ class NotificationNotifier<T extends Notification,
   static _NotificationNotifierService of(BuildContext context) {
     final _NotificationNotifierService? result = context
         .dependOnInheritedWidgetOfExactType<_NotificationNotifierService>();
-    assert(
-    result != null, 'No _NotificationNotifierService found in context');
+    assert(result != null,
+        'No _NotificationNotifierService found in context');
     return result!;
   }
 
   @override
   Widget build(BuildContext context) {
+    //  Define a listener object for notifications of type T, updating
+    //  [notificationData] when T is of type U.
     listener = NotificationListener<T>(
       onNotification: (notification) {
         if (notification is U) {
@@ -91,6 +93,9 @@ class NotificationNotifier<T extends Notification,
       child: child,
     );
 
+    //  Define a notification notifier object using [listener] and
+    //  [notificationData] which issues notifiers to listenable objects
+    //  below it in the widget tree.
     notificationNotifier = _NotificationNotifierService(
       child: listener,
       notificationData: notificationData,
