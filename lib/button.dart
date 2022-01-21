@@ -18,26 +18,28 @@ class Button extends StatelessWidget {
   /// [buttonSpec] defines the button characteristics.
   final ButtonSpec buttonSpec;
 
-  final GlobalKey globalKey = GlobalKey();
+  /// [rectGetterKey] is a unique global key which can be passed to
+  /// RectGetter.getRectFromKey in order to get the bounding rectangle
+  /// for the Button class.
   final GlobalKey<RectGetterState> rectGetterKey = RectGetter.createGlobalKey();
 
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      print('GlobalKeyExtension: absolute coordinates on screen: ${globalKey.globalPaintBounds}');
-    });
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      print('RectGetter: absolute coordinates on screen: ${RectGetter.getRectFromKey(rectGetterKey)}');
+      print('RectGetter: absolute coordinates on screen: '
+          '${RectGetter.getRectFromKey(rectGetterKey)}');
     });
 
-    //  An IconButton with a circular background and geometry-dependent padding.
+    //  An IconButton with a circular background and geometry-dependent
+    //  padding. The RectGetter class provides a method for obtaining
+    //  a widget's bounding rectangle.
     return RectGetter(
       key: rectGetterKey,
       child: Container(
-        key: globalKey,
         decoration: BoxDecoration(
           border: AppSettings.drawLayoutBounds
-              ? Border.all(width: 0.0, color: Colors.redAccent) : null,
+              ? Border.all(width: 0.0, color: Colors.redAccent)
+              : null,
         ),
         child: Padding(
           padding: (AppSettings.buttonAlignment.y < 0)
@@ -46,9 +48,10 @@ class Button extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               border: AppSettings.drawLayoutBounds
-                  ? Border.all(width: 0.0, color: Colors.redAccent) : null,
+                  ? Border.all(width: 0.0, color: Colors.redAccent)
+                  : null,
             ),
-            child:CircleAvatar(
+            child: CircleAvatar(
               radius: this.buttonSpec.size / 2.0,
               backgroundColor: Colors.lightBlue,
               child: IconButton(
@@ -56,34 +59,6 @@ class Button extends StatelessWidget {
                 color: Colors.white,
                 onPressed: () => this.buttonSpec.onPressed(context),
               ),
-            ),
-          ),
-        ),
-      ),
-    );
-
-    return Container(
-      key: globalKey,
-      decoration: BoxDecoration(
-       border: AppSettings.drawLayoutBounds
-           ? Border.all(width: 0.0, color: Colors.redAccent) : null,
-      ),
-      child: Padding(
-        padding: (AppSettings.buttonAlignment.y < 0)
-            ? AppSettings.buttonPaddingDown
-            : AppSettings.buttonPaddingUp,
-        child: Container(
-          decoration: BoxDecoration(
-           border: AppSettings.drawLayoutBounds
-               ? Border.all(width: 0.0, color: Colors.redAccent) : null,
-          ),
-          child:CircleAvatar(
-            radius: this.buttonSpec.size / 2.0,
-            backgroundColor: Colors.lightBlue,
-            child: IconButton(
-              icon: this.buttonSpec.icon,
-              color: Colors.white,
-              onPressed: () => this.buttonSpec.onPressed(context),
             ),
           ),
         ),

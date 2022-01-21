@@ -10,18 +10,16 @@ class BasePage extends StatefulWidget {
   /// Implements a basic generic page layout design.
   const BasePage({
     Key? key,
-    this.animation,
+    this.pageTransitionAnimation,
     required this.pageSpec,
   }) : super(key: key);
 
-  /// [animation] is used to animate the launch of buttons onto the screen.
+  /// [pageTransitionAnimation] is derived from the page transition animation.
+  /// It is used to trigger the launch of buttons onto the screen.
   ///
-  /// Whilst this animation ranges from 0.0 to 1.0, in this instance the
-  /// range of values 0.0--0.5 is reserved for animating the page transition
-  /// whilst the range 0.5--1.0 is used for animating the buttons.
-  /// [animation] is nullable because _DashCamApp includes the call,
-  /// BasePage(title: 'Home',).
-  final Animation<double>? animation;
+  /// [pageTransitionAnimation] is nullable because _DashCamApp includes
+  /// the call, BasePage(title: 'Home',).
+  final Animation<double>? pageTransitionAnimation;
 
   /// [pageSpec] defines the page content.
   final PageSpec pageSpec;
@@ -67,7 +65,7 @@ class _BasePageState extends State<BasePage> {
         children: <Widget>[
           widget.pageSpec.contents,
           ButtonArray(
-            animation: widget.animation,
+            pageTransitionAnimation: widget.pageTransitionAnimation,
           ),
         ],
       ),

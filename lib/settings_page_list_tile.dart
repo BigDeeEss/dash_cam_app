@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
-import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
+import 'package:dash_cam_app/devel/settings_page_list_tile_clipper.dart';
 
 /// [SettingsPageListTile] implements a bespoke listTile class that,
 /// when used in conjunction with NotificationNotifier, will produce

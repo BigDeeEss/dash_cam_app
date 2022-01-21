@@ -20,7 +20,7 @@ class ZoomPageTransition extends PageRouteBuilder {
       Animation<double> animation,
       Animation<double> secondaryAnimation,
     ) => BasePage(
-      animation: animation,
+      pageTransitionAnimation: animation,
       pageSpec: pageSpec,
     ),
 

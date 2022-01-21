@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 //  Import project-specific files.
 import 'package:dash_cam_app/notification_notifier.dart';
 import 'package:dash_cam_app/settings_page_list_tile.dart';
-import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
-import 'package:dash_cam_app/settings_page_listtile.dart';
+import 'package:dash_cam_app/devel/settings_page_list_tile_clipper.dart';
+import 'package:dash_cam_app/devel/settings_page_listtile.dart';
 
 /// Implement a settings page based on a bespoke list view.
 class SettingsPageContents extends StatelessWidget {
