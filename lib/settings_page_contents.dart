@@ -60,6 +60,17 @@ class _SettingsPageContentsList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15)
             ),
           ),
+          ValueListenableBuilder<double>(
+            valueListenable: NotificationNotifier.of(context).notificationData,
+            builder: (BuildContext context, double value, __,){
+              return Container(
+                height: value % 190 + 10,
+                width: 50,
+                alignment: Alignment.center,
+                color: colors[3],
+              );
+            },
+          ),
           Container(
             height: 50,
             width: 50,

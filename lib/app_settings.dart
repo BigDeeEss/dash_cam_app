@@ -52,8 +52,12 @@ class AppSettings {
     buttonPaddingMainAxis,
   );
 
-  /// [buttonSize] defines the button size in Button class..
+  /// [buttonSize] defines the button size in Button class.
   static double buttonSize = 56.0;
+
+  /// [drawLayoutBounds] triggers whether layout bounds are draw or not.
+  /// Used for debugging widget screen location.
+  static bool drawLayoutBounds = true;
 
   /// [pageTransitionTime] defines the time in milliseconds allowed
   /// for the transitioning the page.

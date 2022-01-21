@@ -158,7 +158,7 @@ class _ButtonArrayState extends State<ButtonArray>
         }
       }
     }
-    ;
+
     return widgetList;
   }
 

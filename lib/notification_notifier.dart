@@ -26,6 +26,7 @@ class _NotificationNotifierService extends InheritedWidget {
       notificationData != old.notificationData;
 }
 
+
 /// [NotificationNotifier] combines instances of NotificationListener
 /// and [_NotificationNotifierService].
 ///
@@ -75,7 +76,9 @@ class NotificationNotifier<T extends Notification,
     final _NotificationNotifierService? result = context
         .dependOnInheritedWidgetOfExactType<_NotificationNotifierService>();
     assert(result != null,
-        'No _NotificationNotifierService found in context');
+      'No _NotificationNotifierService found in context: '
+      'Try wrapping the call to [of] in a builder.'
+    );
     return result!;
   }
 
@@ -88,7 +91,10 @@ class NotificationNotifier<T extends Notification,
         if (notification is U) {
           notificationData.value = notification.metrics.pixels;
         }
-        return false;
+
+        //  Return true to stop notifications of this type
+        //  continuing up the widget tree.
+        return true;
       },
       child: child,
     );
@@ -104,3 +110,5 @@ class NotificationNotifier<T extends Notification,
     return notificationNotifier;
   }
 }
+
+
