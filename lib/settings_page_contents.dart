@@ -3,7 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 //  Import project-specific files.
-import 'package:dash_cam_app/notification_notifier.dart';
+// import 'package:dash_cam_app/notification_notifier.dart';
+import 'package:dash_cam_app/notification_notifier_two.dart';
 import 'package:dash_cam_app/settings_page_list_tile.dart';
 import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
 import 'package:dash_cam_app/devel/settings_page_listtile.dart';
@@ -12,12 +13,27 @@ import 'package:dash_cam_app/devel/settings_page_listtile.dart';
 class SettingsPageContents extends StatelessWidget {
   SettingsPageContents({Key? key}) : super(key: key);
 
+  ValueNotifier<double> notificationData = ValueNotifier(0.0);
+
   @override
   Widget build(BuildContext context) {
     //  Insert an instance of NotificationNotifier above
     //  _SettingsPageContentsList in order to trigger rebuild of list tiles.
-    return NotificationNotifier<ScrollNotification, ScrollUpdateNotification>(
+    // return NotificationNotifier<ScrollNotification, ScrollUpdateNotification>(
+    //   child: _SettingsPageContentsList(),
+    // );
+    return NotificationNotifier<ScrollNotification>(
       child: _SettingsPageContentsList(),
+      notificationData: notificationData,
+      onNotification: (notification) {
+        if (notification is ScrollUpdateNotification) {
+          notificationData.value = notification.metrics.pixels;
+        }
+
+        //  Return true to stop notifications of this type
+        //  continuing up the widget tree.
+        return true;
+      },
     );
   }
 }
