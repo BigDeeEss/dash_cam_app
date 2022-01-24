@@ -1,9 +1,10 @@
 //  Import flutter packages.
+import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
-import 'package:dash_cam_app/devel/settings_page_list_tile_clipper.dart';
+import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
 
 /// [SettingsPageListTile] implements a bespoke listTile class that,
 /// when used in conjunction with NotificationNotifier, will produce
@@ -55,12 +56,13 @@ class SettingsPageListTile extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(4.0),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(15.0),
+              borderRadius: BorderRadius.circular(50.0),
               child: Container(
-                height: 50.0,
+                height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
                 width: 50,
                 alignment: Alignment.center,
                 color: colors[4],
+                child: Text('SettingsPageListTile'),
               )
             )
           );

@@ -14,8 +14,9 @@ class BasePage extends StatefulWidget {
     required this.pageSpec,
   }) : super(key: key);
 
-  /// [pageTransitionAnimation] is derived from the page transition animation.
-  /// It is used to trigger the launch of buttons onto the screen.
+  /// [pageTransitionAnimation] is derived from the animation that drives
+  /// the page transition. It is used to trigger the launch of buttons
+  /// onto the screen.
   ///
   /// [pageTransitionAnimation] is nullable because _DashCamApp includes
   /// the call, BasePage(title: 'Home',).
