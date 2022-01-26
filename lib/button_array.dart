@@ -32,15 +32,15 @@ class ButtonArray extends StatefulWidget {
 
 class _ButtonArrayState extends State<ButtonArray>
     with SingleTickerProviderStateMixin {
-  /// [buttonAnimation] specifies the animation to move and shape
-  /// individual buttons in the button array.
+  /// [buttonAnimationList] specifies the animation to move and shape
+  /// buttons in the button array.
   ///
-  /// [buttonAnimation] starts once the page transition animation completes.
+  /// [buttonAnimationList] starts once the page transition animation completes.
   ///
-  /// [buttonAnimation] is instantiated within [slidingButtonList].
-  late CurvedAnimation buttonAnimation;
+  /// [buttonAnimationList] is instantiated within [initState].
+  late List<CurvedAnimation> buttonAnimationList = [];
 
-  /// [buttonAnimationController] controls [buttonAnimation].
+  /// [buttonAnimationController] controls elements in [buttonAnimationList].
   late AnimationController buttonAnimationController;
 
   /// [animationBlocker] set to true stops builder from animating buttons.
@@ -63,10 +63,32 @@ class _ButtonArrayState extends State<ButtonArray>
   void initState() {
     super.initState();
 
+    //  Instantiate [buttonAnimationController]; required for defining
+    //  [buttonAnimationList].
     buttonAnimationController =  AnimationController(
       vsync: this,
       duration: Duration(milliseconds: AppSettings.buttonAnimationTime),
     );
+
+    //  Generate [buttonAnimationList] by iterating over [buttonSpecList]
+    //  and converting each element to an instance of CurvedAnimation.
+    buttonSpecList.forEach((elem) {
+      //  Get index of spec in buttonSpecList.
+      int index = buttonSpecList.indexOf(elem);
+
+      //  Instantiate [buttonAnimationList].
+      buttonAnimationList.add(
+        CurvedAnimation(
+          //  Staggered button movement.
+          curve: Interval(
+            getButtonStartTime(index),
+            getButtonStopTime(index),
+            curve: Curves.easeOutCubic,
+          ),
+          parent: buttonAnimationController,
+        )
+      );
+    });
   }
 
   /// [getButtonStartTime] calculates the start time for button animation.
@@ -108,28 +130,18 @@ class _ButtonArrayState extends State<ButtonArray>
   /// a static or sliding button.
   List<Widget> slidingButtonList(
     BuildContext context,
-    Animation<double>? animation,
+    Animation<double>? pageTransitionAnimation,
     List<ButtonSpec> buttonSpecList,
   ) {
     //  Initialise slidingButtonWidgetList so that it is ready for population.
     List<Widget> slidingButtonWidgetList = [];
 
     //  Loop over items in buttonSpecList and convert each to either a static
-    //  button (if animation is null) or a SlideTransition-SkewedTransition
-    //  combination with button for its child (if not).
+    //  button (if pageTransitionAnimation is null) or a
+    //  SlideTransition-SkewedTransition combination with button for
+    //  its child (if not).
     for (int i = 0; i < buttonSpecList.length; i++) {
-      // Instantiate [buttonAnimation].
-      buttonAnimation = CurvedAnimation(
-        //  Staggered button movement.
-        curve: Interval(
-          getButtonStartTime(i),
-          getButtonStopTime(i),
-          curve: Curves.easeOutCubic,
-        ),
-        parent: buttonAnimationController,
-      );
-
-      if (animation == null) {
+      if (pageTransitionAnimation == null) {
         //  If null then add static button to slidingButtonWidgetList.
         slidingButtonWidgetList.add(Button(
           buttonSpec: buttonSpecList[i],
@@ -143,12 +155,12 @@ class _ButtonArrayState extends State<ButtonArray>
               position: Tween<Offset>(
                 begin: getButtonStartOffset(context),
                 end: Offset.zero,
-              ).animate(buttonAnimation),
+              ).animate(buttonAnimationList[i]),
               child: SkewedTransition(
                 skewFactor: Tween<double>(
                   begin: -AppSettings.buttonAlignment.x * 0.3,
                   end: 0.0,
-                ).animate(buttonAnimation),
+                ).animate(buttonAnimationList[i]),
                 child: Button(
                   buttonSpec: buttonSpecList[i],
                 ),
