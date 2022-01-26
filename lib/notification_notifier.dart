@@ -1,6 +1,13 @@
 //  Import flutter packages.
 import 'package:flutter/material.dart';
 
+
+/// [NotificationNotifierCallback] defines the form of callback that is
+/// acceptable to [NotificationNotifier].
+typedef NotificationNotifierCallback<T extends Notification>
+    = bool Function(T notification);
+
+
 /// [_NotificationNotifierService] notifies listenable objects below
 /// it in the widget tree of changes to [notificationData].
 class _NotificationNotifierService extends InheritedWidget {
@@ -37,20 +44,20 @@ class _NotificationNotifierService extends InheritedWidget {
 ///
 /// [NotificationNotifier] makes [notificationData] available to listenable
 /// objects below it in the widget tree via the [of] method defined below.
-///
-/// [NotificationNotifier] has two type arguments, T and U, which define,
-/// respectively, the type of notification to listen out for (T) and the type
-/// of notification to notify listenable objects of updates to
-/// [notificationNotifier].
-class NotificationNotifier<T extends Notification,
-    U extends ScrollNotification> extends StatelessWidget {
+class NotificationNotifier<T extends Notification> extends StatelessWidget {
   NotificationNotifier({
     Key? key,
     required this.child,
+    required this.onNotification,
+    required this.notificationData
   }) : super(key: key);
 
   /// [child] is the immediate descendant of [NotificationNotifier].
   final Widget child;
+
+  /// [onNotification] is the user-supplied callback that defines when
+  /// listenable variables are notified of updates to [notificationData].
+  NotificationNotifierCallback onNotification;
 
   /// [notificationData] is passed to [_NotificationNotifierService] which
   /// can notify listenable objects below it in the widget tree
@@ -58,7 +65,7 @@ class NotificationNotifier<T extends Notification,
   ///
   /// The [of] method bound to [NotificationNotifier] makes [notificationData]
   /// available to listenable objects below it in the widget tree.
-  final ValueNotifier<double> notificationData = ValueNotifier(0.0);
+  final ValueNotifier<double> notificationData;
 
   /// [listener] listens out for notifications of type T. On condition of
   /// onNotification callback defined below, defined in terms of notifications
@@ -87,15 +94,7 @@ class NotificationNotifier<T extends Notification,
     //  Define a listener object for notifications of type T, updating
     //  [notificationData] when T is of type U.
     listener = NotificationListener<T>(
-      onNotification: (notification) {
-        if (notification is U) {
-          notificationData.value = notification.metrics.pixels;
-        }
-
-        //  Return true to stop notifications of this type
-        //  continuing up the widget tree.
-        return true;
-      },
+      onNotification: onNotification,
       child: child,
     );
 
