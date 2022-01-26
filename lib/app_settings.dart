@@ -20,7 +20,7 @@ class AppSettings {
 
   /// [buttonAnimationTime] defines the time in milliseconds allowed
   /// for the button animation in BasePage.
-  static int buttonAnimationTime = 1500;
+  static int buttonAnimationTime = 5500;
 
   /// [buttonPaddingDown] defines the padding for downward direction
   /// button positioning in Button class.

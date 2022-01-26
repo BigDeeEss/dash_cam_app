@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 //  Import project-specific files.
 // import 'package:dash_cam_app/notification_notifier.dart';
-import 'package:dash_cam_app/notification_notifier_two.dart';
+import 'package:dash_cam_app/notification_notifier.dart';
 import 'package:dash_cam_app/settings_page_list_tile.dart';
 import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
 import 'package:dash_cam_app/devel/settings_page_listtile.dart';

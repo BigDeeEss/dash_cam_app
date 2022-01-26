@@ -145,7 +145,7 @@ class _ButtonArrayState extends State<ButtonArray>
                       getButtonStopTime(i),
                       curve: Curves.easeOutCubic,
                     ),
-                    parent: animation,
+                    parent: buttonAnimationController,
                   ),
                 ),
                 child: Button(
