@@ -32,6 +32,15 @@ class ButtonArray extends StatefulWidget {
 
 class _ButtonArrayState extends State<ButtonArray>
     with SingleTickerProviderStateMixin {
+  /// [buttonAnimation] specifies the animation to move and shape
+  /// individual buttons in the button array.
+  ///
+  /// [buttonAnimation] starts once the page transition animation completes.
+  ///
+  /// [buttonAnimation] is instantiated within [slidingButtonList].
+  late CurvedAnimation buttonAnimation;
+
+  /// [buttonAnimationController] controls [buttonAnimation].
   late AnimationController buttonAnimationController;
 
   /// [animationBlocker] set to true stops builder from animating buttons.
@@ -53,6 +62,7 @@ class _ButtonArrayState extends State<ButtonArray>
   @override
   void initState() {
     super.initState();
+
     buttonAnimationController =  AnimationController(
       vsync: this,
       duration: Duration(milliseconds: AppSettings.buttonAnimationTime),
@@ -101,53 +111,44 @@ class _ButtonArrayState extends State<ButtonArray>
     Animation<double>? animation,
     List<ButtonSpec> buttonSpecList,
   ) {
-    //  Initialise widgetList so that it is ready for population.
-    List<Widget> widgetList = [];
+    //  Initialise slidingButtonWidgetList so that it is ready for population.
+    List<Widget> slidingButtonWidgetList = [];
 
     //  Loop over items in buttonSpecList and convert each to either a static
     //  button (if animation is null) or a SlideTransition-SkewedTransition
     //  combination with button for its child (if not).
     for (int i = 0; i < buttonSpecList.length; i++) {
+      // Instantiate [buttonAnimation].
+      buttonAnimation = CurvedAnimation(
+        //  Staggered button movement.
+        curve: Interval(
+          getButtonStartTime(i),
+          getButtonStopTime(i),
+          curve: Curves.easeOutCubic,
+        ),
+        parent: buttonAnimationController,
+      );
+
       if (animation == null) {
-        //  If animation is null then add static button to widgetList.
-        widgetList.add(Button(
+        //  If null then add static button to slidingButtonWidgetList.
+        slidingButtonWidgetList.add(Button(
           buttonSpec: buttonSpecList[i],
         ));
       } else {
-        //  If animation is not null then add animated button to widgetList.
+        //  If not null then add animated button to slidingButtonWidgetList.
         if (!animationBlocker) {
           //  Only add an animated button if animationBlocker is set to false.
-          widgetList.add(
+          slidingButtonWidgetList.add(
             SlideTransition(
               position: Tween<Offset>(
                 begin: getButtonStartOffset(context),
                 end: Offset.zero,
-              ).animate(
-                CurvedAnimation(
-                  //  Staggered button movement.
-                  curve: Interval(
-                    getButtonStartTime(i),
-                    getButtonStopTime(i),
-                    curve: Curves.easeOutCubic,
-                  ),
-                  parent: buttonAnimationController,
-                ),
-              ),
+              ).animate(buttonAnimation),
               child: SkewedTransition(
                 skewFactor: Tween<double>(
                   begin: -AppSettings.buttonAlignment.x * 0.3,
                   end: 0.0,
-                ).animate(
-                  CurvedAnimation(
-                    //  Staggered button movement.
-                    curve: Interval(
-                      getButtonStartTime(i),
-                      getButtonStopTime(i),
-                      curve: Curves.easeOutCubic,
-                    ),
-                    parent: buttonAnimationController,
-                  ),
-                ),
+                ).animate(buttonAnimation),
                 child: Button(
                   buttonSpec: buttonSpecList[i],
                 ),
@@ -158,7 +159,7 @@ class _ButtonArrayState extends State<ButtonArray>
       }
     }
 
-    return widgetList;
+    return slidingButtonWidgetList;
   }
 
   @override
