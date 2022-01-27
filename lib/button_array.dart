@@ -6,6 +6,8 @@ import 'package:dash_cam_app/skewed_transition.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button.dart';
 import 'package:dash_cam_app/button_specs.dart';
+import 'animation_status_notification.dart';
+
 
 class ButtonArray extends StatefulWidget {
   /// Implements an animated linear button array on screen.
@@ -68,7 +70,11 @@ class _ButtonArrayState extends State<ButtonArray>
     buttonAnimationController =  AnimationController(
       vsync: this,
       duration: Duration(milliseconds: AppSettings.buttonAnimationTime),
-    );
+    )..addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        AnimationStatusNotification(status).dispatch(context);
+      }
+    });
 
     //  Generate [buttonAnimationList] by iterating over [buttonSpecList]
     //  and converting each element to an instance of CurvedAnimation.
