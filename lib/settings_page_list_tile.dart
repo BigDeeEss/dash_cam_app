@@ -9,14 +9,14 @@ import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
 /// [SettingsPageListTile] implements a bespoke listTile class that,
 /// when used in conjunction with NotificationNotifier, will produce
 /// a list tile which changes shape to accommodate ButtonArray.
-class SettingsPageListTile extends StatelessWidget {
+class SettingsPageListTile<T extends Notification> extends StatelessWidget {
   const SettingsPageListTile({
     Key? key,
     required this.valueListenable,
     Widget? this.child,
   }) : super(key: key);
 
-  final ValueListenable<double> valueListenable;
+  final ValueListenable<T>? valueListenable;
   final Widget? child;
   final List<Color> colors = const [
     Colors.blueGrey,
@@ -28,44 +28,46 @@ class SettingsPageListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<double>(
+    return ValueListenableBuilder<T>(
       valueListenable: valueListenable,
       builder: (
         BuildContext context,
-        double value,
+        T value,
         __,
       ) {
-        return
-          // Card(
-          //   child: Container(
-          //     height: 50.0,
-          //     width: 50,
-          //     alignment: Alignment.center,
-          //     color: colors[4],
-          //   )
-          // );
-          // ClipRRect(
-          //   borderRadius: BorderRadius.circular(15.0),
-          //   child: Container(
-          //     height: 50.0,
-          //     width: 50,
-          //     alignment: Alignment.center,
-          //     color: colors[4],
-          //   )
-          // );
-          Padding(
-            padding: EdgeInsets.all(4.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(50.0),
-              child: Container(
-                height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
-                width: 50,
-                alignment: Alignment.center,
-                color: colors[4],
-                child: Text('SettingsPageListTile'),
-              )
-            )
-          );
+        if (value is ScrollNotification) {
+          return
+            // Card(
+            //   child: Container(
+            //     height: 50.0,
+            //     width: 50,
+            //     alignment: Alignment.center,
+            //     color: colors[4],
+            //   )
+            // );
+            // ClipRRect(
+            //   borderRadius: BorderRadius.circular(15.0),
+            //   child: Container(
+            //     height: 50.0,
+            //     width: 50,
+            //     alignment: Alignment.center,
+            //     color: colors[4],
+            //   )
+            // );
+            Padding(
+                padding: EdgeInsets.all(4.0),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50.0),
+                    child: Container(
+                      height: 20.0 +
+                          40 * math.pow(math.cos(value.metrics.pixels / 50), 2),
+                      width: 50,
+                      alignment: Alignment.center,
+                      color: colors[4],
+                      child: Text('SettingsPageListTile'),
+                    )
+                )
+            );
           // ClipPath(
           //   clipper: SettingsPageListTileClipper(
           //     context: context,
@@ -120,21 +122,24 @@ class SettingsPageListTile extends StatelessWidget {
           //   ),
           // );
 
-        // return ClipPath(
-        //     clipper: SettingsPageListTileClipper(
-        //       context: context,
-        //     ),
-        //     // child: ClipRRect(zborderRadius: BorderRadius.circular(15.0),
-        //   child: Card(
-        //       child: Container(
-        //         height: 50.0,
-        //         width: 50,
-        //         alignment: Alignment.center,
-        //         color: colors[4],
-        //       ),
-        //     ),
-        //   // ),
-        // );
+          // return ClipPath(
+          //     clipper: SettingsPageListTileClipper(
+          //       context: context,
+          //     ),
+          //     // child: ClipRRect(zborderRadius: BorderRadius.circular(15.0),
+          //   child: Card(
+          //       child: Container(
+          //         height: 50.0,
+          //         width: 50,
+          //         alignment: Alignment.center,
+          //         color: colors[4],
+          //       ),
+          //     ),
+          //   // ),
+          // );
+        } else {
+          return Container();
+        }
       },
     );
   }

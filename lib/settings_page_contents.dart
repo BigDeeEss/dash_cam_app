@@ -3,17 +3,17 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 //  Import project-specific files.
-// import 'package:dash_cam_app/notification_notifier.dart';
+// import 'package:dash_cam_app/bu2-notification_notifier.dart';
 import 'package:dash_cam_app/notification_notifier.dart';
-import 'package:dash_cam_app/settings_page_list_tile.dart';
-import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
-import 'package:dash_cam_app/devel/settings_page_listtile.dart';
+// import 'package:dash_cam_app/settings_page_list_tile.dart';
+// import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
+// import 'package:dash_cam_app/devel/settings_page_listtile.dart';
 
 /// Implement a settings page based on a bespoke list view.
 class SettingsPageContents extends StatelessWidget {
   SettingsPageContents({Key? key}) : super(key: key);
 
-  ValueNotifier<double> notificationData = ValueNotifier(0.0);
+  ValueNotifier<ScrollNotification>? notificationData;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class SettingsPageContents extends StatelessWidget {
       notificationData: notificationData,
       onNotification: (notification) {
         if (notification is ScrollUpdateNotification) {
-          notificationData.value = notification.metrics.pixels;
+          notificationData = ValueNotifier<ScrollNotification>(notification);
         }
 
         //  Return true to stop notifications of this type
@@ -76,9 +76,9 @@ class _SettingsPageContentsList extends StatelessWidget {
             alignment: Alignment.center,
             color: colors[0],
           ),
-          SettingsPageListTile(
-            valueListenable: NotificationNotifier.of(context).notificationData,
-          ),
+          // SettingsPageListTile<ScrollNotification>(
+          //   valueListenable: NotificationNotifier.of <ScrollNotification> (context).notificationData,
+          // ),
           Container(
             height: 50,
             width: 50,
@@ -95,11 +95,11 @@ class _SettingsPageContentsList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15)
             ),
           ),
-          ValueListenableBuilder<double>(
-            valueListenable: NotificationNotifier.of(context).notificationData,
-            builder: (BuildContext context, double value, __,){
+          ValueListenableBuilder(
+            valueListenable: NotificationNotifier.of<ScrollNotification>(context).notificationData!,
+            builder: (BuildContext context, var value, __,){
               return Container(
-                height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
+                // height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
                 width: 50,
                 alignment: Alignment.center,
                 color: colors[3],
@@ -141,9 +141,9 @@ class _SettingsPageContentsList extends StatelessWidget {
               subtitle: SizedBox(height: 77,),
             ),
           ),
-          SettingsPageListTileTwo(
-            valueListenable: NotificationNotifier.of(context).notificationData,
-          ),
+          // SettingsPageListTileTwo(
+          //   valueListenable: NotificationNotifier.of(context).notificationData,
+          // ),
           Container(
             height: 50,
             width: 50,
@@ -175,9 +175,9 @@ class _SettingsPageContentsList extends StatelessWidget {
             alignment: Alignment.center,
             color: colors[2],
           ),
-          SettingsPageListTile(
-            valueListenable: NotificationNotifier.of(context).notificationData,
-          ),
+          // SettingsPageListTile(
+          //   valueListenable: NotificationNotifier.of(context).notificationData,
+          // ),
           Container(
             height: 50,
             width: 50,
@@ -276,17 +276,17 @@ class _SettingsPageContentsList extends StatelessWidget {
             alignment: Alignment.center,
             color: colors[0],
           ),
-          ValueListenableBuilder<double>(
-            valueListenable: NotificationNotifier.of(context).notificationData,
-            builder: (BuildContext context, double value, __,){
-              return Container(
-                height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
-                width: 50,
-                alignment: Alignment.center,
-                color: colors[3],
-              );
-            },
-          ),
+          // ValueListenableBuilder<double>(
+          //   valueListenable: NotificationNotifier.of(context).notificationData,
+          //   builder: (BuildContext context, double value, __,){
+          //     return Container(
+          //       height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
+          //       width: 50,
+          //       alignment: Alignment.center,
+          //       color: colors[3],
+          //     );
+          //   },
+          // ),
           Container(
             height: 50,
             width: 50,
