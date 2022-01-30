@@ -13,7 +13,7 @@ import 'package:dash_cam_app/notification_notifier.dart';
 class SettingsPageContents extends StatelessWidget {
   SettingsPageContents({Key? key}) : super(key: key);
 
-  ValueNotifier<ScrollNotification>? notificationData;
+  ValueNotifier<double> notificationData = ValueNotifier(0.0);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class SettingsPageContents extends StatelessWidget {
       notificationData: notificationData,
       onNotification: (notification) {
         if (notification is ScrollUpdateNotification) {
-          notificationData = ValueNotifier<ScrollNotification>(notification);
+          notificationData.value = notification.metrics.pixels;
         }
 
         //  Return true to stop notifications of this type
@@ -95,9 +95,9 @@ class _SettingsPageContentsList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15)
             ),
           ),
-          ValueListenableBuilder(
-            valueListenable: NotificationNotifier.of<ScrollNotification>(context).notificationData!,
-            builder: (BuildContext context, var value, __,){
+          ValueListenableBuilder<double>(
+            valueListenable: NotificationNotifier.of<ScrollNotification>(context).notificationData,
+            builder: (BuildContext context, double value, __,){
               return Container(
                 // height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
                 width: 50,

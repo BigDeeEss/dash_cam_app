@@ -24,7 +24,7 @@ class _NotificationNotifierService<T> extends InheritedWidget {
   ///
   /// The value stored in [notificationData] is defined by the callback
   /// associated with the instance of [NotificationNotifier].
-  final ValueNotifier<T>? notificationData;
+  final ValueNotifier<double> notificationData;
 
   /// Allow [_NotificationNotifierService] to notify listenable objects
   /// of updates to [notificationData].
@@ -65,7 +65,7 @@ class NotificationNotifier<T extends Notification> extends StatelessWidget {
   ///
   /// The [of] method bound to [NotificationNotifier] makes [notificationData]
   /// available to listenable objects below it in the widget tree.
-  final ValueNotifier<T>? notificationData;
+  final ValueNotifier<double> notificationData;
 
   /// [listener] listens out for notifications of type T. On condition of
   /// onNotification callback defined below, defined in terms of notifications
