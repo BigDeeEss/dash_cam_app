@@ -9,14 +9,14 @@ import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
 /// [SettingsPageListTile] implements a bespoke listTile class that,
 /// when used in conjunction with NotificationNotifier, will produce
 /// a list tile which changes shape to accommodate ButtonArray.
-class SettingsPageListTile<T extends Notification> extends StatelessWidget {
+class SettingsPageListTile extends StatelessWidget {
   const SettingsPageListTile({
     Key? key,
     required this.valueListenable,
     Widget? this.child,
   }) : super(key: key);
 
-  final ValueListenable<T>? valueListenable;
+  final ValueListenable<double> valueListenable;
   final Widget? child;
   final List<Color> colors = const [
     Colors.blueGrey,
@@ -28,14 +28,13 @@ class SettingsPageListTile<T extends Notification> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<T>(
+    return ValueListenableBuilder<double>(
       valueListenable: valueListenable,
       builder: (
         BuildContext context,
-        T value,
+        double value,
         __,
       ) {
-        if (value is ScrollNotification) {
           return
             // Card(
             //   child: Container(
@@ -60,7 +59,7 @@ class SettingsPageListTile<T extends Notification> extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50.0),
                     child: Container(
                       height: 20.0 +
-                          40 * math.pow(math.cos(value.metrics.pixels / 50), 2),
+                          40 * math.pow(math.cos(value / 50), 2),
                       width: 50,
                       alignment: Alignment.center,
                       color: colors[4],
@@ -137,9 +136,6 @@ class SettingsPageListTile<T extends Notification> extends StatelessWidget {
           //     ),
           //   // ),
           // );
-        } else {
-          return Container();
-        }
       },
     );
   }
