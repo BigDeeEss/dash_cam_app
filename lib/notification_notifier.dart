@@ -48,16 +48,12 @@ class NotificationNotifier<T extends Notification> extends StatelessWidget {
   NotificationNotifier({
     Key? key,
     required this.child,
+    required this.notificationData,
     required this.onNotification,
-    required this.notificationData
   }) : super(key: key);
 
   /// [child] is the immediate descendant of [NotificationNotifier].
   final Widget child;
-
-  /// [onNotification] is the user-supplied callback that defines when
-  /// listenable variables are notified of updates to [notificationData].
-  NotificationNotifierCallback onNotification;
 
   /// [notificationData] is passed to [_NotificationNotifierService] which
   /// can notify listenable objects below it in the widget tree
@@ -66,6 +62,10 @@ class NotificationNotifier<T extends Notification> extends StatelessWidget {
   /// The [of] method bound to [NotificationNotifier] makes [notificationData]
   /// available to listenable objects below it in the widget tree.
   final ValueNotifier<double> notificationData;
+
+  /// [onNotification] is the user-supplied callback that defines when
+  /// listenable variables are notified of updates to [notificationData].
+  NotificationNotifierCallback onNotification;
 
   /// [listener] listens out for notifications of type T. On condition of
   /// onNotification callback defined below, defined in terms of notifications
