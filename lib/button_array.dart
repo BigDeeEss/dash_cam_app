@@ -210,35 +210,62 @@ class _ButtonArrayState extends State<ButtonArray>
     return DataNotifier(
       key: ValueKey('DataNotifier test'),
       data: animationStatus,
-      child: Container()
-    );
-    return Container(
-      //  Request that this container expands to fit the entire screen.
-      //  Required for calculating the button start position off-screen.
-      constraints: BoxConstraints.expand(
-        width: double.infinity,
-        height: double.infinity,
-      ),
-      //  Position the button array according to Align specs.
-      //  Specs provided by AppSettings.
-      child: Align(
-        alignment: AppSettings.buttonAlignment,
-        child: Flex(
-          direction: AppSettings.buttonAxis,
-          textDirection: (AppSettings.buttonAlignment.x < 0)
-              ? TextDirection.ltr
-              : TextDirection.rtl,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          verticalDirection: (AppSettings.buttonAlignment.y < 0)
-              ? VerticalDirection.down
-              : VerticalDirection.up,
-          children: slidingButtonList(
-            context,
-            widget.pageTransitionAnimation,
-            buttonSpecList,
+      child: Container(
+          //  Request that this container expands to fit the entire screen.
+          //  Required for calculating the button start position off-screen.
+          constraints: BoxConstraints.expand(
+            width: double.infinity,
+            height: double.infinity,
           ),
-        ),
-      ),
+          //  Position the button array according to Align specs.
+          //  Specs provided by AppSettings.
+          child: Align(
+            alignment: AppSettings.buttonAlignment,
+            child: Flex(
+              direction: AppSettings.buttonAxis,
+              textDirection: (AppSettings.buttonAlignment.x < 0)
+                  ? TextDirection.ltr
+                  : TextDirection.rtl,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              verticalDirection: (AppSettings.buttonAlignment.y < 0)
+                  ? VerticalDirection.down
+                  : VerticalDirection.up,
+              children: slidingButtonList(
+                context,
+                widget.pageTransitionAnimation,
+                buttonSpecList,
+              ),
+            ),
+          ),
+        )
     );
+    // return Container(
+    //   //  Request that this container expands to fit the entire screen.
+    //   //  Required for calculating the button start position off-screen.
+    //   constraints: BoxConstraints.expand(
+    //     width: double.infinity,
+    //     height: double.infinity,
+    //   ),
+    //   //  Position the button array according to Align specs.
+    //   //  Specs provided by AppSettings.
+    //   child: Align(
+    //     alignment: AppSettings.buttonAlignment,
+    //     child: Flex(
+    //       direction: AppSettings.buttonAxis,
+    //       textDirection: (AppSettings.buttonAlignment.x < 0)
+    //           ? TextDirection.ltr
+    //           : TextDirection.rtl,
+    //       crossAxisAlignment: CrossAxisAlignment.center,
+    //       verticalDirection: (AppSettings.buttonAlignment.y < 0)
+    //           ? VerticalDirection.down
+    //           : VerticalDirection.up,
+    //       children: slidingButtonList(
+    //         context,
+    //         widget.pageTransitionAnimation,
+    //         buttonSpecList,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
