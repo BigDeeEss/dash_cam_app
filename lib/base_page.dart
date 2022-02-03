@@ -6,10 +6,11 @@ import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button_array.dart';
 import 'package:dash_cam_app/page_specs.dart';
 import 'package:dash_cam_app/nn.dart';
+import 'package:dash_cam_app/data_notifier.dart';
 
 class BasePage extends StatefulWidget {
   /// Implements a basic generic page layout design.
-  const BasePage({
+  BasePage({
     Key? key,
     this.pageTransitionAnimation,
     required this.pageSpec,
@@ -25,6 +26,9 @@ class BasePage extends StatefulWidget {
 
   /// [pageSpec] defines the page content.
   final PageSpec pageSpec;
+
+  final ValueNotifier<AnimationStatus> animationStatus
+      = ValueNotifier(AnimationStatus.completed);
 
   @override
   _BasePageState createState() => _BasePageState();
@@ -63,13 +67,18 @@ class _BasePageState extends State<BasePage> {
 
       //  Ensure that [ButtonArray] sits above the page content using
       //  a Stack widget.
-      body: Stack(
-        children: <Widget>[
-          widget.pageSpec.contents,
-          ButtonArray(
-            pageTransitionAnimation: widget.pageTransitionAnimation,
-          ),
-        ],
+      body: DataNotifier(
+        key: ValueKey('BasePage DataNotifier test'),
+        data: widget.animationStatus,
+        // onNotification: ()
+        child: Stack(
+          children: <Widget>[
+            widget.pageSpec.contents,
+            ButtonArray(
+              pageTransitionAnimation: widget.pageTransitionAnimation,
+            ),
+          ],
+        ),
       ),
     );
   }

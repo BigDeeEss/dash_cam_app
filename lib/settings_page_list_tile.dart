@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
+import 'package:dash_cam_app/data_notifier.dart';
 import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
 
 /// [SettingsPageListTile] implements a bespoke listTile class that,
@@ -28,6 +29,12 @@ class SettingsPageListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print('SettingsPageListTile test: '
+    //   '${DataNotifier.of(context, ValueKey('BasePage DataNotifier test'))}');
+    // print('SettingsPageListTile test print data: '
+    //   '${DataNotifier.of(context, ValueKey('BasePage DataNotifier test')).data}');
+    print('SettingsPageListTile test print data value: '
+      '${DataNotifier.of(context, ValueKey('BasePage DataNotifier test')).data.value}');
     return ValueListenableBuilder<double>(
       valueListenable: valueListenable,
       builder: (
@@ -35,6 +42,7 @@ class SettingsPageListTile extends StatelessWidget {
         double value,
         __,
       ) {
+
           return
             // Card(
             //   child: Container(

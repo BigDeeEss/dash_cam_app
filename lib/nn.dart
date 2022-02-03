@@ -15,9 +15,10 @@ class NN<T extends Notification> extends DataNotifier {
     required this.onNotification,
   })  : super(key: key, child: child, data: data);
 
-  NNCallback onNotification;
+  NNCallback<T> onNotification;
   late NotificationListener<T> listener;
-  late DataNotifierService notificationNotifier;
+  late DataNotifierService<T> notificationNotifier;
+//   static NN of<T>(BuildContext context, Key key) => DataNotifierService of<T>(BuildContext context, Key key);
 
   @override
   Widget build(BuildContext context) {
