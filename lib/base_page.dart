@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button_array.dart';
 import 'package:dash_cam_app/page_specs.dart';
-import 'package:dash_cam_app/nn.dart';
 import 'package:dash_cam_app/data_notifier.dart';
 
 class BasePage extends StatefulWidget {

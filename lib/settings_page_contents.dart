@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 // import 'package:dash_cam_app/bu2-notification_notifier.dart';
 import 'package:dash_cam_app/notification_notifier.dart';
 import 'package:dash_cam_app/data_notifier.dart';
-import 'package:dash_cam_app/nn.dart';
+// import 'package:dash_cam_app/nn.dart';
 import 'package:dash_cam_app/settings_page_list_tile.dart';
 // import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
 // import 'package:dash_cam_app/devel/settings_page_listtile.dart';
@@ -24,13 +24,10 @@ class SettingsPageContents extends StatelessWidget {
     // return NotificationNotifier<ScrollNotification, ScrollUpdateNotification>(
     //   child: _SettingsPageContentsList(),
     // );
-    return NN<ScrollNotification>(
+    return DataNotifier(
       key: ValueKey('NN_test'),
       child: _SettingsPageContentsList(),
       data: notificationData,
-      onNotification: (data) {
-        return true;
-      },
     );
   }
 }
@@ -47,7 +44,7 @@ class _SettingsPageContentsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(DataNotifier.of<double>(context, ValueKey('NN_test')).data.value);
+    print(DataNotifier.of(context, ValueKey('NN_test')).data.value);
     return
       // ClipPath(
       //   clipper: SettingsPageListTileClipper(
