@@ -24,10 +24,13 @@ class SettingsPageContents extends StatelessWidget {
     // return NotificationNotifier<ScrollNotification, ScrollUpdateNotification>(
     //   child: _SettingsPageContentsList(),
     // );
-    return DataNotifier<double>(
+    return NN<ScrollNotification>(
       key: ValueKey('NN_test'),
       child: _SettingsPageContentsList(),
       data: notificationData,
+      onNotification: (data) {
+        return true;
+      },
     );
   }
 }
@@ -44,7 +47,7 @@ class _SettingsPageContentsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(DataNotifier.of<double>(context, ValueKey('NN_test')).data.value);
+    // print(DataNotifier.of<double>(context, ValueKey('NN_test')).data.value);
     return
       // ClipPath(
       //   clipper: SettingsPageListTileClipper(
