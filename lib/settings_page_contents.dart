@@ -78,9 +78,9 @@ class _SettingsPageContentsList extends StatelessWidget {
             alignment: Alignment.center,
             color: colors[0],
           ),
-          SettingsPageListTile(
-            valueListenable: NN.of(context, ValueKey('NN_test')),
-          ),
+          // SettingsPageListTile(
+          //   valueListenable: NN.of(context, ValueKey('NN_test')),
+          // ),
           Container(
             height: 50,
             width: 50,
