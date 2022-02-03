@@ -11,9 +11,7 @@ class DataNotifierService<T> extends InheritedWidget {
     this.data,
   }) : super(key: key, child: child);
 
-  /// [data] can be of any type and so var is used here. It is possible to
-  /// define a generic DataNotifierService<T>, but this adds complications
-  /// when using the [of] method bound to [DataNotifier].
+  /// [data] can be of any type and so var is used here.
   var data;
 
   /// [context] is used when passing on the search for further instances of
@@ -35,16 +33,14 @@ class DataNotifier<T> extends StatelessWidget {
   }) : localKey = key,
         super(key: key);
 
-  /// [data] can be of any type and so var is used here. It is possible to
-  /// define a generic DataNotifier<T>, but this adds complications
-  /// when using the [of] method bound to [DataNotifier].
+  /// [data] can be of any type and so var is used here.
   var data;
 
   /// The widget immediately below this instance of [DataNotifier] in the
   /// widget tree.
   final Widget child;
 
-  Key? localKey;
+  final Key? localKey;
 
   /// [of] returns a copy of [DataNotifierService] which matches the key
   /// provided, or passes the search on up the widget tree if not.
@@ -53,6 +49,9 @@ class DataNotifier<T> extends StatelessWidget {
     //  instance of [DataNotifier] in the widget tree.
     DataNotifierService<T>? result =
         context.dependOnInheritedWidgetOfExactType<DataNotifierService<T>>();
+
+    print('DataNotifier: result = $result');
+
 
     //  Using 'is' promotes result to type DataNotifierService in what
     //  follows so that the comparison 'key != result.key' can be made.
