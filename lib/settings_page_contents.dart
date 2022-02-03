@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 //  Import project-specific files.
 // import 'package:dash_cam_app/bu2-notification_notifier.dart';
 import 'package:dash_cam_app/notification_notifier.dart';
+import 'package:dash_cam_app/data_notifier.dart';
 import 'package:dash_cam_app/nn.dart';
 import 'package:dash_cam_app/settings_page_list_tile.dart';
 // import 'package:dash_cam_app/settings_page_list_tile_clipper.dart';
@@ -23,19 +24,10 @@ class SettingsPageContents extends StatelessWidget {
     // return NotificationNotifier<ScrollNotification, ScrollUpdateNotification>(
     //   child: _SettingsPageContentsList(),
     // );
-    return NN<ScrollNotification>(
+    return DataNotifier(
       key: ValueKey('NN_test'),
       child: _SettingsPageContentsList(),
       data: notificationData,
-      onNotification: (notification) {
-        if (notification is ScrollUpdateNotification) {
-          notificationData.value = notification.metrics.pixels;
-        }
-
-        //  Return true to stop notifications of this type
-        //  continuing up the widget tree.
-        return true;
-      },
     );
   }
 }
@@ -52,6 +44,7 @@ class _SettingsPageContentsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(DataNotifier.of(context, ValueKey('NN_test')).data.value);
     return
       // ClipPath(
       //   clipper: SettingsPageListTileClipper(
@@ -98,7 +91,7 @@ class _SettingsPageContentsList extends StatelessWidget {
             ),
           ),
           // ValueListenableBuilder<double>(
-          //   valueListenable: NotificationNotifier.of<ScrollNotification>(context).notificationData,
+          //   valueListenable: NN.of(context, ValueKey('NN_test')).data,
           //   builder: (BuildContext context, double value, __,){
           //     return Container(
           //       // height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
