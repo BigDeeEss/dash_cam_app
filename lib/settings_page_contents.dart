@@ -15,7 +15,7 @@ import 'package:dash_cam_app/settings_page_list_tile.dart';
 class SettingsPageContents extends StatelessWidget {
   SettingsPageContents({Key? key}) : super(key: key);
 
-  ValueNotifier<double> notificationData = ValueNotifier(0.0);
+  ValueNotifier<double> valueNotifier = ValueNotifier(0.0);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +24,12 @@ class SettingsPageContents extends StatelessWidget {
     // return NotificationNotifier<ScrollNotification, ScrollUpdateNotification>(
     //   child: _SettingsPageContentsList(),
     // );
-    return NotificationNotifier<ScrollNotification>(
+    return NotificationNotifier<ScrollNotification, double>(
       child: _SettingsPageContentsList(),
-      notificationData: notificationData,
-      onNotification: (notification) {
-        if (notification is ScrollUpdateNotification) {
-          notificationData.value = notification.metrics.pixels;
+      valueNotifier: valueNotifier,
+      onNotification: (scrollNotification) {
+        if (scrollNotification is ScrollUpdateNotification) {
+          valueNotifier.value = scrollNotification.metrics.pixels;
         }
 
         //  Return true to stop notifications of this type
@@ -52,6 +52,8 @@ class _SettingsPageContentsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('NotificationNotifier.of <ScrollNotification, double> (context).valueNotifier '
+        '= ${NotificationNotifier.of <ScrollNotification, double> (context).valueNotifier}');
     return
       // ClipPath(
       //   clipper: SettingsPageListTileClipper(
@@ -79,7 +81,7 @@ class _SettingsPageContentsList extends StatelessWidget {
             color: colors[0],
           ),
           SettingsPageListTile(
-            valueListenable: NotificationNotifier.of <ScrollNotification> (context).notificationData,
+            valueListenable: NotificationNotifier.of <ScrollNotification, double> (context).valueNotifier,
           ),
           Container(
             height: 50,
@@ -97,17 +99,17 @@ class _SettingsPageContentsList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15)
             ),
           ),
-          ValueListenableBuilder<double>(
-            valueListenable: NotificationNotifier.of <ScrollNotification> (context).notificationData,
-            builder: (BuildContext context, double value, __,){
-              return Container(
-                height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
-                width: 50,
-                alignment: Alignment.center,
-                color: colors[3],
-              );
-            },
-          ),
+          // ValueListenableBuilder<double>(
+          //   valueListenable: NotificationNotifier.of <ScrollNotification, double> (context).valueNotifier.value,
+          //   builder: (BuildContext context, double value, __,){
+          //     return Container(
+          //       height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
+          //       width: 50,
+          //       alignment: Alignment.center,
+          //       color: colors[3],
+          //     );
+          //   },
+          // ),
           Container(
             height: 50,
             width: 50,
@@ -143,9 +145,9 @@ class _SettingsPageContentsList extends StatelessWidget {
               subtitle: SizedBox(height: 77,),
             ),
           ),
-          SettingsPageListTile(
-            valueListenable: NotificationNotifier.of <ScrollNotification> (context).notificationData,
-          ),
+          // SettingsPageListTile(
+          //   valueListenable: NotificationNotifier.of <ScrollNotification, double> (context).valueNotifier.value,
+          // ),
           Container(
             height: 50,
             width: 50,
@@ -177,9 +179,9 @@ class _SettingsPageContentsList extends StatelessWidget {
             alignment: Alignment.center,
             color: colors[2],
           ),
-          SettingsPageListTile(
-            valueListenable: NotificationNotifier.of <ScrollNotification> (context).notificationData,
-          ),
+          // SettingsPageListTile(
+          //   valueListenable: NotificationNotifier.of <ScrollNotification, double> (context).valueNotifier.value,
+          // ),
           Container(
             height: 50,
             width: 50,
@@ -278,17 +280,17 @@ class _SettingsPageContentsList extends StatelessWidget {
             alignment: Alignment.center,
             color: colors[0],
           ),
-          ValueListenableBuilder<double>(
-            valueListenable: NotificationNotifier.of <ScrollNotification> (context).notificationData,
-            builder: (BuildContext context, double value, __,){
-              return Container(
-                height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
-                width: 50,
-                alignment: Alignment.center,
-                color: colors[3],
-              );
-            },
-          ),
+          // ValueListenableBuilder<double>(
+          //   valueListenable: NotificationNotifier.of <ScrollNotification, double> (context).valueNotifier.value,
+          //   builder: (BuildContext context, double value, __,){
+          //     return Container(
+          //       height: 20.0 + 40 * math.pow(math.cos(value/50), 2),
+          //       width: 50,
+          //       alignment: Alignment.center,
+          //       color: colors[3],
+          //     );
+          //   },
+          // ),
           Container(
             height: 50,
             width: 50,

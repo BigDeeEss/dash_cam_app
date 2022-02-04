@@ -25,10 +25,10 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      print('RectGetter: absolute coordinates on screen: '
-          '${RectGetter.getRectFromKey(rectGetterKey)}');
-    });
+    // WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //   print('RectGetter: absolute coordinates on screen: '
+    //       '${RectGetter.getRectFromKey(rectGetterKey)}');
+    // });
 
     //  An IconButton with a circular background and geometry-dependent
     //  padding. The RectGetter class provides a method for obtaining

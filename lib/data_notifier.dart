@@ -56,7 +56,6 @@ class DataNotifier extends StatelessWidget {
     //  Using 'is' promotes result to type DataNotifierService in what
     //  follows so that the comparison 'key != result.key' can be made.
     if (result is DataNotifierService) {
-      print('result.key = ${result.key}');
       if (key != result.key) {
         //  If keys do not match then continue search up the widget tree.
         return DataNotifier.of(result.context, key);

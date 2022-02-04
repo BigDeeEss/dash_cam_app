@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 
 class AnimationStatusNotification extends Notification {
   AnimationStatusNotification(
-    this.status,
+    this.animationStatus,
   );
 
-  final AnimationStatus status;
+  final AnimationStatus animationStatus;
+
+  AnimationStatus get status {
+    return animationStatus;
+  }
 }

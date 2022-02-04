@@ -2,30 +2,32 @@
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
+import 'package:dash_cam_app/animation_status_notification.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button_array.dart';
 import 'package:dash_cam_app/page_specs.dart';
-import 'package:dash_cam_app/data_notifier.dart';
+import 'package:dash_cam_app/notification_notifier.dart';
 
 class BasePage extends StatefulWidget {
-  /// Implements a basic generic page layout design.
+  /// [BasePage] implements a generic page layout design so that a
+  /// similar UI is presented for each route.
   BasePage({
     Key? key,
-    this.pageTransitionAnimation,
     required this.pageSpec,
+    this.pageTransitionAnimation,
   }) : super(key: key);
 
-  /// [pageTransitionAnimation] is derived from the animation that drives
-  /// the page transition. It is used to trigger the launch of buttons
-  /// onto the screen.
+  /// [pageSpec] defines the page content.
+  final PageSpec pageSpec;
+
+  /// [pageTransitionAnimation] drives the page transition. When it completes
+  /// the animation of ButtonArray begins.
   ///
   /// [pageTransitionAnimation] is nullable because _DashCamApp includes
   /// the call, BasePage(title: 'Home',).
   final Animation<double>? pageTransitionAnimation;
 
-  /// [pageSpec] defines the page content.
-  final PageSpec pageSpec;
-
+  /// [animationStatus]...
   final ValueNotifier<AnimationStatus> animationStatus
       = ValueNotifier(AnimationStatus.completed);
 
@@ -66,10 +68,16 @@ class _BasePageState extends State<BasePage> {
 
       //  Ensure that [ButtonArray] sits above the page content using
       //  a Stack widget.
-      body: DataNotifier(
-        key: ValueKey('BasePage DataNotifier test'),
-        data: widget.animationStatus,
-        // onNotification: ()
+      body: NotificationNotifier<AnimationStatusNotification, AnimationStatus>(
+        valueNotifier: widget.animationStatus,
+        onNotification: (animationStatusNotification) {
+          if (animationStatusNotification is AnimationStatusNotification) {
+            print('animationStatusNotification is AnimationStatusNotification: '
+                '${animationStatusNotification is AnimationStatusNotification}');
+          }
+          // widget.animationStatus.value = animationStatusNotification.status;
+          return true;
+        },
         child: Stack(
           children: <Widget>[
             widget.pageSpec.contents,

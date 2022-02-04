@@ -10,14 +10,17 @@ void main() {
   runApp(const _DashCamApp());
 }
 
+/// [_DashCamApp] is the root widget of this project.
 class _DashCamApp extends StatelessWidget {
-  /// The root widget of this dash cam project called by runApp(...).
   const _DashCamApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '_DashCamApp',
+
+      //  Invoke a generic page layout so that a similar UI is presented
+      //  for each route.
       home: BasePage(
         pageSpec: settingsPage,
       ),
