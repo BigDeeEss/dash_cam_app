@@ -69,7 +69,7 @@ class _BasePageState extends State<BasePage> {
       //  Ensure that [ButtonArray] sits above the page content using
       //  a Stack widget.
       body: NotificationNotifier<AnimationStatusNotification, AnimationStatus>(
-        valueNotifier: widget.animationStatus,
+        notificationData: widget.animationStatus,
         onNotification: (animationStatusNotification) {
           if (animationStatusNotification is AnimationStatusNotification) {
             print('animationStatusNotification is AnimationStatusNotification: '

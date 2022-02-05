@@ -33,8 +33,8 @@ class SettingsPageListTile extends StatelessWidget {
     //   '${DataNotifier.of(context, ValueKey('BasePage DataNotifier test'))}');
     // print('SettingsPageListTile test print data: '
     //   '${DataNotifier.of(context, ValueKey('BasePage DataNotifier test')).data}');
-    print('SettingsPageListTile test print data value: '
-      '${DataNotifier.of(context, ValueKey('BasePage DataNotifier test')).data.value}');
+    // print('SettingsPageListTile test print data value: '
+    //   '${DataNotifier.of(context, ValueKey('BasePage DataNotifier test')).data.value}');
     return ValueListenableBuilder<double>(
       valueListenable: valueListenable,
       builder: (
