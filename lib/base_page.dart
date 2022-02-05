@@ -72,8 +72,7 @@ class _BasePageState extends State<BasePage> {
         notificationData: widget.animationStatus,
         onNotification: (animationStatusNotification) {
           if (animationStatusNotification is AnimationStatusNotification) {
-            print('animationStatusNotification is AnimationStatusNotification: '
-                '${animationStatusNotification is AnimationStatusNotification}');
+            animationStatusNotification.prn();
           }
           // widget.animationStatus.value = animationStatusNotification.status;
           return true;

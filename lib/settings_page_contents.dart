@@ -54,7 +54,7 @@ class _SettingsPageContentsList extends StatelessWidget {
   Widget build(BuildContext context) {
     var res = NotificationNotifier.of <ScrollNotification, double> (context);
     // print('res = ${res}');
-    print(res.runtimeType);
+    // print(res.runtimeType);
     // print('res.valueNotifier = ${res.notificationData}');
     // print('res.valueNotifier.value = ${res.notificationData.value}');
     return

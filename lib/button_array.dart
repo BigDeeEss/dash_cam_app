@@ -75,7 +75,7 @@ class _ButtonArrayState extends State<ButtonArray>
       vsync: this,
       duration: Duration(milliseconds: AppSettings.buttonAnimationTime),
     )..addStatusListener((status) {
-      print('ButtonArray test 1: ${status}');
+      // print('buttonAnimationController status = ${status}');
       // animationStatus.value = status;
       AnimationStatusNotification(status).dispatch(context);
     });
@@ -101,6 +101,7 @@ class _ButtonArrayState extends State<ButtonArray>
     });
   }
 
+  //  TODO: Refactor getButtonStartTime in light of the fact that button animation is separate to page transition animation. (Currently there is a time lag.)
   /// [getButtonStartTime] calculates the start time for button animation.
   double getButtonStartTime(int i) {
     //  The total time for all buttons to finish animating is defined
@@ -109,6 +110,7 @@ class _ButtonArrayState extends State<ButtonArray>
     return (i / (buttonSpecList.length + 1));
   }
 
+  //  TODO: Refactor getButtonStopTime in light of the fact that button animation is separate to page transition animation. (Currently there is a time lag.)
   /// [getButtonStopTime] calculates the stop time for button animation.
   double getButtonStopTime(int i) {
     //  The total time for all buttons to finish animating is defined
@@ -189,9 +191,10 @@ class _ButtonArrayState extends State<ButtonArray>
     //  Add a status listener to widget.pageTransitionAnimation in order
     //  to trigger a setState that removes the animationBlocker and starts
     //  buttonAnimationController.
+    //  TODO: Change '!=' to 'is not' in order to remove the null assertion operator, !, if that can be done.
     if (widget.pageTransitionAnimation != null) {
       widget.pageTransitionAnimation!..addStatusListener((status) {
-        print('ButtonArray test 2: ${status}');
+        // print('widget.pageTransitionAnimation status = ${status}');
         if (status == AnimationStatus.completed) {
           setState(() {
             animationBlocker = false;

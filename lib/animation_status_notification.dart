@@ -8,6 +8,10 @@ class AnimationStatusNotification extends Notification {
 
   final AnimationStatus animationStatus;
 
+  void prn() {
+    print('AnimationStatusNotification, prn: animationStatus = $animationStatus');
+  }
+
   AnimationStatus get status {
     return animationStatus;
   }

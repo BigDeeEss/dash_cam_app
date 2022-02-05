@@ -86,7 +86,7 @@ class NotificationNotifier<T extends Notification, U> extends StatelessWidget {
       'No _NotificationNotifierService found in context: '
       'Try wrapping the call to [of] in a builder.'
     );
-    print(result);
+    // print(result);
     return result!;
   }
 
