@@ -47,7 +47,6 @@ class _BasePageState extends State<BasePage> {
       appBar: AppBar(
         title: Text(widget.pageSpec.title),
       ),
-
       //  Use Builder widget because it is not possible to get the appBar
       //  height from the current BuildContext when it doesn't yet include the
       //  Scaffold class being returned by the parent widget.
@@ -70,18 +69,19 @@ class _BasePageState extends State<BasePage> {
           );
         },
       ),
-
       //  Insert instance of NotificationNotifier above the Stack widget
       //  in order to be able catch AnimationStatusNotifications
       //  generated within ButtonArray.
       body: NotificationNotifier<AnimationStatusNotification, AnimationStatus>(
         notificationData: widget.pageTransitionAnimationStatus,
         onNotification: (animationStatusNotification) {
+          // Use 'is' to both check and promote animationStatusNotification
+          // up to type AnimationStatusNotification in code that follows.
           if (animationStatusNotification is AnimationStatusNotification) {
-            widget.pageTransitionAnimationStatus.value = animationStatusNotification.animationStatus;
+            widget.pageTransitionAnimationStatus.value =
+                animationStatusNotification.animationStatus;
             animationStatusNotification.prn();
           }
-
           // Return true to indicate that AnimationStatusNotification
           // has been handled.
           return true;
@@ -94,6 +94,7 @@ class _BasePageState extends State<BasePage> {
             ButtonArray(
               //  ButtonArray requires the pageTransitionAnimation in order to
               //  know when to initiate ButtonArray animation.
+              //  TODO: Consider using AnimationStatusNotification.
               pageTransitionAnimation: widget.pageTransitionAnimation,
             ),
           ],
@@ -102,4 +103,3 @@ class _BasePageState extends State<BasePage> {
     );
   }
 }
-

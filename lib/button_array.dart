@@ -2,23 +2,23 @@
 import 'package:flutter/material.dart';
 
 // Import project-specific files.
-import 'package:dash_cam_app/skewed_transition.dart';
+import 'package:dash_cam_app/animation_status_notification.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button.dart';
 import 'package:dash_cam_app/button_specs.dart';
-import 'package:dash_cam_app/animation_status_notification.dart';
-import 'package:dash_cam_app/data_notifier.dart';
+import 'package:dash_cam_app/skewed_transition.dart';
 
-
+/// [ButtonArray] implements an animated linear button array on screen.
 class ButtonArray extends StatefulWidget {
-  /// Implements an animated linear button array on screen.
   ButtonArray({
     Key? key,
     this.pageTransitionAnimation,
   }) : super(key: key);
 
-  /// [pageTransitionAnimation] is derived from the page transition and
-  /// is only listened to in this class.
+  /// [pageTransitionAnimation] is derived from the page transition
+  /// associated loading the current route.
+  ///
+  /// [pageTransitionAnimation] is only listened to in this class.
   ///
   /// When the page transition is complete a listener triggers two things:
   /// (i) the removal of the build blocker, animationBlocker, which prevents
@@ -35,7 +35,7 @@ class ButtonArray extends StatefulWidget {
 
 class _ButtonArrayState extends State<ButtonArray>
     with SingleTickerProviderStateMixin {
-  /// [buttonAnimationList] specifies the animation to move and shape
+  /// [buttonAnimationList] is a list of animations which move and shape
   /// buttons in the button array.
   ///
   /// [buttonAnimationList] starts once the page transition animation completes.
@@ -43,14 +43,15 @@ class _ButtonArrayState extends State<ButtonArray>
   /// [buttonAnimationList] is instantiated within [initState].
   late List<CurvedAnimation> buttonAnimationList = [];
 
-  /// [buttonAnimationController] controls elements in [buttonAnimationList].
+  /// [buttonAnimationController] controls all animations within
+  /// [buttonAnimationList].
+  ///
+  /// [buttonAnimationController] has a status listener attached so that it
+  /// can dispatch AnimationStatusNotifications up the widget tree.
   late AnimationController buttonAnimationController;
 
   /// [animationBlocker] set to true stops builder from animating buttons.
   bool animationBlocker = true;
-
-  // final ValueNotifier<AnimationStatus> animationStatus
-  //     = ValueNotifier(AnimationStatus.completed);
 
   /// [buttonSpecList] defines the specs for buttons on each screen.
   static List<ButtonSpec> buttonSpecList = [
@@ -60,23 +61,24 @@ class _ButtonArrayState extends State<ButtonArray>
   ];
 
   @override
-  void dispose () {
+  void dispose() {
     buttonAnimationController.dispose();
     super.dispose();
   }
 
+  //  initState instantiates buttonAnimationController and buttonSpecList.
   @override
   void initState() {
     super.initState();
 
     //  Instantiate [buttonAnimationController]; required for defining
     //  [buttonAnimationList].
-    buttonAnimationController =  AnimationController(
+    buttonAnimationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: AppSettings.buttonAnimationTime),
     )..addStatusListener((status) {
-      AnimationStatusNotification(status).dispatch(context);
-    });
+        AnimationStatusNotification(status).dispatch(context);
+      });
 
     //  Generate [buttonAnimationList] by iterating over [buttonSpecList]
     //  and converting each element to an instance of CurvedAnimation.
@@ -85,17 +87,15 @@ class _ButtonArrayState extends State<ButtonArray>
       int index = buttonSpecList.indexOf(elem);
 
       //  Instantiate [buttonAnimationList].
-      buttonAnimationList.add(
-        CurvedAnimation(
-          //  Staggered button movement.
-          curve: Interval(
-            getButtonStartTime(index),
-            getButtonStopTime(index),
-            curve: Curves.easeOutCubic,
-          ),
-          parent: buttonAnimationController,
-        )
-      );
+      buttonAnimationList.add(CurvedAnimation(
+        //  Staggered button movement.
+        curve: Interval(
+          getButtonStartTime(index),
+          getButtonStopTime(index),
+          curve: Curves.easeOutCubic,
+        ),
+        parent: buttonAnimationController,
+      ));
     });
   }
 
@@ -137,7 +137,7 @@ class _ButtonArrayState extends State<ButtonArray>
   /// [slidingButtonList] outputs a list of widgets.
   ///
   /// All elements in the list produced by [slidingButtonList] are either
-  /// a static or sliding button.
+  /// static or sliding Buttons.
   List<Widget> slidingButtonList(
     BuildContext context,
     Animation<double>? pageTransitionAnimation,
@@ -191,20 +191,21 @@ class _ButtonArrayState extends State<ButtonArray>
     //  buttonAnimationController.
     //  TODO: Change '!=' to 'is not' in order to remove the null assertion operator, !, if that can be done.
     if (widget.pageTransitionAnimation != null) {
-      widget.pageTransitionAnimation!..addStatusListener((status) {
-        if (status == AnimationStatus.completed) {
-          setState(() {
-            animationBlocker = false;
-            buttonAnimationController.forward();
-          });
-        }
-      });
+      widget.pageTransitionAnimation!
+        ..addStatusListener((status) {
+          if (status == AnimationStatus.completed) {
+            setState(() {
+              animationBlocker = false;
+              buttonAnimationController.forward();
+            });
+          }
+        });
     }
 
     //  TODO: Implement getRect here to obtain button rect.
 
     //  Use a Container-Align-Column construct to position items in the list
-    //  generated by slidingButtonList(...).
+    //  generated by the slidingButtonList method.
     return Container(
       //  Request that this container expands to fit the entire screen.
       //  Required for calculating the button start position off-screen.
