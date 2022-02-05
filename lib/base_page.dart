@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:dash_cam_app/animation_status_notification.dart';
 import 'package:dash_cam_app/app_settings.dart';
 import 'package:dash_cam_app/button_array.dart';
-import 'package:dash_cam_app/page_specs.dart';
 import 'package:dash_cam_app/notification_notifier.dart';
+import 'package:dash_cam_app/page_specs.dart';
 
+/// [BasePage] implements a generic page layout design so that a
+/// similar UI is presented for each page/route.
 class BasePage extends StatefulWidget {
-  /// [BasePage] implements a generic page layout design so that a
-  /// similar UI is presented for each route.
   BasePage({
     Key? key,
     required this.pageSpec,
@@ -27,8 +27,13 @@ class BasePage extends StatefulWidget {
   /// the call, BasePage(title: 'Home',).
   final Animation<double>? pageTransitionAnimation;
 
-  /// [animationStatus]...
-  final ValueNotifier<AnimationStatus> animationStatus =
+  /// [pageTransitionAnimationStatus] notifies listenable variables on
+  /// changes to its value. [pageTransitionAnimationStatus] is provided
+  /// as an input to the instance of NotificationNotifier in the build
+  /// method below. Access to to [pageTransitionAnimationStatus] is given
+  /// to widgets below BasePage in the widget tree via the instance of
+  /// _NotificationNotifierService which is part of NotificationNotifier.
+  final ValueNotifier<AnimationStatus> pageTransitionAnimationStatus =
       ValueNotifier(AnimationStatus.completed);
 
   @override
@@ -66,22 +71,29 @@ class _BasePageState extends State<BasePage> {
         },
       ),
 
-      //  Ensure that [ButtonArray] sits above the page content using
-      //  a Stack widget.
+      //  Insert instance of NotificationNotifier above the Stack widget
+      //  in order to be able catch AnimationStatusNotifications
+      //  generated within ButtonArray.
       body: NotificationNotifier<AnimationStatusNotification, AnimationStatus>(
-        notificationData: widget.animationStatus,
+        notificationData: widget.pageTransitionAnimationStatus,
         onNotification: (animationStatusNotification) {
           if (animationStatusNotification is AnimationStatusNotification) {
-            widget.animationStatus.value = animationStatusNotification.animationStatus;
+            widget.pageTransitionAnimationStatus.value = animationStatusNotification.animationStatus;
             animationStatusNotification.prn();
           }
 
+          // Return true to indicate that AnimationStatusNotification
+          // has been handled.
           return true;
         },
         child: Stack(
           children: <Widget>[
+            //  Ensure that [ButtonArray] sits above the page content by
+            //  placing it last in a Stack list of children.
             widget.pageSpec.contents,
             ButtonArray(
+              //  ButtonArray requires the pageTransitionAnimation in order to
+              //  know when to initiate ButtonArray animation.
               pageTransitionAnimation: widget.pageTransitionAnimation,
             ),
           ],
@@ -90,3 +102,4 @@ class _BasePageState extends State<BasePage> {
     );
   }
 }
+
