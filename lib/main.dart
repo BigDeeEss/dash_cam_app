@@ -19,8 +19,8 @@ class _DashCamApp extends StatelessWidget {
     return MaterialApp(
       title: '_DashCamApp',
 
-      //  Invoke a generic page layout.
-      //  A similar UI is presented for each page(route).
+      //  BasePage invokes a generic page layout: a similar UI is
+      //  presented for each page(route).
       home: BasePage(
         pageSpec: settingsPage,
       ),

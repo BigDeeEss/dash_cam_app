@@ -20,16 +20,16 @@ class BasePage extends StatefulWidget {
   /// [pageSpec] defines the page content.
   final PageSpec pageSpec;
 
-  /// [pageTransitionAnimation] drives the page transition. When it completes
-  /// the animation of ButtonArray begins.
+  /// [pageTransitionAnimation] drives the transition between different pages.
+  /// When it completes ButtonArray is animated.
   ///
   /// [pageTransitionAnimation] is nullable because _DashCamApp includes
   /// the call, BasePage(title: 'Home',).
   final Animation<double>? pageTransitionAnimation;
 
   /// [animationStatus]...
-  final ValueNotifier<AnimationStatus> animationStatus
-      = ValueNotifier(AnimationStatus.completed);
+  final ValueNotifier<AnimationStatus> animationStatus =
+      ValueNotifier(AnimationStatus.completed);
 
   @override
   _BasePageState createState() => _BasePageState();
@@ -72,9 +72,10 @@ class _BasePageState extends State<BasePage> {
         notificationData: widget.animationStatus,
         onNotification: (animationStatusNotification) {
           if (animationStatusNotification is AnimationStatusNotification) {
+            widget.animationStatus.value = animationStatusNotification.animationStatus;
             animationStatusNotification.prn();
           }
-          // widget.animationStatus.value = animationStatusNotification.status;
+
           return true;
         },
         child: Stack(

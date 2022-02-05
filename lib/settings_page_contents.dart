@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 //  Import project-specific files.
+import 'package:dash_cam_app/animation_status_notification.dart';
 // import 'package:dash_cam_app/bu2-notification_notifier.dart';
 import 'package:dash_cam_app/notification_notifier.dart';
 import 'package:dash_cam_app/data_notifier.dart';
@@ -113,7 +114,21 @@ class _SettingsPageContentsList extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15)
             ),
           ),
-          ValueListenableBuilder<double>(
+          ValueListenableBuilder<AnimationStatus>(
+            valueListenable: NotificationNotifier.of <AnimationStatusNotification, AnimationStatus> (context).notificationData,
+            builder: (BuildContext context, AnimationStatus value, __) {
+              if (value == AnimationStatus.completed) {
+                print('Completed!');
+              } else {
+                print('NOT completed!');
+              }
+              return Container(
+                height: 50.0,
+                child: Text('ValueListenableBuilder<AnimationStatus>'),
+              );
+            },
+          ),
+            ValueListenableBuilder<double>(
             valueListenable: NotificationNotifier.of <ScrollNotification, double> (context).notificationData,
             builder: (BuildContext context, double value, __,){
               return Container(
